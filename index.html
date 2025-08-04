@@ -4,8 +4,128 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>유웰비뇨의학과 - 클론코딩</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <h1>git 체크</h1>
+    <!-- header : start -->
+    <header id="header">
+      <!-- header의 최대 넓이를 부모 -->
+      <div class="in-header">
+        <!-- 1. 로고 -->
+        <h1 class="logo-box">
+          <a href="#" class="logo"> </a>
+        </h1>
+
+        <!-- 2. nav -->
+        <nav id="nav">
+          <ul class="depth1">
+            <li>
+              <a href="#">
+                <span>병원소개</span>
+              </a>
+              <!-- 서브메뉴 HTML이 들어가야함.   -->
+            </li>
+
+            <li>
+              <a href="#">
+                <span>전립선</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <span>요로결석</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <span>여성비뇨의학</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <span>난임·남성비뇨의학</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <span>비뇨의학검진</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <span>커뮤니티</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- 유틸리티 메뉴 -->
+        <div class="utils right-wrap">
+          <a href="" class="info-btn utils_btn">
+            <!-- a태그안에 div는 유효하지 않은 HTML이다.  -->
+            <span class="info">지점안내</span>
+          </a>
+
+          <a href="#" class="login-box utils_btn">
+            <span class="login"><i class="hidden">로그인 창</i></span>
+          </a>
+
+          <a href="#" class="search-box utils_btn">
+            <span class="search"><i class="hidden">검색창</i></span>
+          </a>
+
+          <a href="#" class="ham-box utils_btn">
+            <span class="line"><i class="hidden">흰색 선 라인</i></span>
+            <span class="line"><i class="hidden">흰색 선 라인</i></span>
+            <span class="line"><i class="hidden">흰색 선 라인</i></span>
+          </a>
+        </div>
+
+        <!-- 서치 아이콘을 눌렀을 때 나오는 검색창 -->
+        <form action="" id="headerSearch" name="headerSearch">
+          <div class="all-sch">
+            <!-- 검색창 -->
+            <div class="search-box"></div>
+            <!-- 닫기 버튼 -->
+            <button type="button" class="close-btn">
+              <i class="hidden">닫기 버튼</i>
+            </button>
+
+            <!-- 텍스트 그룹 (2줄로 디자인 형성)-->
+            <div class="text-wrap">
+              <div class="box">
+                <div class="tag">전립선비대증</div>
+                <div class="tag">요로결석</div>
+                <div class="tag">정계정맥류</div>
+                <div class="tag">정관복원수술</div>
+              </div>
+
+              <div class="box">
+                <div class="tag">진료안내</div>
+                <div class="tag">검사결과문의</div>
+                <div class="tag">제증명 발급 안내</div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- 이 헤더의 구조는 햄버거 메뉴를 기준으로 세로로 fixed 되어있는 바가 하나 있다.  -->
+      </div>
+    </header>
+    <!-- header : end -->
+
+    <!-- main : start -->
+    <main id="main"></main>
+    <!-- main : end -->
+
+    <!-- footer : start -->
+    <footer id="footer"></footer>
+    <!-- footer : end -->
   </body>
 </html>
