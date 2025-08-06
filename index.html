@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/main.css" />
+
+    <!-- 라이브러리들 -->
+    <!-- GSAP -->
+    <!-- GSAP - ScrollTrigger -->
+    <!-- lenis -->
+    <!-- Swiper -> CSS도  -->
+    <!-- Jquery -->
   </head>
   <body>
     <!-- header : start -->
@@ -88,7 +95,8 @@
           </a>
         </div>
 
-        <!-- 서치 아이콘을 눌렀을 때 나오는 검색창 -->
+        <!-- 서치 아이콘을 눌렀을 때 나오는 검색창 (모달)-->
+        <!-- 모달이란 일반적으로 기존 화면 위에 플로팅 되는 화면을 말한다. - 새 페이지 이동없이 기존화면에서 정보를 표시하는 것.  -->
         <form action="" id="headerSearch" name="headerSearch">
           <div class="all-sch">
             <!-- 검색창 -->
@@ -101,16 +109,16 @@
             <!-- 텍스트 그룹 (2줄로 디자인 형성)-->
             <div class="text-wrap">
               <div class="box">
-                <div class="tag">전립선비대증</div>
-                <div class="tag">요로결석</div>
-                <div class="tag">정계정맥류</div>
-                <div class="tag">정관복원수술</div>
+                <p class="tag">전립선비대증</p>
+                <p class="tag">요로결석</p>
+                <p class="tag">정계정맥류</p>
+                <p class="tag">정관복원수술</p>
               </div>
 
               <div class="box">
-                <div class="tag">진료안내</div>
-                <div class="tag">검사결과문의</div>
-                <div class="tag">제증명 발급 안내</div>
+                <p class="tag">진료안내</p>
+                <p class="tag">검사결과문의</p>
+                <p class="tag">제증명 발급 안내</p>
               </div>
             </div>
           </div>
@@ -120,8 +128,100 @@
     </header>
     <!-- header : end -->
 
+    <!-- 헤더와 메인 사이의 모달들.  -->
+
     <!-- main : start -->
-    <main id="main"></main>
+    <main id="main">
+      <!-- 1 . visual section : start -->
+      <!-- visual부분은 swiper을 이용해서 사용된 구조 -> 이미지 슬라이드 -->
+      <div class="visual-section">
+        <div class="cover-bg"></div>
+        <!-- 1) swiper-slide 부분 -->
+        <div class="swiper-container">
+          <!-- swiper-wrapper 클래스 지정 -->
+          <div class="swiper-wrapper">
+            <!-- slide할 요소에 swiper-slide 클래스 지정 -->
+            <div class="swiper-slide item">
+              <!-- 슬라이드 이미지 -->
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+              <!-- 슬라이드 텍스트 박스 -->
+            </div>
+
+            <div class="swiper-slide item">
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+            </div>
+
+            <div class="swiper-slide item">
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+            </div>
+
+            <div class="swiper-slide item">
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+            </div>
+
+            <div class="swiper-slide item">
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+            </div>
+
+            <div class="swiper-slide item">
+              <div class="bg"></div>
+              <div class="txt-box">
+                <p class="tit"></p>
+                <p class="tit"></p>
+                <p class="tit"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2) slide move(슬라이드 개수 활성화 및 시간연동(progress bar)) -->
+          <div class="slide-move">
+            <!-- swiper-pagination 을 사용 -->
+            <div class="paging">
+              <span class="swiper-pagination-current">01</span>
+              <div class="progress"></div>
+              <span class="swiper-pagination-total">06</span>
+            </div>
+          </div>
+
+          <!-- 3) scroll down(아이콘)  -->
+          <div class="scroll-down">
+            <p>Scroll</p>
+            <div class="scroll-down-icon">
+              <!-- border와 background로 만들거임. -->
+              <span>
+                <em></em>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 1 . visual section : end -->
+    </main>
     <!-- main : end -->
 
     <!-- footer : start -->
