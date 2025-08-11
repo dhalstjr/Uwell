@@ -178,19 +178,61 @@ input {
 
   align-items: center;
 
+  /* 높이를 100%로 주지 않는다면, 크기가 작아서 헤더 위에 정렬하게 된다. */
   height: 100%;
 }
 
-#nav .depth1 li {
+#nav .depth1 > li {
+  /* 절대요소의 부모가 되어 서브메뉴의 부모가 된다. */
+  position: relative;
   border: 1px solid #000;
+  white-space: nowrap;
+
+  /* li에 크기를 주고 a태그도 100%를 줄 수 있도록 100%를 준다. a태그의 크기를 키워 마우스가 들어갈 수 있는 영역을 키움. */
+  height: 100%;
+  padding: 0 3.6rem;
+
+  transition: padding 0.3s;
 }
 
 #nav .depth1 li > a {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+
+  font-size: 1.8rem;
 }
 
 #nav .depth1 li > a > span {
-  font-size: 1.8rem;
-  font-weight: 400;
+  /* 텍스트 요소에 부모 요소가 되게 하고, hover시 나오는 효과를 주기 위해서 부모 요소로 적용. */
+  position: relative;
+
+  /* line-height를 줘 가상요소 효과가 텍스트와 너무 붙지 않게 함. */
+  line-height: 1.7;
+}
+
+#nav .depth1 li > a > span:before {
+  content: "";
+  display: block;
+
+  position: absolute;
+
+  /* 이 요소들의 위치들은 가운데에서 퍼지는 효과를 주기 위해서 이렇게 설정. */
+  bottom: 0;
+  left: 50%;
+
+  transform: translate(-50%, 100%);
+
+  width: 0;
+
+  border-top: 1.5px solid #0c3659;
+
+  transition: width 0.3s;
+}
+
+#nav .depth1 li > a > span:hover:before {
+  width: 100%;
 }
 
 .utils {
