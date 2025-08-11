@@ -111,3 +111,240 @@ input {
   .swiper-pagination-bullet {
   margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
 }
+
+/* header에 대한 CSS */
+/* header에 스타일 fixed */
+#header {
+  position: fixed;
+  top: 0;
+  /* left 0과 right : 0을 줘도 width : 100% 와 같은 동작을 하지만 width : 100%를 준 이유가 있을거임.*/
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  font-size: 1.8rem;
+
+  z-index: 1000;
+
+  background: #55f;
+}
+
+/* 헤더의 넓이를 선정. */
+#header .in-header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  /* 높이 지정 */
+  height: 9rem;
+
+  padding: 0 0 0 5rem;
+
+  background: #5f5;
+}
+
+.logo-box {
+  background: #ff5;
+
+  margin-right: 20rem;
+}
+
+.logo-box .logo {
+  width: 19rem;
+  height: 3.3rem;
+
+  display: block;
+
+  background: url(../img/logo.png) no-repeat 50% / cover;
+}
+
+#header #nav {
+  background: #f5f;
+  height: 100%;
+
+  /* 절대 요소로 만들고 가운데 맞춤. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 50;
+}
+
+#nav .depth1 {
+  display: flex;
+
+  align-items: center;
+
+  height: 100%;
+}
+
+#nav .depth1 li {
+  border: 1px solid #000;
+}
+
+#nav .depth1 li > a {
+}
+
+#nav .depth1 li > a > span {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.utils {
+  background: #f55;
+
+  /* 유틸메뉴의 정렬은 오른쪽에 붙여서 헤더의 레이아웃을 구성 */
+  display: flex;
+  /*  유틸메뉴의 구성인 자식들이 가운데 정렬 */
+  align-items: center;
+
+  /*  크기를 100%로 줘 헤더의 크기에 맞게 크기를 가져감 */
+  height: 100%;
+
+  /* 오른쪽 끝으로 붙임. */
+  margin-left: auto;
+}
+
+.utils .utils_btn_common {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+
+  /* 크기  */
+  width: 2.25rem;
+  height: 100%;
+
+  font-size: 2.25rem;
+}
+
+.utils .utils_btn_common span {
+  display: block;
+}
+
+/* 본페이지에서는 유틸메뉴의 아이콘들이 svg로 선으로 구성 되어있으나, 나는 이미지로 구성 */
+
+.utils .utils_btn_common + .utils_btn_common {
+  margin-left: 3.6rem;
+}
+
+.utils .info-btn {
+  width: auto;
+}
+
+.utils .info-btn .info {
+  padding: 0.4rem 1.56rem;
+  border: 1px solid #0c3659;
+
+  border-radius: 2.6rem;
+
+  color: #0c3659;
+
+  font-size: 1.4rem;
+
+  font-weight: 500;
+
+  /* 줄바꿈 일어나지 않게. */
+  white-space: nowrap;
+
+  transition: all 0.3s;
+}
+
+/* hover시 효과 */
+.utils .info-btn .info:hover {
+  background-color: #0c3659;
+  color: #fff;
+}
+
+/* 유틸매뉴의 로그인  */
+.utils .login-box .login {
+  background: url(../img/login-icon.svg) no-repeat 0 0 / contain;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.utils .login-box .login-toll {
+  display: none;
+}
+
+/* 유틸메뉴의 검색 */
+.utils .search-box .search {
+  background: url(../img/search-icon.svg) no-repeat 0 0 / contain;
+  width: 2.25rem;
+  height: 2.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+/* 유틸메뉴의 햄버거 메뉴 */
+.utils .ham-box {
+  /* 박스 크기 안 가운데 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 9rem;
+
+  background: #0a2e4d;
+}
+
+.utils .ham-box .ham-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  /* 세로로 간격을 주기 위해서는 columns가 필요 */
+  flex-direction: column;
+
+  /* 라인의 부모 요소에 크기를 주고, 자식에게 100%를 준다. */
+  position: relative;
+
+  width: 2.25rem;
+  height: 1.8rem;
+}
+
+.utils .ham-box .ham-btn span {
+  display: block;
+}
+
+.utils .ham-box .ham-btn .line {
+  width: 100%;
+  height: 1px;
+
+  border-top: 1.5px solid #fff;
+
+  /* 여기서 height와 border-top을 함께 사용한 이유는 기능적으로는 한개만 사용해도 되지만, 디자인적으로는 border로 선을 그리고, height로 높이를 제어하는 방식이 라인을 얇지만 선명하게 만들 수 있어 같이 쓰는 경우가 많다 */
+  /* 1. 라인 두께 조절, 2. 레이아윳의 안정성, 3.시각적 대비 강회 */
+  background: #fff;
+}
+
+/* line의 2번째 요소에게 넓이의 차이를 줘 디자인 적 요소 추가 */
+.utils .ham-box .ham-btn .line:nth-of-type(2) {
+  width: 80%;
+}
+
+/* 검색창 모달 -> 일단 보이지 않게 설정. */
+#headerSearch {
+  display: none;
+}
+
+#main .visual-section {
+  width: 100%;
+  height: 100vh;
+
+  background: #55f;
+}
