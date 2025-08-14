@@ -202,6 +202,8 @@ input {
   height: 100%;
 
   font-size: 1.8rem;
+
+  font-weight: 400;
 }
 
 #nav .depth1 li > a > span {
@@ -231,7 +233,7 @@ input {
   transition: width 0.3s;
 }
 
-#nav .depth1 li > a > span:hover:before {
+#nav .depth1 li > a:hover > span:before {
   width: 100%;
 }
 
@@ -456,7 +458,7 @@ input {
   width: 0;
   height: 1px;
 
-  border-top: 1.5px solid #9a9ea7;
+  background-color: #9a9ea7;
 
   transition: width 0.5s;
 }
@@ -497,9 +499,293 @@ input {
   display: none;
 }
 
-#main .visual-section {
-  width: 100%;
-  height: 100vh;
+/* main : start */
 
-  background: #55f;
+/* main을 감싸는 container -> main 영역이 알맞게 들어갈 수 있도록, 헤더와 퀵메뉴 크기 뺌 */
+.container {
+  margin-top: 9rem;
+  margin-right: 9rem;
+  font-size: 1.8rem;
+  word-break: keep-all;
+
+  line-height: 1.7;
 }
+
+/* section - visual : start */
+
+.visual-section {
+  position: relative;
+  width: 100%;
+
+  /* 높이도 헤더 영역을 뺴줘야함. */
+  height: 100vh;
+}
+
+.visual-section .cover-bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+
+  /*   background: #55f; */
+}
+
+.visual-section .cover-bg .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+
+  /*   background: #fff; */
+}
+
+/* swiper */
+.visual-section .swiper-container {
+  height: 100%;
+}
+
+/* slide에 부모 요소 */
+.visual-section .swiper-container .swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  /* flex를 주면 구현하고자 하는 디자인이 보이지 않기 때문에 일단 명령을 뺴주자 -> swiper에 들어가있는 공통 CSS때문에 안보이는 것 같은데, 디자인을 다 만들고 나서 바꾸자. */
+  /*  display: flex; */
+
+  /* border-box는 콘텐츠 영역, 패딩, 테두리까지 포함하여 너비와 높이를 계산. */
+  /* 요소의 너비와 높이가 콘텐츠 영역에만 적용 */
+  box-sizing: content-box;
+
+  transition-property: transform;
+}
+
+/* item이라는 클래스를 붙인 이유는 swiper에 들어가는 공통CSS와 헷갈리지 않게, 다른 클래스에 스타일을 줌. */
+.visual-section .item {
+  position: relative;
+  height: 100%;
+}
+
+.visual-section .item .bg {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.visual-section .item .bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visual-section .item .txt-box {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+
+  font-size: 5.4rem;
+  color: #fff;
+}
+
+.visual-section .item .txt-box .tit {
+  line-height: 1.4;
+}
+
+.visual-section .item .txt-box .tit + .tit {
+  font-weight: 700;
+}
+
+.visual-section .item .txt-box .txt {
+  margin-top: 4.4rem;
+  font-size: 2.1rem;
+}
+
+.visual-section .item .btn-wrap {
+  /* a태그 부모에게 flex를 줘야 공간을 100%을 차지하지 않음. */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4.6rem;
+}
+
+.visual-section .item .btn-wrap a {
+  padding: 1.3rem 2rem;
+
+  border: 1px solid #fff;
+  border-radius: 2.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.5s;
+}
+
+.visual-section .item .btn-wrap a .btn-txt {
+  font-size: 1.3rem;
+
+  color: #fff;
+
+  margin-right: 1.6rem;
+}
+
+.visual-section .item .btn-wrap a .icon {
+  display: block;
+  width: 1.2rem;
+  height: 1.1rem;
+
+  background: url(../img/more-arrow-white.svg) no-repeat 0 0 / cover;
+}
+
+.visual-section .item .btn-wrap a:hover {
+  background: #fff;
+}
+.visual-section .item .btn-wrap a:hover .btn-txt {
+  color: #000;
+}
+
+.visual-section .item .btn-wrap a:hover .icon {
+  background: url(../img/more-arrow-black.svg) no-repeat 0 0 / cover;
+}
+
+.visual-section .slide-move {
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+
+  width: 26rem;
+  height: 5rem;
+
+  font-size: 1.3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 10;
+}
+
+/* slide 프로그래스 바 */
+.visual-section .slide-move .paging {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+
+  text-align: left;
+}
+
+.visual-section .slide-move .paging .timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2rem;
+
+  width: 20rem;
+}
+
+.visual-section .slide-move .paging .progress {
+  width: 100%;
+  height: 2px;
+
+  background: #000;
+  opacity: 0.3;
+}
+
+.visual-section .slide-move .paging .progress .bar {
+  width: 50%;
+  height: 2px;
+
+  background: #000;
+}
+
+/* 스크롤 다운 아이콘 */
+.visual-section .scroll-down {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  text-align: center;
+  z-index: 15;
+  color: #fff;
+}
+
+.visual-section .scroll-down p {
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  margin-bottom: 1rem;
+}
+
+/* 스크롤 마우스 모양 css으로 */
+.visual-section .scroll-down .scroll-down-icon span {
+  display: block;
+  position: relative;
+  width: 2.7rem;
+  height: 3.6rem;
+
+  border: 1px solid #fff;
+  border-radius: 1.3rem;
+  box-sizing: border-box;
+  /* 가운데로 정렬할 수 있도록. */
+  margin: 0 auto;
+}
+
+.visual-section .scroll-down .scroll-down-icon span em {
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  background: #fff;
+  border-radius: 3.6rem;
+
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  box-sizing: border-box;
+
+  /* 애니메이션 생성 후 적용 */
+  animation: scroll 2s infinite;
+}
+
+/* 스크롤 마우스 인터랙션을 위해서 animation 생성 */
+@keyframes scroll {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  80% {
+    transform: translate(-50%, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* slide-item에 백그라운드 이미지가 img 태그로 들어가서 다 불러올 수가 없기에, 하나로 여러개를 만듦. */
+/* section - visual : end */
+
+/* main : end */

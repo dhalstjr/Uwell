@@ -183,114 +183,132 @@
       </div>
     </div>
 
-    <!-- main : start -->
-    <main id="main">
-      <!-- 1 . visual section : start -->
-      <!-- visual부분은 swiper을 이용해서 사용된 구조 -> 이미지 슬라이드 -->
-      <div class="visual-section">
-        <div class="cover-bg"></div>
-        <!-- 1) swiper-slide 부분 -->
-        <div class="swiper-container">
-          <!-- swiper-wrapper 클래스 지정 -->
-          <div class="swiper-wrapper">
-            <!-- slide할 요소에 swiper-slide 클래스 지정 -->
-            <div class="swiper-slide item">
-              <!-- 슬라이드 이미지 -->
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
-                <div class="btn-wrap">
-                  <a href="">
-                    <span class="btn-txt">View More</span>
-                    <div class="icon"><i class="hidden">화살표 아이콘</i></div>
-                  </a>
+    <!-- main을 감싼 container -> 헤더와 옆에 퀵메뉴를 뺸 모든 영역. main이 잘 보일 수 있도록. -->
+    <div class="container">
+      <!-- main : start -->
+      <main id="main">
+        <!-- 1 . visual section : start -->
+        <!-- visual부분은 swiper을 이용해서 사용된 구조 -> 이미지 슬라이드 -->
+        <div class="visual-section">
+          <div class="cover-bg">
+            <div class="cover"></div>
+            <div class="symbol"></div>
+          </div>
+          <!-- 1) swiper-slide 부분 -->
+          <div class="swiper-container">
+            <!-- swiper-wrapper 클래스 지정 -->
+            <div class="swiper-wrapper">
+              <!-- slide할 요소에 swiper-slide 클래스 지정 -->
+              <div class="swiper-slide item">
+                <!-- 슬라이드 이미지 -->
+                <div class="bg">
+                  <img src="./img/slide-bg1.png" alt="비주얼 섹션 배경 사진1">
+                </div>
+                
+                <div class="txt-box">
+                  <p class="tit">'대규모 확장 이전 및
+                    <br>개원 10주년 기념'
+                  </p>
+                  <p class="tit">전립선 MRI 검진 30% 할인 이벤트</p>
+                  <p class="txt">미세 전립선암까지 정확하고 완벽한 진단!</p>
+
+                  <div class="btn-wrap">
+                    <a href="#">
+                      <span class="btn-txt">View More</span>
+                      <div class="icon">
+                        <i class="hidden">화살표 아이콘</i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <!-- 슬라이드 텍스트 박스 -->
+              </div>
+<!-- 
+              <div class="swiper-slide item">
+                <div class="bg"></div>
+                <div class="txt-box">
+                  <p class="tit"></p>
+                  <p class="tit"></p>
+                  <p class="txt"></p>
+                  <div class="btn-wrap">
+                    <a href="">
+                      <span class="btn-txt">View More</span>
+                      <div class="icon">
+                        <i class="hidden">화살표 아이콘</i>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
-              <!-- 슬라이드 텍스트 박스 -->
-            </div>
 
-            <div class="swiper-slide item">
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
-                <div class="btn-wrap">
-                  <a href="">
-                    <span class="btn-txt">View More</span>
-                    <div class="icon"><i class="hidden">화살표 아이콘</i></div>
-                  </a>
+              <div class="swiper-slide item">
+                <div class="bg"></div>
+                <div class="txt-box">
+                  <p class="tit"></p>
+                  <p class="tit"></p>
+                  <p class="txt"></p>
                 </div>
               </div>
-            </div>
 
-            <div class="swiper-slide item">
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
+              <div class="swiper-slide item">
+                <div class="bg"></div>
+                <div class="txt-box">
+                  <p class="tit"></p>
+                  <p class="tit"></p>
+                  <p class="txt"></p>
+                </div>
+              </div>
+
+              <div class="swiper-slide item">
+                <div class="bg"></div>
+                <div class="txt-box">
+                  <p class="tit"></p>
+                  <p class="tit"></p>
+                  <p class="txt"></p>
+                </div>
+              </div>
+
+              <div class="swiper-slide item">
+                <div class="bg"></div>
+                <div class="txt-box">
+                  <p class="tit"></p>
+                  <p class="tit"></p>
+                  <p class="txt"></p>
+                </div>
+              </div>
+            </div> -->
+            
+            <!-- 2) slide move(슬라이드 개수 활성화 및 시간연동(progress bar)) -->
+            <div class="slide-move">
+              <!-- swiper-pagination 을 사용 -->
+              <div class="paging">
+                <span class="swiper-pagination-current">01</span>
+                <div class="timer">
+                  <div class="progress">
+                    <div class="bar"><i class="hidden">프로그래스 바</i></div>
+                  </div>
+                </div>
+                <span class="swiper-pagination-total">06</span>
               </div>
             </div>
-
-            <div class="swiper-slide item">
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
+            <!-- 3) scroll down(아이콘)  -->
+            <div class="scroll-down">
+              <p>Scroll</p>
+              <div class="scroll-down-icon">
+                <!-- border와 background로 만들거임. -->
+                <span>
+                  <em><i class="hidden">마우스</i></em>
+                </span>
               </div>
-            </div>
-
-            <div class="swiper-slide item">
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
-              </div>
-            </div>
-
-            <div class="swiper-slide item">
-              <div class="bg"></div>
-              <div class="txt-box">
-                <p class="tit"></p>
-                <p class="tit"></p>
-                <p class="txt"></p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2) slide move(슬라이드 개수 활성화 및 시간연동(progress bar)) -->
-          <div class="slide-move">
-            <!-- swiper-pagination 을 사용 -->
-            <div class="paging">
-              <span class="swiper-pagination-current">01</span>
-              <div class="progress"></div>
-              <span class="swiper-pagination-total">06</span>
-            </div>
-          </div>
-
-          <!-- 3) scroll down(아이콘)  -->
-          <div class="scroll-down">
-            <p>Scroll</p>
-            <div class="scroll-down-icon">
-              <!-- border와 background로 만들거임. -->
-              <span>
-                <em></em>
-              </span>
             </div>
           </div>
         </div>
-      </div>
-      <!-- 1 . visual section : end -->
-
-      <!-- 2 . 상담신청 section : start (quick consultation -> 빠른 상담 ) -->
-      <div class="quick-con-section"></div>
-      <!-- 2 . 상담신청 section : end -->
-    </main>
+        <!-- 1 . visual section : end -->
+        <!-- 2 . 상담신청 section : start (quick consultation -> 빠른 상담 ) -->
+        <div class="quick-con-section"></div>
+        <!-- 2 . 상담신청 section : end -->
+      </main>
+    </div>
     <!-- main : end -->
 
     <!-- footer : start -->
