@@ -304,8 +304,160 @@
           </div>
         </div>
         <!-- 1 . visual section : end -->
+
         <!-- 2 . 상담신청 section : start (quick consultation -> 빠른 상담 ) -->
-        <div class="quick-con-section"></div>
+         <!-- 본패이지에서는 이 부분을 form태그를 사용해서 했음. -> 데이터를 제출하기 위한 웹 양식 영역을 나타내는 태그이기에 데이터를 보내야하는 영역으로서 form 태그를 사용한 것으로 보임. -->
+        <!-- <div class="counsel-section">
+          <div class="counsel-con">
+
+            <div class="conusel-tit">상담, 간편하고 빠르게</div>
+            <div class="counsel-info">
+              <div class="name-area">
+                <div class="name counsel-txt">이름</div>
+                <span class="line"><i class="hidden">가로선</i></span>
+              </div>
+            
+              <div class="number-area">
+                <div class="phone-number counsel-txt">연락처 (숫자만)</div>
+                <span class="line"><i class="hidden">가로선</i></span>
+              </div>
+              <div class="disease-area">
+                <div class="disease counsel-txt">질환명</div>
+                <span class="line"><i class="hidden">가로선</i></span>
+              </div>
+              <div class="inflow-area">
+                <div class="inflow counsel-txt">유입경로</div>
+                <span class="line"><i class="hidden">가로선</i></span>
+              </div>
+            </div>
+            <a href="#" class="application-btn">
+              신청
+            </a>
+
+            <div class="Personal-info">
+              <a href="#" class="agreement-link">
+                <div class="check-btn"><i class="hidden">체크 아이콘</i></div>
+                <span class="check-txt">개인정보 수집 이용 동의</span>
+              </a>
+
+              <a href="#" class="learn-more">
+                자세히 보기
+              </a>
+            </div>
+
+          </div>
+        </div> -->
+
+        <!-- form 태그 버전 HTML -->
+         <div class="counsel-section" id="counselFrm">
+          <!-- section영역의 넓이를 제한 -->
+          <div class="section-inner">
+            <div class="counsel-container">
+              <p class="tit">상담, 간단하고 빠르게</p>
+
+              <!-- form태그 사용 -> 데이터가 들어가는 영역 -->
+              <!-- form태그에 action 속성의 기능은 사용자가 폼을 제출했을 때 데이터가 전송될 서버의 URL을 지정하는 역할 -->
+              <!--form태그에  data-gtm-form-interact-id 속성은 Google Tag Manager(GTM)에서 폼 상호 작용을 추적하기 위해 사용됩니다. 이 속성을 사용하면 폼 제출과 관련된 특정 이벤트를 쉽게 식별하고 분석할 수 있습니다 -->
+              <form id="mainFrm" name="mainFrm" method="post" autocomplete="off" >
+                <input type="hidden" name="mode" value="insert">
+                <!-- input태그안 name에서 gubun은 특정 입력 필드가 속하는 그룹을 나타내거나, 서버에서 해당 데이터를 처리할 때 구분자로 사용될 수 있습니다. -->
+                <input type="hidden" name="gubun" value="easy">
+
+                <div class="form-wrap">
+                  <!-- 데이터가 들어갈 영역 (4개) -->
+                  <div class="form-box">
+                    <div class="inp">
+                      <input type="text" name="userName" id="muserName" placeholder="이름" aria-label="이름">
+                    </div>
+                    <div class="inp">
+                      <input type="text" class="phoneNumnerFormat" name="userPhone" id="muserPhone" placeholder="연락처 (숫자만)" area-label = '연락처 (숫자만)'>
+                    </div>
+
+                    <!-- select 태그를 사용한 select박스 -> 여러개의 데이터를 넣을 수 있는 태그 -->
+                    <div class="sel-box">
+                      <!-- select태그는 사용자가 여러 선택지 중 하나를 고를 수 있도록 하는 드롭다운 메뉴 또는 콤보 리스트를 생성하는 기능 -->
+                      <!-- select태그를 사용하고 왜 또 다시 nice-select를 만들었냐고 물었다, 이유는 select태그에 display: none이 붙어있고, 실제로 보이는 드롭다운 메뉴는 nice-select인 것 같아서이다 -->
+                      <!-- 그래서 물어본 결과 1. HTML기본 select태그의 한계 : 브라우저마다 select 기본 스타일이 다르고, CSS로 꾸미는 데도 한계가 있다. 예를 들면 글씨 옆 아이콘 넣기 어렵고, 옵션 hover스타일도 제한적이고, 커서 모양, 스크롤바 디자인, 테두리 모양 등 통제 불가능한 영역들이 많음 -->  
+                      <!-- 그렇기에 nice-select라는 클래스를 가진 태그를 만들어서 실제로 보이는 select박스를 구현함,  -->
+                       <!-- 그리고, select태그는 display : none을 사용해도 폼 전송에는 영향을 주지 않기에 js로 숨겨진 select태그의 value로 동기화 해주면, 서버로는 정상적으로 값이 전달된다. -->
+                      <select name="disease" id="mdisease" style = 'display : none;'>
+                        <option value disabled selected>질환명</option>
+                        <option value="0">전립선</option>
+                        <option value="1">요로결석</option>
+                        <option value="2">여성배뇨장애(요실금)</option>
+                        <option value="3">정계정맥류</option>
+                        <option value="4">정관복원수술</option>
+                        <option value="5">보형물수술</option>
+                        <option value="6">기타</option>
+                      </select>
+
+                      <!-- 보이는 select 박스 -->
+                       <div class="nice-select" tabindex="0">
+                        <span class="current">질환명</span>
+                        <ul class="list">
+                          <li data-value class="option selected disable focus">질환명</li>
+                          <li data-value="0" class="option">전립선</li>
+                          <li data-value="1" class="option">요로결석</li>
+                          <li data-value="2" class="option">여성배뇨장애(요실금)</li>
+                          <li data-value="3" class="option">정계정맥류</li>
+                          <li data-value="4" class="option">정관복원수술</li>
+                          <li data-value="5" class="option">보형물수술</li>
+                          <li data-value="6" class="option">기타</li>
+                        </ul>
+                       </div>
+                    </div>
+
+                    <div class="sel-box">
+                      <select name="traffic" id="mtraffic" style = "display : none;">
+                        <option value disabled selected>유입경로</option>
+                        <option value="naver">네이버</option>
+                        <option value="google">구글</option>
+                        <option value="youtube">유튜브</option>
+                        <option value="kakao">카카오</option>
+                        <option value="etc">기타</option>
+                      </select>
+
+                      <!-- 실제로 보이는 select 박스 -->
+                       <div class="nice-select" tabindex="0">
+                        <span class="current">유입경로</span>
+                        <ul class="list">
+                          <li data-value class="option selected disable focus">유입경로</li>
+                          <li data-value="naver" class="option">네이버</li>
+                          <li data-value="google" class="option">구글</li>
+                          <li data-value="youtube" class="option">유튜브</li>
+                          <li data-value="kakao" class="option">카카오</li>
+                          <li data-value="etc" class="option">기타</li>
+                        </ul>
+                       </div>
+                    </div>
+                  </div>
+
+                  <!-- form 버튼 -->
+                   <div class="btn-wrap">
+                    <!--  폼 태그 내에서 `button type="button"`은 클릭 가능한 일반 버튼을 의미합니다. 즉, 클릭 시 폼 데이터를 제출하거나 초기화하는 등의 동작을 수행하지 않고, 주로 JavaScript를 사용하여 특정 동작을 연결할 때 사용됩니다.   -->
+                    <!-- 폼 태그 내에 onclick 속성은 사용자가 버튼을 클릭했을 때 실행할 자바스크립트 코드를 지정합니다. onclick 속성은 주로 특정 동작을 수행하거나 폼 제출을 막는 등 버튼 클릭 시 추가적인 기능을 구현할 때 사용됩니다.  -->
+                    <button type="button" class="submit-btn" onclick="mainFrmChk()">신청</button>
+                   </div>
+
+                   <!-- 개인정보동의 -->
+                   <div class="agree-box">
+                    <div class="check-box">
+                      <input type="checkbox" aria-label="개인정보 수집 및 이용 동의">
+                      <label for="">
+                        <div class="icon"><i class="hidd">체크 박스 아이콘</i></div>
+                        <p class="txt">개인정보 수집 및 이용 동의</p>
+                      </label>
+                    </div>
+                    <!-- 자세히 보기 링크 -->
+                    <div class="btn-wrap">
+                      <button type="button" class="agree-btn">자세히 보기</button>
+                    </div>
+                   </div>
+                </div>
+              </form>
+            </div>
+          </div>
+         </div>
         <!-- 2 . 상담신청 section : end -->
       </main>
     </div>
