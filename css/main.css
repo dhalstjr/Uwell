@@ -295,6 +295,217 @@
 /* section - visual : end */
 
 /* section - counsel : start */
+.counsel-section {
+  margin-top: 10rem;
+  padding: 5rem 0;
+
+  background-color: #ff5;
+  color: #232323;
+}
+
+/* 넓이 제한해주는 영역 */
+.section-inner {
+  position: relative;
+  /* max-width에 165.3rem을 주지 않고, width에 주고, max-width에 100%를 준 이유는 width는 기본적으로 폭 넓이를 165.3rem 최대로 갖는다는 의미인데, 넓은 화면에서 레이아웃이 무한히 늘어나는 게 아니라, 최대 디자인 폭이 165.3rem을 유지하도록 만든 것이다. */
+  /* max-width는 반응형에 대응하기 위해서 명령을 준 것인데, 만약 width만 165.3rem만 준다면, 화면이 좁아졌을 때도 width는 165.3rem을 고집한다. -> 그러면 스크롤이 생기고, 화면 밖으로 벗어나게 된다. */
+  /* max-width:100%를 추가하면 화면이 width의 크기보다 넓을 때는 그대로의 넓이를 유지하고, 화면이 width보다 작아졌을때는 화면 폭에 맞춰 100%로 줄어든다. -> 유동적으로 넓이를 변화하는 구조를 갖게 되는 것이다. */
+  width: 165.3rem;
+  max-width: 100%;
+  margin: 0 auto;
+
+  /* padding을 주는 이유는 잘 모르겠지만. 양끝까지 딱 붙게 하지 않게 하기 위해서라고 한다. 모바일에서는 글자나 이미지가 화면 끝에 딱 붙으면 답답해 보이는 느낌을 주기 때문에 기본적인 가이드로 패딩을 주는 경우가 있다고 한다. */
+  padding: 0 2rem;
+}
+
+.counsel-section .counsel-container {
+  display: flex;
+
+  /* 시작점에 정렬. */
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.counsel-section .tit {
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  /* flex-shrink는 플렉스 아이템이 플렉스 컨테이너의 공간이 부족할 때 줄어드는 비율을 설정하는 속성이다. 기본값은 1이며, 0으로 설정하면 줄어들지 않는다. */
+  flex-shrink: 0;
+
+  /*   margin-right: 2.7rem; */
+}
+
+/* form태그에 있는 요소들을 grid로 설정. */
+/* 이 grid가 만드는 구조는 기본값 grid-auto-flow : row때문에 가로로 채우고 다음줄로 내려간다. */
+/* grid-template-columns : max-content  grid-template-columns: max-content max-content; 이므로 두 칸짜리 그리드가 향성되고, 아이템은  1행 1열 - form-box 1행 2열 btn-wrap , 2열 1행은 agree-box*/
+/* 여기서 grid-template-columns :max-content는 CSS 그리드 레이아웃에서 컬럼의 너비를 해당 컬럼 내의 컨텐츠가 차지하는 최대 너비만큼 자동 조정하도록 설정하는 기능입니다. 즉, 각 컬럼은 자신의 컨텐츠가 꽉 차도록 자동으로 늘어납니다 */
+/* 그렇다면  grid-template-columns: max-content max-content는 두개의 열을 만들고, 각각의 열 너비를 내용이 차지하려는 최댓값으로 딱 맞게 형성하고, 결과적으로 각 열이 내용을 감싸는 최소한의 폭만 차지합니다(늘어나서 빈 공간을 채우려 하지 않음) -> 그로 인해 폼 전체가 “꽉 차는 레이아웃”이 아니라, 컨트롤들이 필요한 만큼만 차지하는 꽉-조인 묶음이 됩니다.*/
+/* justify-content : flex-end는 그리드 트랙(열들의 묶음) 전체를 컨테이너의 **가로축 끝(오른쪽)**으로 붙입니다. */
+/* 즉 이 구조는 두 열 레이아웃: 왼쪽에 입력 묶음, 오른쪽에 제출 버튼(작은 폭)을 나란히 배치. 내용만큼만 차지: max-content로 둘 다 필요 폭만 사용 → 폼이 “컴팩트”해 보임. 오른쪽 정렬: justify-content: flex-end로 이 컴팩트 묶음을 섹션의 오른쪽에 붙임.  */
+.counsel-section .form-wrap {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: flex-end;
+
+  /* 세로 가로  (폭) */
+  gap: 2rem 3rem;
+  width: 100%;
+}
+
+/* 데이터 기입란 */
+.form-wrap .form-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.form-wrap .form-box .inp {
+  min-width: 20.7rem;
+  height: 5.4rem;
+
+  border-bottom: 2px solid #000;
+}
+
+/* input태그는 대체 요소이다. 자체 렌더링 규칙을 가지고 있는 요소, 대부분에서 브라우저 텍스트 입력창은 기본적으로 수직 중앙정렬된 텍스트 렌더링 규칙을 가지고 있다. -> 그래서 CSS height를 주면, 그 높이에 맞춰 중앙정렬을 하게 되는 것이다.  */
+.form-wrap .form-box .inp input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+
+  color: #000;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.form-wrap .form-box .inp + .inp {
+  margin-left: 2.8rem;
+}
+
+/* 드롭다운 메뉴 박스 -> select태그로 만드는 메뉴 */
+.form-wrap .form-box .sel-box {
+  min-width: 20.7rem;
+  margin-left: 2.8rem;
+}
+
+.form-wrap .form-box .sel-box .nice-select {
+  height: 5.4rem;
+
+  background-color: transparent;
+
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px solid #000;
+
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+/* span에는 저 위에 코드와 같은 명령을 주면 가운데로 정렬하지 않기에, span이 있는 요소에 height를 주고, block이나, flex요소로 만들고, 중앙 정렬을 해주는 명령을 내려야만 중앙정렬이 된댜. */
+.form-wrap .form-box .sel-box .nice-select span {
+  /* 박스 안 텍스트를 중앙정렬 span인 경우 flex를 하여 공간을 형성 후 중앙 정렬 */
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.form-wrap .form-box .nice-select .list {
+  background: #55f;
+
+  /*스크롤 높이를 제한해준다. */
+  max-height: 30.6rem;
+  min-width: 100%;
+  color: #232313;
+  /* overflow : auto는 컨텐츠가 요소의 크기를 초과할 때만 스크롤을 생성한다. -> 자기 영역보다 요소가 크면 스크롤 생성, 요소가 작다면 스크롤 생성 X */
+  overflow: auto;
+}
+
+.form-wrap .form-box .nice-select .list li {
+  border: 1px solid #000;
+}
+
+/* 드롭다운 메뉴 공통 CSS */
+.nice-select {
+  line-height: 40px;
+
+  position: relative;
+  box-sizing: border-box;
+
+  display: block;
+  cursor: pointer;
+
+  font-family: inherit;
+
+  text-align: left !important;
+  padding-right: 30px;
+
+  width: auto;
+  white-space: nowrap;
+
+  /* 특정 HTML 요소 내의 텍스트 선택을 방지하는 기능입니다. 즉, 사용자가 해당 영역의 텍스트를 드래그하거나 더블 클릭하여 선택할 수 없도록 만듭니다. 주로 텍스트 복사를 방지하거나, 의도치 않은 선택을 막기 위해 사용됩니다.  */
+  user-select: none;
+}
+
+.nice-select .list {
+  background-color: #fff;
+
+  /* 드롭 다운 메뉴 활성화 시 다운 됐을 때에 매뉴 요소의 가독성, 알아보기 위해 */
+  box-shadow: 0 0 10px 0 rgba(68, 68, 68, 0.11);
+
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+
+  padding: 0;
+  margin-top: 0;
+
+  z-index: 9;
+
+  /* 메뉴 활성화 시 opacity 1로 변경 */
+  opacity: 0;
+  overflow: hidden;
+
+  /* 메뉴 활성화 시(open) */
+  transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25) opacity 0.15s ease-out;
+}
+
+.nice-select .option {
+  line-height: 40px;
+  list-style: none;
+  min-height: 40px;
+
+  padding: 8.5px 18px;
+}
+
+/* focus 상태일 시 */
+.nice-select .option.focus {
+}
+
+.nice-select .option.selectd {
+}
+
+/* 드롭 다운 메뉴 활성화 시 */
+
+.nice-select.open .list {
+  opacity: 1;
+  overflow: visible;
+}
+
+/* 신청 버튼 */
+.counsel-section .form-wrap .btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counsel-section .form-wrap .btn-wrap .submit-btn {
+  width: 13.2rem;
+  height: 5.4rem;
+
+  background-color: #65a9df;
+  color: #fff;
+
+  border-radius: 3.4rem;
+}
 
 /* section - counsel : end */
 
