@@ -46,6 +46,8 @@ body {
 
 body {
   /* 폰트 적용  */
+
+  font-family: "Pretendard", sans-serif;
 }
 
 input {
