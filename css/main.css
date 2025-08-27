@@ -713,4 +713,90 @@
 
 /* section - staff(조직) : end */
 
+/* section - innovation Leaders(혁신적인 리더) : start */
+.innovation-section {
+  margin-top: 26rem;
+  padding-top: 9rem;
+
+  background: #4490cd;
+}
+
+.innovation-section .innov-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-tit-wrap .desc {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.main-tit-wrap .desc,
+.main-tit-wrap .txt-box {
+  color: #fff;
+}
+
+.main-tit-wrap .tit > p {
+  font-size: 6.5rem;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+/* 텍스트에 gradient 효과 -> background를 이용해서 text에만 컬러가 들어갈 수 있게 사용된 것 같음. */
+/* 문자 자체를 mask처럼 사용해서 그라디언트를 보여주고, js로 background-position만 계속 바꿔서 흘러가는 듯한 느낌을 줌. */
+.main-tit-wrap .tit .tit-gradient {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.4),
+    #fff,
+    #fff
+  );
+
+  /* 크기를 3배 늘림 -> 그 이유는 크기를 키워두면 background-position을 움직일 때 긴거리를 부드럽게 이동시키며 효과가 원활히 연출이 가능(작으면 금방 끝난다)*/
+  background-size: 300% 300%;
+
+  /* 1. 이 둘의 조합은 글리프(문자모양) 안쪽으로만 배경을 클리핑 */
+  /* 2. 글자 채움색을 투명(transparent)으로 만들어서, 텍스트 속에 깔린 배경 그라디언트만 보이게 함. */
+  /* 즉, 글자가 그라디언트를 보여주는 창이 된다. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main-tit-wrap .txt-box .box > p {
+  line-height: 1.7;
+
+  letter-spacing: 0.02em;
+}
+
+.main-tit-wrap .txt-box:first-of-type {
+  margin-top: 6rem;
+}
+.main-tit-wrap .txt-box .cate {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.main-tit-wrap .txt-box .cate-txt {
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+.main-tit-wrap .txt-box + .txt-box {
+  margin-top: 3rem;
+}
+/* 넓이를 정해줌. */
+.innov-content .main-tit-wrap {
+  text-align-last: left;
+  width: 35%;
+}
+
+.innov-content .innov-box {
+  width: 55%;
+}
+/* section - innovation Leaders(혁신적인 리더) : end */
+
 /* main : end */
