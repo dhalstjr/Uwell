@@ -845,10 +845,31 @@
   padding: 4.6rem 0; /* box로 인해 띄움. */
 }
 
+.innov-box .box-wrap .box {
+  /* 이미지가 있는 박스 요소들을 크기를 주고, margin-left/right : auto로 좌 우로 해서 정렬힘. */
+  width: 40%;
+}
+
+/* margin-left와 right은 홀수와 짝수를 나누는 even과 odd으로 나누어서 css 적용 */
+.innov-box .box-wrap .box:nth-of-type(even) {
+  margin-left: auto;
+}
+
+.innov-box .box-wrap .box:nth-of-type(odd) {
+  /* 원래 오른쪽으로 정렬이 우선 시 되지만, 그래도 적용시켜준다. */
+  margin-right: auto;
+}
+
 .innov-box .box-wrap .bg-line {
-  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+
+  /* border로 사용 시 1px보다 뚜꺼워보인다. */
+  border-right: 1px solid #fff;
+  /* 스크롤 돠면서 height값이 늘어남. */
   height: 100%;
-  background: #fff;
 }
 
 .innov-box .box-wrap .box-content {
@@ -873,6 +894,51 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.box-wrap .box-content .line {
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(-50%);
+  height: 0;
+  width: 25%;
+  border-top: 1px solid #fff;
+}
+
+/* 가상요소로 꾸미기  -> 이것도 홀수와 짝수를 나눠서 사용*/
+.box-wrap .box-content .line:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #fff;
+
+  position: absolute;
+  top: 50%;
+}
+
+.box-wrap .box:nth-of-type(even) .line:before {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.box-wrap .box:nth-of-type(odd) .line:before {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+/* 여기 라인도 홀수(even) 짝수(odd)로 나누어서 css를 적용시켜준다. */
+/* 홀수 짝수를 이용할 때는 :nth-of-type를 사용. */
+.box-wrap .box:nth-of-type(even) .line {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.box-wrap .box:nth-of-type(odd) .line {
+  right: 0;
+  transform: translateX(100%);
 }
 /* section - innovation Leaders(혁신적인 리더) : end */
 
