@@ -947,6 +947,221 @@
   margin-top: 9rem;
   padding: 27rem 0;
 }
+
+.center-section .main-tit-wrap {
+  text-align-last: left;
+}
+
+.center-section .main-tit-wrap .tit {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.7;
+  margin-top: 0;
+}
+
+.center-section .main-tit-wrap .desc {
+  color: #232323;
+  font-size: 4.7rem;
+  font-weight: 700;
+  margin-top: 2rem;
+
+  line-height: 1.7;
+}
+
+.center-section .main-tit-wrap .txt-wrap {
+  margin-top: 2rem;
+  line-height: 1.7;
+}
+.center-section .main-tit-wrap .txt-wrap .txt {
+  margin-top: 0;
+}
+
+/* 각각에게 크기를 줘서 CSS을 형성하여 만들었지만, 본페이지는 다른 CSS를 적용했음. 차이점은 반응형에 대비한 것 같음. 내 생각엔 한 번 물어보겠음. */
+/* 내가 만든 구조는 tab을 크기를 줘서 정해진 크기를 유지하는 방식이므로 반응형에 취약. */
+/* .center-section .center-tab {
+  margin-top: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .center-tab .tab {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #cdcdcd;
+
+  width: 32.4rem;
+  height: 5.4rem;
+
+  border-bottom: 1px solid #cdcdcd;
+  padding-bottom: 2.4rem;
+} */
+
+/* 본페이지에 대한 CSS 구조(반응형 고려) */
+.center-section .center-tab {
+  display: flex;
+  align-items: flex-end;
+
+  /* margin-top을 10rem 띄우고, 중앙 정렬 */
+  margin: 10rem auto 0;
+
+  /* 여기서 포인트는 width의 크기를 %로 주는 거. */
+  width: 80%;
+}
+
+.center-tab .tab {
+  /* 가상요소로 애니메이션을 주기 위해서 부모 역할이 되어줘야 함. */
+  position: relative;
+
+  /* 크기를 100%로 줌. -> 크기를 최대로 가질 수 있을 만큼 가짐.*/
+  /* center-tab에 flex-item이라서, 버튼 개수에 맞게 자동 분배가 됨. -> 이것이 반응형을 고려하여 CSS을 적용한 것.*/
+  width: 100%;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #cdcdcd;
+
+  border-bottom: 1px solid #cdcdcd;
+  padding-bottom: 2.4rem;
+
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* active 클래스 부여 시 스타일 변경 */
+.center-tab .tab.active {
+  color: #65a9df;
+}
+
+/* 가상요소로 border-bottom에 애니메이션 효과주기, 가운데에서 퍼지는 애니메이션 */
+.center-tab .tab:before {
+  content: "";
+  position: absolute;
+  /* -1px를 주어 위치 조정 -> 없으면 tab에 있는 border 위에 얹어있음. */
+  bottom: -1px;
+  left: 50%;
+  width: 10%;
+
+  border-bottom: 2px solid #000;
+  border-radius: 44px;
+
+  /* left : 50%만 주면 가운데에서 퍼지지 않고, 정확한 가운데를 맞추기 위해서는 translateX에 -50%를 줘, 가운데로 퍼지게 하는 애니메이션을 형성한다. */
+  transform: translateX(-50%);
+
+  /* 크기가 부드럽게 퍼지기 위해서 transition을 준다. */
+  transition: width 0.5s;
+}
+
+.center-tab .tab.active:before {
+  width: 100%;
+  border-bottom: 2px solid #65a9df;
+}
+
+/* slide.js를 이용할 부분 */
+.center-section .slide-wrap {
+  margin-top: 8rem;
+}
+
+.center-section .slide-wrap .swiper-container {
+}
+
+/* swiper.js에 있는 공통 css에 flex가 있어 따로 주지 않아도 됨. */
+.center-section .slide-wrap .swiper-container .swiper-wrapper {
+}
+
+/* 본페이지에서는 slide-item에 grid를 주어 영역을 나누고, 반응형을 고려한 듯 보임. */
+.center-section .slide-wrap .swiper-container .swiper-wrapper .slide-item {
+  display: grid;
+  grid-template-columns: 60% minmax(0, 1fr);
+  align-items: center;
+
+  gap: 4.5rem;
+}
+
+.center-section .slide-item .img {
+  position: relative;
+  width: 100%;
+
+  /* 이미지 크기를 padding-top으로 주는 방식 */
+  /* slide-item에 grid를 설정하고, grid-template-columns를 사용하여 이미지 크기에 영향을 줄 것으로 보임. */
+  padding-top: 60%;
+
+  /* 애니메이션 효과를 위해 적용 */
+  border-radius: 45rem;
+
+  overflow: hidden;
+}
+
+.center-section .slide-item .img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.center-section .slide-item .txt-wrap {
+  color: #232323;
+}
+
+.center-section .slide-item .txt-wrap .tit {
+  font-size: 4rem;
+  font-weight: 700;
+
+  line-height: 1.7;
+}
+
+.center-section .slide-item .txt-wrap .txt {
+  margin-top: 3.6rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.center-section .slide-item .txt-wrap .btn-wrap {
+  display: flex;
+
+  margin-top: 8.6rem;
+}
+
+.center-section .slide-item .txt-wrap .btn-wrap a {
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 1.4rem 2rem;
+  border: 1px solid #000;
+  border-radius: 2.6rem;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.4s;
+}
+
+.center-section .slide-item .txt-wrap .btn-wrap a::after {
+  content: "";
+  display: block;
+
+  width: 1.3rem;
+  height: 1.3rem;
+
+  margin-left: 1.6rem;
+
+  background: url(../img/arrow-right.svg) no-repeat 0 0 / contain;
+
+  transition: all 0.4s;
+}
+
+/* hover시 스타일 변경 */
+.center-section .slide-item .txt-wrap .btn-wrap a:hover {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: #0a2e4d;
+}
+
+.center-section .slide-item .txt-wrap .btn-wrap a:hover::after {
+  background: url(../img/arrow-right-hover.svg) no-repeat 0 0 / contain;
+}
+
 /* section - center section(특화센터 섹션) : end */
 
 /* main : end */
