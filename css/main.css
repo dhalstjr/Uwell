@@ -636,10 +636,13 @@
   letter-spacing: -0.02em;
 }
 
-.main-tit-wrap .tit h2 {
-}
+.staff-section .main-tit-wrap .tit .tit-gradient {
+  background: linear-gradient(90deg, #0f2538, #0f2538, #65a9df, #65a9df);
+  background-size: 300% 300%;
 
-.main-tit-wrap .tit h2 p {
+  /* 배경으로 준 색을 텍스트에만 mask효과를 주는 방법 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .main-tit-wrap .txt {
@@ -748,7 +751,7 @@
 
 /* 텍스트에 gradient 효과 -> background를 이용해서 text에만 컬러가 들어갈 수 있게 사용된 것 같음. */
 /* 문자 자체를 mask처럼 사용해서 그라디언트를 보여주고, js로 background-position만 계속 바꿔서 흘러가는 듯한 느낌을 줌. */
-.main-tit-wrap .tit .tit-gradient {
+.innovation-section .main-tit-wrap .tit .tit-gradient {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.4),
@@ -1070,6 +1073,12 @@
 }
 
 /* 본페이지에서는 slide-item에 grid를 주어 영역을 나누고, 반응형을 고려한 듯 보임. */
+/* 이 부분 CSS에서 궁금하고, 공부해야 할 부분은 grid-template-columns와 padding-top으로 이미지에 영향을 주는 이유 */
+/* 1) grid-template-columns : 60% minmax(0,1fr)이 어떤 역할을 하는가 */
+/* 1 - slide-item을 2열 그리드로 나누고, 1열은 60%, 2열은 minmax(0 , 1fr) 남은 공간을 1fr로 채우되, 최소값을 0으로 설정하여, min-content 기반 자동 축소로 인한 오버플로우 방지 -> min-content 기반 자동 축소는 그리드 레이아웃이나 플렉스박스에서 콘텐츠의 내용에 맞춰 가능한 가장 작은 크기로 줄이는 방식입니다. 텍스트의 경우 공백을 기준으로 줄바꿈을 시도하며, 이로 인해 콘텐츠가 넘치지 않도록 자동으로 크기가 조정되는 원리입니다. */
+/* 즉, .img(이미지 블록)가 1열의 자식이면, .img에 계산된 width는 그리드 컨테이너 너비의 60%가 된다. (여기에 gap이 있다면 gap만큼 줄어든다.) */
+/* 왜 minmax(0, 1fr)을 사용했는가? -> 1fr만 사용하면, 컨텐츠가 클 경우 min-content 규칙 때문에 의도치 않게 칼럼이 줄어들 지 않을 수 있다.  */
+/* 그리하여 minmax(0, 1fr)는 최소 0, 최대는 남은 공간 으로 강제하므로 반응형에서 안정적으로 동작한다.  */
 .center-section .slide-wrap .swiper-container .swiper-wrapper .slide-item {
   display: grid;
   grid-template-columns: 60% minmax(0, 1fr);
@@ -1078,6 +1087,19 @@
   gap: 4.5rem;
 }
 
+/* 2) padding-top : 60% 트릭의 원리(정확한 규칙) */
+/* css규정 -> padding-top또는 padding-bottom에 퍼센트 값을 사용하면, 그 백분율은 해당 요소의 컨테이닝 블록의 가로 너비를 기준으로 계산. */
+/* .img가 그리드 1열에서 width : 100%를 가지고 있으므로, .img의 사용된 폭( = 그리드 칼럼의 60%)이 컨테이닝 블록의 가로 폭이 되고, padding-top : 60%는 그 폭의 60%에 해당하는 픽셀 값을 세로 패딩으로 넣는다. -> 60% 60% 이거네. */
+
+/* 3) 그리드가 이미지 크기에 영향을 주는 이유 */
+/* 그리드 칼럼이 .img가 차지할 너비를 정한다. .img에 width : 100% 이므로 100% 너비를 사용 */
+/* padding-top은 그 너비를 기준으로 계산되어 세로 높이를 생성 */
+/* 따라서 칼럼 비율(60%) 변경 -> .img의 폭 변경 -> padding-top의 계산결과(높이)변경 -> 이미지의 최종 크기(폭, 높이)가 변경된다. -> 칼럼의 비율이 바뀌면 이미지의 폭과 넓이가 바뀐다. (반응형) */
+
+/* 4) 반응형 관점  */
+/* grid-template-columns에 퍼센트 또는 fr를 쓰면 그리드 컨테이너의 너비에 따라 칼럼 너비가 동적으로 변한다.  */
+/* 그 결과 .img의 폭이 줄어들면 padding-top도 줄어들어 비율은 같지만 크기(절대값)는 반응형으로 줄어든다.  */
+/* 그래서 이 조합은 반응형에서 동일한 비율의 이미지를 유지하려는 전형적인 기법이다.  */
 .center-section .slide-item .img {
   position: relative;
   width: 100%;
@@ -1116,6 +1138,11 @@
   margin-top: 3.6rem;
   font-size: 1.8rem;
   font-weight: 400;
+}
+
+/* 형제 선택자. */
+.center-section .slide-item .txt-wrap .txt + .txt {
+  margin-top: 0;
 }
 
 .center-section .slide-item .txt-wrap .btn-wrap {
