@@ -1191,4 +1191,240 @@
 
 /* section - center section(특화센터 섹션) : end */
 
+/* section - leader section(submit 섹션) : start */
+.leader-section {
+  position: relative;
+  padding: 27rem 0;
+  color: #fff;
+  overflow: hidden;
+}
+
+.leader-section .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0.025;
+  background-color: #fff;
+}
+
+.leader-section .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.leader-section .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: #0c3659;
+}
+
+.leader-section .line1 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 1px;
+  height: 15%;
+  background: #fff;
+  z-index: 4;
+}
+
+.leader-section .line2 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 1px;
+  height: 55%;
+  background: #fff;
+  z-index: 4;
+}
+
+.leader-section .tit-cont {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.leader-section .tit-cont .desc {
+  font-weight: 500;
+  font-size: 1.8rem;
+  letter-spacing: 0.5em;
+}
+
+.leader-section .tit-cont .tit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  font-size: 18rem;
+  font-weight: 200;
+  color: #fff;
+  overflow: hidden;
+  letter-spacing: 0.03em;
+}
+
+/* box-wrap은 swiper.js와 직접적인 연관이 없다 (css상) */
+.leader-section .box-wrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 13.6rem;
+  z-index: 10;
+
+  /* 이 코드에 대해서 모르겠어서 물어봄 */
+  /* 의도 : 고정된 디자인 폭 165.4rem을 중앙 정렬시키면서, 좌측에 2rem 여백을 추가하려는 것. */
+  /* 계산 과정 :  1. (100% -165.4rem) / 2 ->  뷰포트 전체 너비에서 디자인 기준 폭 (165.4rem)을 뺀 뒤 반으로 나눈 값 -> 중앙 정렬을 위한 좌측 마진 값. */
+  /*             2. 2rem -> 그 위에 좌측 패딩 2rem을 더해서 약간 오른쪽으로 민 효과*/
+  /* 즉, 이 코드는 swiper와 무관하고, 순전히 레이아웃(중앙 배치 + 좌측 패딩) 을 위한 계산식이다.  */
+  padding-left: calc((100% - 165.4rem) / 2 + 2rem);
+}
+
+/* swiper.js를 연동해야 레이아웃이 맞을 것 같음. -> 이미지 크기가 안맞음. */
+.leader-section .swiper-wrapper {
+  display: flex;
+}
+
+.leader-section .item {
+  width: 32.8rem;
+}
+
+.leader-section .swiper-slide .img {
+  width: 100%;
+  height: 100%;
+}
+
+.leader-section .swiper-slide .img img {
+  max-width: 100%;
+}
+
+.leader-section .tab-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  margin-top: 4.5rem;
+
+  /* 옆에 디자인 요소로 인해. */
+  padding-left: 1.62rem;
+
+  height: 3.3rem;
+
+  font-size: 1.8rem;
+}
+
+.leader-section .tab-wrap .tab {
+  position: relative;
+  opacity: 0.2;
+  font-weight: 700;
+
+  transform: font-size 0.3s, opacity 0.3s;
+  white-space: nowrap;
+}
+
+.leader-section .tab-wrap .tab + .tab {
+  margin-left: 3.6rem;
+}
+
+.leader-section .tab-wrap .tab.active {
+  font-size: 2.2rem;
+
+  opacity: 1;
+}
+
+.leader-section .tab-wrap .tab:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -1.62rem;
+
+  transform: translateY(-50%);
+
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: #65a9df;
+  border-radius: 8px;
+}
+
+.leader-section .box-wrap .txt-wrap {
+  width: 50%;
+}
+
+.leader-section .box-wrap .txt-wrap .tit {
+  font-size: 5.4rem;
+  font-weight: 700;
+  line-height: 1.4;
+
+  margin-bottom: 5.4rem;
+}
+
+.leader-section .box-wrap .txt-wrap .tit .gradient {
+  background: linear-gradient(90deg, #65a9df, #65a9df, #45647d, #44637c);
+
+  background-size: 300% 300%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.leader-section .box-wrap .slide-wrap {
+  width: 48.5%;
+  overflow: hidden;
+}
+
+.leader-section .box-wrap .txt-wrap .txt {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.leader-section .box-wrap .txt-wrap .txt p {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.leader-section .box-wrap .txt-wrap .txt span {
+  position: relative;
+  color: #9ca1ae;
+}
+
+/* 2. em태그 안에 들어간 텍스트 CSS로 스타일 변경 */
+.leader-section .box-wrap .txt-wrap .txt span em {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #fff;
+  /* js로 width의 퍼센트를 올릴 것. -> scroll에 의해서 */
+  width: 0;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.leader-section .box-wrap .txt-wrap .txt p + p {
+  margin-top: 3.6rem;
+}
+/* section - leader section(submit 섹션) : enb */
+
+/* section - staff slide section : start */
+
+.staff-slide-section {
+  padding: 27rem 0;
+}
+
+/* section - staff slide section : end */
+
 /* main : end */

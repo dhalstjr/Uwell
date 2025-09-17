@@ -795,19 +795,21 @@
           <div class="leader-section">
             <!-- 배경이 되는 이미지와 라인 효과를 줄 요소 만들기 -->
              <div class="bg">
-              <img src="" alt="">
+              <img src="./img/leader-bg.png" alt="">
             </div>
 
             <div class="cover"><i class="hidden">배경커버</i></div>
-            
+
             <div class="line1"><i class="hidden">선1</i></div>
             <div class="line2"><i class="hidden">선2</i></div>
 
             <div class="section-inner">
-              <div class="main-tit-wrap">
+              <div class="tit-cont">
                 <p class="desc">U·WELL UROLOGY CLINIC</p>
-                <h3 class="tit">UrologySummit</h3>
+                <!-- h3 부분에 텍스트는 각각의 텍스트로 나눠서 사용한다(본페이지) -->
+                <h3 class="tit">Urology Summit</h3>
               </div>
+            </div>
 
               <!-- 여기 부분에서도 swiper를 사용하는 부분 존재. -->
                <div class="box-wrap">
@@ -818,21 +820,56 @@
                     <p>늘 유웰비뇨의학과.</p>
                   </div>
 
+                  <!-- 텍스트에 컬러를 주는 방법. - scroll에 의해서 바뀌는 컬러  -->
                   <div class="txt">
                     <p>
-                      <span>유웰비뇨의학과는 질환에 따른 최소침습, 정상 조직 보존을 핵심으로유웰비뇨의학과는 질환에 따른 최소침습, 정상 조직 보존을 핵심으로</span>
-                      <span>고령의 환자도 안전한 단계적 비수술 치료법을 제시하며,</span>
+                      <span>
+                        유웰비뇨의학과는 질환에 따른 최소침습, 정상 조직 보존을 핵심으로
+                        <!-- 1. HTML구조는 이런 식으로 텍스트안에 같은 텍스트를 넣어준다. 그리고 나서 CSS로 style를 변경해준다. -->
+                        <em>
+                          유웰비뇨의학과는 질환에 따른 최소침습, 정상 조직 보존을 핵심으로
+                        </em>
+                      </span>
+
+                      <span>
+                        고령의 환자도 안전한 단계적 비수술 치료법을 제시하며,
+                        <em>
+                          고령의 환자도 안전한 단계적 비수술 치료법을 제시하며,
+                        </em>
+                      </span>
                     </p>
                     
                     <p>
-                      <span>전국 최대 규모의 대학병원급 검사 장비, 임상병리실을 운영하여</span>
-                      <span>고도화 된 시스템으로 정밀하고 신속한 검사가 가능합니다.</span>
+                      <span>
+                        전국 최대 규모의 대학병원급 검사 장비, 임상병리실을 운영하여
+                        <em>
+                          전국 최대 규모의 대학병원급 검사 장비, 임상병리실을 운영하여
+                        </em>
+                      </span>
+
+                      <span>
+                        고도화 된 시스템으로 정밀하고 신속한 검사가 가능합니다.
+                        <em>고도화 된 시스템으로 정밀하고 신속한 검사가 가능합니다.</em>
+                      </span>
                     </p>
                     
                     <p>
-                      <span>또한, 신의료기술 도입과 풍부한 임상경험으로</span>
-                      <span>메디컬 노하우 증진 및 의료서비스의 사명을 다하고 있으며,</span>
-                      <span>오늘도 비뇨기계 질환의 치료를 위해 내원하는 환자에게 유웰비뇨의학과는 최선을 다합니다.오늘도 비뇨기계 질환의 치료를 위해 내원하는 환자에게 유웰비뇨의학과는 최선을 다</span>
+                      <span>
+                        또한, 신의료기술 도입과 풍부한 임상경험으로
+                        <em>또한, 신의료기술 도입과 풍부한 임상경험으로</em>
+                      </span>
+
+                      <span>
+                        메디컬 노하우 증진 및 의료서비스의 사명을 다하고 있으며,
+                        <em>메디컬 노하우 증진 및 의료서비스의 사명을 다하고 있으며,</em>
+                      </span>
+                      
+                      <span>
+                        오늘도 비뇨기계 질환의 치료를 위해 내원하는 환자에게 유웰비뇨의학과는 최선을 다합니다.
+                        <em>
+                          오늘도 비뇨기계 질환의 치료를 위해 내원하는 환자에게 유웰비뇨의학과는 최선을 다합니다.
+                        </em>
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -844,25 +881,25 @@
                       <div class="swiper-wrapper">
                         <div class="swiper-slide item">
                           <div class="img">
-                            <img src="" alt="">
+                            <img src="./img/leader-slider1.png" alt="">
                           </div>
                         </div>
 
                         <div class="swiper-slide item">
                           <div class="img">
-                            <img src="" alt="">
+                            <img src="./img/leader-slider2.png" alt="">
                           </div>
                         </div>
 
                         <div class="swiper-slide item">
                           <div class="img">
-                            <img src="" alt="">
+                            <img src="./img/leader-slider3.png" alt="">
                           </div>
                         </div>
 
                         <div class="swiper-slide item">
                           <div class="img">
-                            <img src="" alt="">
+                            <img src="./img/leader-slider4.png" alt="">
                           </div>
                         </div>
                       </div>
@@ -878,10 +915,700 @@
                    </div>
                 </div>
                </div>
-            </div>
+
           </div>
          <!-- 5. 리더(submit) section : end-->
          
+         <!-- 6. 리더(staff) 슬라이드 section : start-->
+          <div class="staff-slide-section">
+            <div class="cont">
+              <div class="tit-wrap">
+                <div class="tit-box">
+                  <div class="tit">
+                    유웰비뇨의학과는
+                    <br>비뇨기계 전문의료진 16인과
+                    <br>95인의 STAFF가 함께 합니다.
+                  </div>
+
+                  <!-- slide연동 -->
+                  <div class="paging-con">
+                   <div class="progress">
+                    <div class="bar"><i class="hiddne">프로그래스 바</i></div>
+                   </div>
+
+                   <div class="paging">
+                    <div class="current"><!-- 숫자 --></div>
+                    <div class="total">17</div>
+                   </div>
+
+                   <div class="slide-btn-wrap">
+                    <div class="btn-prev"><i class="hidden">슬라이드 이전 버튼</i></div>
+                    <div class="btn-next"><i class="hidden">슬라이드 다음 버튼</i></div>
+                   </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- swiper -->
+              <div class="slide-wrap">
+                <!-- 1. swiper로 감싼다. -> 예전 버전은 swiper-container-->
+                <div class="swiper-container">
+                  <!-- 2. swiper-wrapper -->
+                  <div class="swiper-wrapper">
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 3. swiper-slide -> 슬라이드될 아이템들 -->
+                    <div class="swiper-slide">
+                      <div class="item-box">
+                        <div class="img"><img src="" alt=""></div>
+                        <!-- hover시에 변경되는 디자인 -->
+                        <div class="hover-box">
+                          <div class="top-wrap">
+                            <div class="badge"></div>
+
+                            <div class="name-wrap">
+                              <div class="name"></div>
+
+                              <div class="bookmark-btn">
+                                <i class="hidden">즐겨찾기 버튼</i>
+                              </div>
+
+                              <div class="qualification-list">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- a링크안에 div요소는 품을 수 없었는데, div만 들어갈 수 있게 되었다고 변경. -->
+                          <a href="#" class="view-btn-wrap">
+                            <div class="view-btn">
+                              <div class="txt">View More</div>
+                              <div class="ico"><i class="hidden">방향 아이콘</i></div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         <!-- 6. 리더(staff) 슬라이드 section : end-->
         
       </main>
     </div>
