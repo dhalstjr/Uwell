@@ -308,7 +308,7 @@
         <!-- 1 . visual section : end -->
 
         <!-- 2 . 상담신청 section : start (quick consultation -> 빠른 상담 ) -->
-         <!-- 본패이지에서는 이 부분을 form태그를 사용해서 했음. -> 데이터를 제출하기 위한 웹 양식 영역을 나타내는 태그이기에 데이터를 보내야하는 영역으로서 form 태그를 사용한 것으로 보임. -->
+        <!-- 본패이지에서는 이 부분을 form태그를 사용해서 했음. -> 데이터를 제출하기 위한 웹 양식 영역을 나타내는 태그이기에 데이터를 보내야하는 영역으로서 form 태그를 사용한 것으로 보임. -->
         <!-- <div class="counsel-section">
           <div class="counsel-con">
 
@@ -351,7 +351,7 @@
         </div> -->
 
         <!-- form 태그 버전 HTML -->
-         <div class="counsel-section" id="counselFrm">
+        <div class="counsel-section" id="counselFrm">
           <!-- section영역의 넓이를 제한 -->
           <div class="section-inner">
             <div class="counsel-container">
@@ -459,10 +459,10 @@
               </form>
             </div>
           </div>
-         </div>
+        </div>
         <!-- 2 . 상담신청 section : end -->
 
-         <!-- 3 . 조직 section : start -->
+        <!-- 3 . 조직 section : start -->
           <div class="staff-section">
             <div class="section-inner">
               <div class="main-tit-wrap">
@@ -483,17 +483,17 @@
             </div>
 
             <!-- 이미지 영역 -->
-             <div class="cont">
+            <div class="cont">
               <p class="tit">U·well's Team Of</p>
               <div class="img">
                 <img src="./img/staff-img.png" alt="">
               </div>
               <p class="tit">16 Urology Specialist</p>
-             </div>
+            </div>
           </div>
-         <!-- 3 . 조직 section : end -->
+        <!-- 3 . 조직 section : end -->
 
-         <!-- 4. 혁신적 리더 section : start -->
+        <!-- 4. 혁신적 리더 section : start -->
           <div class="innovation-section">
             <div class="section-inner">
               <div class="innov-con-wrap">
@@ -713,7 +713,7 @@
         <!-- 4. 혁신적 리더 section : end -->
         
         <!-- 4. 특화센터 section : start -->
-         <div class="center-section">
+        <div class="center-section">
           <div class="section-inner">
             <div class="main-tit-wrap">
               <div class="tit">유월 특화센터</div>
@@ -790,10 +790,10 @@
               </div>
              </div>
           </div>
-         </div>
-         <!-- 4. 특화센터 section : end -->
+        </div>
+        <!-- 4. 특화센터 section : end -->
 
-         <!-- 5. 리더(submit) section : start-->
+        <!-- 5. 리더(submit) section : start-->
           <div class="leader-section">
             <!-- 배경이 되는 이미지와 라인 효과를 줄 요소 만들기 -->
              <div class="bg">
@@ -919,9 +919,9 @@
                </div>
 
           </div>
-         <!-- 5. 리더(submit) section : end-->
-         
-         <!-- 6. 리더(staff) 슬라이드 section : start-->
+        <!-- 5. 리더(submit) section : end-->
+        
+        <!-- 6. 리더(staff) 슬라이드 section : start-->
           <div class="staff-slide-section">
             <div class="cont">
               <div class="tit-wrap">
@@ -1572,8 +1572,76 @@
               </div>
             </div>
           </div>
-         <!-- 6. 리더(staff) 슬라이드 section : end-->
+        <!-- 6. 리더(staff) 슬라이드 section : end-->
+      
+        <!-- 7.. 누적(count) count section : start -->
+        <!-- 이 곳은 GSAP ScrollTrigger에 pin 활용 애니메이션 적용 -->
+      <div class="count-section">
+        <div class="bg-wrap">
+        <div class="bg-img">
+          <div class="bg"><i class="hidden">섹션 배경화면</i></div>
+        </div>
+
+        <div class="section-inner">
+          <div class="wrap">
+            <div class="main-tit-wrap">
+              <div class="desc">Path to being No.1</div>
+
+              <div class="txt-box">
+                <p class="txt">유웰의 역량</p>
+                <p class="gradient">숫자와 규모로 입증합니다.</p>
+              </div>
+            </div>
+            
+            <div class="count-container">
+              <!-- 그리드할 아이템 박스들(4개) -->
+              <div class="count-box">
+                <div class="ico"><i class="hidden">박스 아이템 아이콘1</i></div>
+                <div class="num-box">
+                  <span class="num">151,174</span>
+                  "+"
+                  <span>명</span>
+                </div>
+                <div class="txt">누적환자 수</div>
+              </div>
+
+              <div class="count-box">
+                <div class="ico"><i class="hidden">박스 아이템 아이콘2</i></div>
+                <div class="num-box">
+                  <span class="num">8,606</span>
+                  "+"
+                  <span>건</span>
+                </div>
+                <div class="txt">누적 시술 · 수술 (*2024 당해연도 기준)</div>
+              </div>
+
+              <div class="count-box">
+                <div class="ico"><i class="hidden">박스 아이템 아이콘3</i></div>
+                <div class="num-box">
+                  <span class="num">800</span>
+                  "+"
+                  <span>평</span>
+                </div>
+                <div class="txt">전용면적</div>
+              </div>
+
+              <div class="count-box">
+                <div class="ico"><i class="hidden">박스 아이템 아이콘4</i></div>
+                <div class="num-box">
+                  <span class="num">17</span>
+                  "+"
+                  <span>인</span>
+                </div>
+                <div class="txt">전문 의료진</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
         
+        </div>
+        <!-- 7.. 누적(count) count section : end -->
       </main>
     </div>
     <!-- main : end -->
