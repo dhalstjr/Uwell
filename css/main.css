@@ -665,12 +665,12 @@
 }
 
 /* 이미지 영역 */
-.staff-section .cont {
+.staff-section .section-inner .cont {
   margin: 9rem auto 0;
   width: 80%;
 }
 
-.cont .tit {
+.staff-section .section-inner .cont .tit {
   font-size: 6.4vw;
   font-weight: 300;
 
@@ -683,13 +683,13 @@
   transform: translate(-5%, 50%);
 }
 
-.cont .tit:nth-of-type(2) {
+.staff-section .section-inner .cont .tit:nth-of-type(2) {
   text-align: right;
   /* 텍스트 위치 조정 */
   transform: translate(0, -40%);
 }
 
-.cont .img {
+.staff-section .section-inner .cont .img {
   position: relative;
   width: 80%;
   margin: 0 auto;
@@ -702,11 +702,11 @@
   transform: unset;
 }
 
-.cont.active .img {
+.staff-section .section-inner .cont.active .img {
   transform: unset;
 }
 
-.cont .img img {
+.staff-section .section-inner .cont .img img {
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -1425,6 +1425,307 @@
   padding: 27rem 0;
 }
 
-/* section - staff slide section : end */
+/* 스태프 슬라이드 섹션 container */
+.staff-slide-section .cont {
+  display: flex;
+  justify-content: space-between;
 
+  /* align-items의 기본값은 stretch이며, 교차축 방향으로 채우고, 아이템의 크기가 다를 경우에도 모든 아이템의 크기를 컨테이너에 맞춰 자동으로 조절  */
+  /* stretch는 카드 디자인에 적용하기 좋다. */
+  align-items: stretch;
+
+  padding-left: calc((100% - 165.4rem) / 2 + 2rem);
+}
+
+.staff-slide-section .cont .tit-wrap .tit {
+  font-weight: 700;
+  font-size: 3.6rem;
+  color: #000;
+}
+
+.staff-slide-section .tit-wrap {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  /* flex-shrink는 아이템이 flex컨테이너 크기보다 작아질 때, 해당 아이템의 크기를 얼마나 줄일 지 결정하는 CSS속성 */
+  /* 기본값은 1이며, 이 값을 1이상 지정하면 크기가 줄어들지만, 0으로 설정 시 아이템은 줄어들지 않고, 너비나 높이를 유지. */
+  flex-shrink: 0;
+}
+
+.staff-slide-section .paging-con {
+  position: relative;
+
+  width: 60%;
+  display: flex;
+  align-items: center;
+  /*   justify-content: space-between; */
+}
+
+.staff-slide-section .paging-con .progress {
+  position: relative;
+
+  width: calc(100% - 5.4rem);
+  height: 1px;
+  background-color: #d4d9e4;
+
+  transition: width 0.5s;
+
+  /* 왼쪽에 마진을 줘서 중앙에 맞게 정렬.  */
+  margin-left: 2.4rem;
+}
+
+/* 이게 프로그래스 바가 채워지는 효과. */
+.staff-slide-section .paging-con .progress .bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  /* width는 js로 효과 */
+  width: 10%;
+  height: 200%;
+
+  background-color: #65a9df;
+}
+
+.staff-slide-section .paging-con .paging {
+  display: flex;
+  justify-content: space-between;
+
+  /* center를 사용해서 progress와 중앙 정렬되게. */
+  align-items: center;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  /* 크기를 줘서 숫자의 거리를 벌린다.  */
+  width: 100%;
+  height: 100%;
+}
+
+/* 슬라이드 개수에 맞춰 swiper 사용 시 숫자 자동 변환 */
+.staff-slide-section .paging-con .paging .current {
+  font-size: 1.7rem;
+  font-weight: 700;
+
+  color: #65a9df;
+}
+
+.staff-slide-section .paging-con .paging .total {
+  font-size: 1.7rem;
+  font-weight: 400;
+
+  color: #bac4cf;
+}
+
+.staff-slide-section .paging-con .slide-btn-wrap {
+  /* 가상요소로 */
+  position: absolute;
+  top: 50%;
+  right: -9.9rem;
+  transform: translateY(-50%);
+
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+
+  z-index: 10;
+}
+
+.staff-slide-section .paging-con .slide-btn-wrap .btn-prev {
+  width: 2.7rem;
+  height: 2.7rem;
+
+  background: url(../img/slide-prev-ico.svg) no-repeat 0 0 / contain;
+}
+
+.staff-slide-section .paging-con .slide-btn-wrap .btn-next {
+  width: 2.7rem;
+  height: 2.7rem;
+
+  background: url(../img/slide-next-ico.svg) no-repeat 0 0 / contain;
+
+  margin-left: 2.4rem;
+}
+
+/* slide 부분 */
+.staff-slide-section .slide-wrap {
+  /* 슬라이드 부분이 가질 width크기 주기. */
+  width: 65%;
+}
+
+.staff-slide-section .slide-wrap .swiper-container {
+  padding-top: 4.6rem;
+  overflow: hidden;
+}
+
+/* swiper의 라이브러리에 들어가는 공통 CSS가 들어가는데, 지금은 내가 줘서 디자인 맞추기 */
+.staff-slide-section .slide-wrap .swiper-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* swiper공통 CSS 들어감. -> 일단 디자인 맞추기 */
+.staff-slide-section .swiper-slide {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+
+  width: 35.2rem;
+  margin-right: 2.5rem;
+}
+
+.staff-slide-section .swiper-slide .item-box {
+  position: relative;
+  width: 100%;
+
+  /* 이미지가 가질 크기를 padding-top으로 주기 -> 이미지를 absolute로 주면 보이지 않는데, padding-top에 크기를 줘서 이미지가 보이게  */
+  /* 가상요소가 padding-top이 주어졌을 때 보이게 되는 현상 */
+  /* 1. 이런 구조에서 padding-top이 하는 역할 - padding-top은 내부 컨텐츠와 상관없이 , 부모의 width를 기준으로 세로 공간을 확보합니다. */
+  /* 즉, padding-top에 130%의 크기를 주었다면, 가로 길이의 130%만큼 세로 패딩 -> 결과적으로 item-box의 높이를 만들어 준 것이다.  */
+  /* 여기서 item-box에 높이를 height로 직접 주지 않고, padding-top을 이용한 이유는 "가로 길이에 비례한 세로 비율을 유지" 하려는 전형적인 aspect-ratio의 기법이다. */
+  /* 2. absolute요소는 부모의 높이가 있어야 보임. -> absolute는 자기 자신이 블록의 높이를 만들지 않는다.  */
+  /* 부모가 height가 0이라면, 자식이 존재해도 화면에 보이지 않음(좌표는 잡히지만 영역이 0이라 렌더가 안 됨.) */
+  /* padding-top을 줬을 때 부모의 높이가 생기고, 그 안에서 .img가 height : 100%로 꽉 차면서 이미지가 보이게 되는 것.  */
+  /* 3. 결론 : 이미지가 .item-box안에서 제대로 보이려면  1) item-box가 자체 높이를 가져야 함. 2) padding-top 또는 height 값을 줘야 함.  */
+  /* * padding-top은 % 단위일 때 부모의 width 기준으로 계산되는 것도 중요. */
+  padding-top: 130%;
+
+  /*   height: 35.2rem; -> 퍼센트로는 안됌. 크기를 지정해줘야 보임. */
+}
+
+.staff-slide-section .swiper-slide .item-box .img {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.staff-slide-section .swiper-slide .item-box .img img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.staff-slide-section .swiper-slide .item-box .hover-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: #0a2e4d;
+
+  color: #fff;
+
+  padding: 4rem 3.1rem;
+
+  /* 이미지 hover 했을 시 opacity : 1로 적용 */
+  opacity: 0;
+}
+
+.staff-slide-section .swiper-slide .hover-box .top-wrap .badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.5rem 1.6rem;
+
+  border-radius: 2.6rem;
+  background-color: rgba(255, 255, 255, 0.2);
+
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.staff-slide-section .swiper-slide .hover-box .top-wrap .name-wrap {
+  margin-top: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.staff-slide-section .swiper-slide .hover-box .top-wrap .name-wrap .name {
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.staff-slide-section .swiper-slide .top-wrap .name-wrap .bookmark-btn {
+  width: 3rem;
+  height: 3rem;
+
+  background: url(../img/like-icon-defalut.svg) no-repeat 0 0 / contain;
+
+  cursor: pointer;
+}
+
+.staff-slide-section .swiper-slide .top-wrap .qualification-list {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.staff-slide-section .swiper-slide .top-wrap .qualification-list p {
+  font-size: 1.4rem;
+}
+
+.staff-slide-section .swiper-slide .view-btn-wrap {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  margin-top: 8.8rem;
+  padding-top: 1.8rem;
+}
+
+.staff-slide-section .swiper-slide .view-btn-wrap:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  transition: width 0.8s;
+}
+
+.staff-slide-section .swiper-slide .view-btn-wrap .view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.staff-slide-section .swiper-slide .view-btn-wrap .view-btn .txt {
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.staff-slide-section .swiper-slide .view-btn-wrap .view-btn .ico {
+  width: 1.3rem;
+  height: 1.4rem;
+  background: url(../img/more-arrow-white.svg) no-repeat 0 0 / contain;
+}
+/* section - staff slide section : end */
 /* main : end */
