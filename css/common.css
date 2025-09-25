@@ -497,6 +497,10 @@ body {
   background: url(../img/top-cion.svg) no-repeat 0 0 / contain;
 }
 
+.mo-only {
+  display: none;
+}
+
 /* 검색창 모달 -> 일단 보이지 않게 설정. */
 #headerSearch {
   display: none;

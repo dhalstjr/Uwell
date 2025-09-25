@@ -1728,4 +1728,183 @@
   background: url(../img/more-arrow-white.svg) no-repeat 0 0 / contain;
 }
 /* section - staff slide section : end */
+
+/* 7번째 섹션 - count section : start */
+.count-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* video대신 img */
+.count-section .bg-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  margin: 0 auto;
+
+  width: 100%;
+  height: 100%;
+
+  background: #55f;
+}
+
+.count-section .bg-wrap .bg-img {
+  position: relative;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  /* pim효과는 pin이 걸리기 전에 크기가 작았다가 스크롤 할수록 전체회면이 꽉 차게 35vh -> 100vh */
+  /* pin 적용되기 후 크기 */
+  padding-top: 35vh;
+
+  /* pin 적용되기 전 크기 */
+  padding-top: 100vh;
+}
+
+.count-section .bg-wrap .bg-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.count-section .bg-wrap .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 64, 133, 0.9);
+
+  z-index: 10;
+}
+
+.count-section .section-inner .wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: calc(100vh - 90px);
+}
+
+.count-section .section-inner .main-tit-wrap {
+  width: 45%;
+  text-align-last: left;
+}
+
+.count-section .section-inner .main-tit-wrap .desc {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.count-section .section-inner .main-tit-wrap .txt-box {
+  margin-top: 1.8rem;
+  line-height: 1;
+}
+
+.count-section .section-inner .main-tit-wrap .txt-box .txt {
+  margin-top: 0;
+  font-size: 5.4rem;
+  font-weight: 700;
+}
+
+.count-section .section-inner .main-tit-wrap .txt-box .gradient {
+  font-size: 5.4rem;
+  font-weight: 700;
+
+  /* 텍스트 그라디언트 */
+  background: linear-gradient(90deg, #fff, #fff, #65a9df, #65a9df);
+  /* 지금 400%로 인해서 색이 보이지 않음, 이 명령을 없애면 보임. */
+  background-size: 400% 400%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* grid 부분 */
+.count-section .count-container {
+  width: 60%;
+  display: grid;
+
+  /* 두 열을 만들고, 각 열은 동일한 비율로(1fr) 남은 공간을 나눠가지라는 의미. (균등 분배) */
+  grid-template-columns: repeat(2, 1fr);
+
+  margin-left: auto;
+
+  gap: 0 7.2rem;
+  margin-top: -4.5rem;
+}
+/*  grid가 될 아이템 요소 */
+.count-section .count-container .count-box {
+  position: relative;
+
+  padding: 3.6rem 2.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.count-section .count-container .count-box .ico {
+  width: 3rem;
+  height: 2.8rem;
+
+  display: flex;
+}
+
+.count-section .count-container .count-box .ico.icon1 {
+  background: url(../img/count-item-icon1.svg) no-repeat 0 0 / contain;
+}
+
+.count-section .count-container .count-box .ico.icon2 {
+  background: url(../img/count-item-icon2.svg) no-repeat 0 0 / contain;
+}
+
+.count-section .count-container .count-box .ico.icon3 {
+  background: url(../img/count-item-icon3.svg) no-repeat 0 0 / contain;
+}
+
+.count-section .count-container .count-box .ico.icon4 {
+  background: url(../img/count-item-icon4.svg) no-repeat 0 0 / contain;
+}
+
+.count-section .count-container .count-box .num-box {
+  margin-top: 2.6rem;
+  font-size: 5.2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+
+  vertical-align: middle;
+}
+
+.count-section .count-container .count-box .num-box .num {
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.count-section .count-container .count-box .num-box span:not(.num) {
+  font-size: 1.6rem;
+}
+
+.count-section .count-container .count-box .txt {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
+
+.count-section .count-container .count-box .txt span {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+/* 7번째 섹션 - count section : end */
 /* main : end */
