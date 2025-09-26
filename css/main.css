@@ -1891,6 +1891,8 @@
   transition: all 0.3s;
 }
 
+/* 이 선택자는 .num-box안에 있는 span요소들 중에서 class = "num"이 없는(:not(.num)) span들을 모두 선택 */
+
 .count-section .count-container .count-box .num-box span:not(.num) {
   font-size: 1.6rem;
 }
@@ -1905,6 +1907,12 @@
   font-size: 1.3rem;
   font-weight: 400;
 }
-
 /* 7번째 섹션 - count section : end */
+
+/* 8번째 섹션 - career section : start */
+.career-section {
+  padding: 27rem 0;
+}
+/* 8번째 섹션 - career section : end */
+
 /* main : end */
