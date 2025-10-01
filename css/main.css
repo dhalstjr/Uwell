@@ -621,12 +621,12 @@
   width: 100%;
 }
 
-.main-tit-wrap .desc {
+.staff-section .main-tit-wrap .desc {
   font-size: 2.2rem;
   font-weight: 600;
 }
 
-.main-tit-wrap .tit {
+.staff-section .main-tit-wrap .tit {
   font-size: 5.4rem;
   font-weight: 700;
 
@@ -645,7 +645,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.main-tit-wrap .txt {
+.staff-section .main-tit-wrap .txt {
   margin-top: 2.6rem;
   font-size: 1.7rem;
   font-weight: 500;
@@ -653,13 +653,13 @@
   line-height: 1.82;
 }
 
-.main-tit-wrap .txt p {
+.staff-section .main-tit-wrap .txt p {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
 }
 
-.main-tit-wrap .txt p span {
+.staff-section .main-tit-wrap .txt p span {
   /* 강제로 한줄 맞춤 */
   white-space: nowrap;
 }
@@ -2173,5 +2173,241 @@
   background: url(../img/more-arrow-black.svg) no-repeat 0 0 / contain;
 }
 /* 9번째 섹션 - banner section : end */
+
+/* 10. 유튜브(Youtube) Youtube section : start */
+.youtube-section {
+  padding: 13.4rem 0;
+  background-color: #f4f6f9;
+}
+
+.youtube-section .main-tit-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 50%;
+}
+
+.youtube-section .main-tit-wrap .tit-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.youtube-section .main-tit-wrap .tit-wrap .tit-box .tit {
+  margin-bottom: 2.2rem;
+}
+
+.youtube-section .main-tit-wrap .tit-wrap .tit-box .tit p {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.youtube-section .main-tit-wrap .tit-wrap .tit-box .txt {
+  line-height: 1.38;
+  margin-bottom: 6.4rem;
+}
+
+.youtube-section .main-tit-wrap .tit-wrap .tit-box .txt p {
+  font-size: 4.7rem;
+  font-weight: 700;
+}
+
+.youtube-section .youtube-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 1.4rem 2.1rem;
+  color: #000;
+
+  border: 1px solid #000;
+  border-radius: 2.6rem;
+
+  transition: all 0.4s;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn .youtube-logo {
+  width: 2.6rem;
+  height: 1.8rem;
+
+  background: url(../img/youtube-logo-defalut.svg) no-repeat 0 0 / contain;
+
+  margin-right: 1rem;
+
+  transition: all 0.4s;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn span {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn .btn-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+
+  background: url(../img/more-arrow-black.svg) no-repeat 0 0 / contain;
+
+  margin-left: 1.2rem;
+
+  transition: all 0.4s;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn:hover {
+  color: #fff;
+  background-color: #ed2828;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn:hover .youtube-logo {
+  background: url(../img/youtube-logo-hover.svg) no-repeat 0 0 / contain;
+}
+
+.youtube-section .youtube-wrap .btn-wrap .youtube-btn:hover .btn-icon {
+  background: url(../img/more-arrow-white.svg) no-repeat 0 0 / contain;
+}
+
+.youtube-section .paging-con {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 40%;
+
+  margin-top: 5rem;
+}
+
+.youtube-section .paging-con .progress {
+  position: relative;
+
+  width: calc(100% - 5.4rem);
+  height: 1px;
+
+  margin-left: 2.7rem;
+
+  background-color: #bac4cf;
+}
+
+.youtube-section .paging-con .progress .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 40%;
+  height: 200%;
+
+  background-color: #65a9df;
+}
+
+.youtube-section .paging-con .paging {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 크기를 100%로 줘야 중앙으로 정렬을 하고 양쪽 끝으로 정렬된다.  */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.6rem;
+}
+
+.youtube-section .paging-con .paging .current {
+  color: #65a9df;
+  font-weight: 700;
+}
+
+.youtube-section .paging-con .paging .total {
+  color: #bac4cf;
+  font-weight: 700;
+}
+
+.youtube-section .paging-con .slide-btn-wrap {
+  position: absolute;
+  top: 50%;
+  right: -11rem;
+
+  transform: translateY(-50%);
+
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+
+  z-index: 10;
+}
+
+.youtube-section .paging-con .slide-btn-wrap .btn-prev {
+  width: 2.7rem;
+  height: 2.7rem;
+  background: url(../img/slide-prev-ico.svg) no-repeat 0 0 / contain;
+}
+
+.youtube-section .paging-con .slide-btn-wrap .btn-next {
+  width: 2.7rem;
+  height: 2.7rem;
+  background: url(../img/slide-next-ico.svg) no-repeat 0 0 / contain;
+
+  margin-left: 2.7rem;
+}
+
+/* slide 부분 */
+.youtube-section .slide-wrap {
+  width: 45%;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide {
+  display: flex;
+  flex-direction: column;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box {
+  display: flex;
+  align-items: center;
+
+  transition: background 0.3s;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box + .link-box {
+  margin-top: 1.8rem;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box .img {
+  width: 19rem;
+  height: 10.8rem;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box .tit {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #232323;
+
+  margin-left: 2.7rem;
+
+  transition: color 0.3s;
+}
+
+/* a링크에 hover시 */
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box:hover {
+  background-color: #0a2e4d;
+}
+
+.youtube-section .slide-wrap .box-wrap .swiper-slide .link-box:hover .tit {
+  color: #fff;
+}
+/* 10. 유튜브(Youtube) Youtube section : end */
 
 /* main : end */
