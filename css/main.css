@@ -2413,6 +2413,264 @@
 /*   11. 공지(Notice) notice section : start */
 .notice-section {
   padding: 27rem 0;
+  overflow: hidden;
+}
+
+/* 여기는 flex가 아닌 grid로 설정함.  */
+/* flex는 헤더,푸터,내비,버튼,줄에 적합 : 간단 정렬/한 줄 레이아웃에 적합.  */
+/* grid는 카드 그리드, 본문+사이드바 -> 영역 설계/여러 행,열을 동시에 컨트롤  */
+/* 실제 프로젝트에서는 둘을 같이 사용하는 것이 좋다. 바깥은 grid, 내부에는 flex로 정렬 */
+.notice-section .notice-cont {
+  display: grid;
+  /* notice-con에 자식은 2개이며, 두 개의 열로 구성된다. */
+  /* 첫번째 열은 55%로 가로 너비를 55%를 고정하여 차지합니다. */
+  /* 두번째 열은 minmax(0, 1fr) -> 1fr은 남은 공간의 비율값을 뜻하며, 55%와 gap을 뺀 나머지 남는 여유 공간을 fr트랙들이 나눠 갖습니다. 여기서는 1fr 하나뿐이니 사실상 남은 전부를 가져갑니다. */
+  /* minmax(0, 1fr)의 의미는  이 열의 최소 너비는 0으로, 최대를 1fr로 강제합니다. 이렇게 해야 내용물이 길거나 최소 콘텐츠 크기(min-content) 때문에 열이 수축을 거부하며 가로 스크롤이 생기는 문제를 막을 수 있습니다. */
+  /* 요약하자면, 왼쪽의 컨테이너 폭의 55%, 오른쪽은 남는 공간 전부를 쓰되, 오른쪽 열이 콘텐츠 때문에 억지로 커지지 않게(= 줄어들 수 있게) minmax(0, 1fr)로 최소값을 0으로 고정한 구성입니다.  *
+  /* 그리고, 반응형 전환에도 사용 가능하다.  */
+  grid-template-columns: 55% minmax(0, 1fr);
+  gap: 7.2rem;
+}
+
+.notice-section .notice-cont .notice-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .tit {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #232323;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.3rem 2.1rem;
+  border: 1px solid #000;
+  border-radius: 2.6rem;
+
+  transition: all 0.3s;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more:hover {
+  background-color: #0c3659;
+  border: none;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more .txt {
+  font-size: 1.3rem;
+  font-weight: 400;
+
+  color: #232323;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more:hover .txt {
+  color: #fff;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more .ico {
+  width: 1.2rem;
+  height: 1.2rem;
+
+  background: url(../img/more-arrow-black.svg) no-repeat 0 0 / contain;
+
+  margin-left: 1.6rem;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-top .btn-more:hover .ico {
+  background: url(../img/more-arrow-white.svg) no-repeat 0 0 / contain;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-list {
+  margin-top: 2.7rem;
+
+  border-top: 1px solid #000;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-list .notice-link {
+  position: relative;
+
+  display: grid;
+  /* minmax(0,1fr)을 2열에 쓴 이유는 제목 칼럼이 남은 공간을 먹되, */
+  /*  긴 단어/URL 때문에 줄어들지 못하는 일을 막기 위해 최소를 0으로 고정합니다.  */
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+
+  padding: 2.2rem 2.4rem;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #d4d9e4;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-list .notice-link .label {
+  padding: 0.4rem 1.4rem;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #0c3659;
+  border-radius: 2.6rem;
+
+  margin-right: 1.2rem;
+}
+
+.notice-section .notice-cont .notice-list .notice-link .notice-tit {
+  width: 95%;
+
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #232323;
+
+  /* 강제 한줄 맞춤 */
+  white-space: nowrap;
+
+  /* 이렇게 두개를 같이 사용하면 영역이 넘어가면 ...으로 표시 -> text-overflow : ellipsis를 사용해줘야함. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* grid-column을 왜 사용했는가에 대해서 */
+  /* 핵심은 제목(notice-tit)을 어떤 열에 놓을지 상황(라벨 유무)에 따라 바꾸기 위해 grid-column을 쓰는 것이다. */
+  /* .notice-link가 그리드 컨테이너이고, 열 정의는 grid-template-columns : max-content minmax(0,1fr) max-content  */
+  /* 1열 - max-content : 라벨(짧은 폭만 유지) / 2열 - minmax(0,1fr) : 제목(남은 공간 유연하게 사용, 줄어들 수 있음.) / 3열 - max-content : 날짜(짧은 폭)  */
+
+  /* 일단 그리드 컨테이너에 레이아웃에 대해서 알아보고, grid-column은 왜 사용했는가. */
+  /* 그리드는 기본적으로 자동 배치하지만, 같은 행 안에서 아이템을 정확히 어느 열(라인)에 둘 지 지정하고 싶을 때는 grid-column으로 시작 / 끝 라인을 직접 정한다.  */
+  /* 3열 그리드면 라인은 네 개 (1-2-3-4) - grid-column  : 1 / 3 = 1번 라인에서 시작해 3번 라인 직전까지(즉, 1열+2열) 차지 / grid-column : 2 / 3은 2번 라인에서 시작해 3번 라인 직전까지(즉, 2열만) 차지*/
+  grid-column: 1 / 3;
+}
+
+/* .notice-tit에 관한 grid-column 규칙이 2개인 이유 */
+/* 1. 저 위 명령이 기본 규칙 .notice-tit {...} */
+/* 라벨이 없는 항목도 있을 수 있으니, 기본값으로 제목을 1~2열(두 칸)에 깔아둡니다. 이렇게 하면 라벨이 없어도 제목이 왼쪽부터 넓게 사용되고,  날짜(3열)와 깔끔하게 분리된다.  */
+
+/* 2. 이 아래에 있는 명령이 라벨이 있을 때만 사용되는 규칙 label + .notice-tit {...}*/
+/* 인접 형제 결합자 A + B는 "같은 부모 아래에서 A 바로 뒤에 오는 B" 를 선택한다. 여기서는 바로 앞에 .label 이 있는 .notice-tit만 잡는다.  */
+/* 이 경우 제목을 2열만 쓰도록 바꿔 1열(라벨) 2열(제목) 3열(날짜) 로 한줄 정렬을 보장한다.  */
+/* 즉, 라벨이 없으면 제목은 1 / 3 (1,2열 사용), 라벨이 있다면 제목은 2 / 3 (2열만) 한 줄 정렬.  */
+.notice-section .notice-cont .notice-list .notice-link .label + .notice-tit {
+  grid-column: 2 / 3;
+}
+
+.notice-section .notice-cont .notice-wrap .notice-list .notice-link .data {
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  color: rgba(35, 35, 35, 0.5);
+}
+
+/* 이것 또한 grid */
+.notice-section .notice-cont .quick-info {
+  background-color: #f5f;
+
+  display: grid;
+  /* 반응형괴 연관되서 좋다. 두 칸의 열 너비가 뷰포트에 맞춰 변함. */
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.8rem;
+
+  height: 100%;
+}
+
+.notice-section .notice-cont .quick-info .quick-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  padding: 2.8rem 2.2rem;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .txt-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .txt-box .img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: auto;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .txt-box .img img {
+  /* img를 width : 55%로 설정한 이유 - .img가 flex, width : 100% , height : auto 라서, 부모의 가로폭 100%로 따라가고, 세로는 자식(이미지)높이만큼 잡힌다. */
+  /* img에 width : 55%는 이미지의 가로폭을 .img의 가로폭 대비 55%로 설정한다는 이야기이다.  */
+  /* 결과적으로 그리드 열이 커지면 아이콘도 비례해서 커지고, 열이 줄면 같이 줄어드는 유동적인 크기가 된다. */
+  /* width : 55%는 열 너비에 비례해 아이콘 크기를 항상 여백이 있는 비율로 유지로 하려는 의도이다. - 아이콘이 박스를 꽉 채우지 않고, 적당히 여백을 남기며 중앙에 위치하는 레이아웃을 만드려는 선택 */
+  width: 55%;
+  height: auto;
+  /* 이미지 최대 크기를 설정해주고, 이미지가 이 크기를 벗어나 커지지 않게 해줌. */
+  max-width: 18rem;
+
+  /* width : 55% , height : auto 는 이미지가 세로의 원본 비율대로 자동 계산되기 때문에 이때는 자르기가 일어나지 않는다. */
+  /* object-fit : cover는  요소의 박스 비율과 이미지 비율이 맞지 않을 때(예 : width와 height를 동시에 강제하거나, 부모가 고정 비율일 때) 내부 이미지를 잘라서 채우는 동작을 실행한다.  */
+  /* object-fit: cover; */
+  object-fit: contain;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .txt-box .txt {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #fff;
+
+  margin-top: 2.1rem;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin-top: auto;
+  padding-top: 1.6em;
+  border-top: 1px solid #fff;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .btn-wrap .btn-txt {
+  font-size: 1.4em;
+  font-weight: 400;
+  color: #fff;
+}
+
+.notice-section .notice-cont .quick-info .quick-box .btn-wrap .ico {
+  width: 1.3rem;
+  height: 1.3em;
+
+  background: url(../img/more-arrow-white.svg) no-repeat 0 0 / contain;
+}
+
+.notice-section .notice-cont .quick-info .quick-box.box1 {
+  background-color: #65a9df;
+}
+
+.notice-section .notice-cont .quick-info .quick-box.box2 {
+  background: #004a74;
 }
 /*   11. 공지(Notice) notice section : end */
 
