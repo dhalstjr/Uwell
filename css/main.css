@@ -2575,8 +2575,6 @@
 
 /* 이것 또한 grid */
 .notice-section .notice-cont .quick-info {
-  background-color: #f5f;
-
   display: grid;
   /* 반응형괴 연관되서 좋다. 두 칸의 열 너비가 뷰포트에 맞춰 변함. */
   grid-template-columns: repeat(2, 1fr);
