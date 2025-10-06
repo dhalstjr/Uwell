@@ -922,6 +922,19 @@
   top: 50%;
 }
 
+.innov-box .box-wrap .box-content .con-tit {
+  margin-top: 1.3rem;
+  font-size: 1.7rem;
+}
+
+.innov-box .box-wrap .box-content .con-tit .tit {
+  font-weight: 700;
+}
+
+.innov-box .box-wrap .box-content .con-tit .txt {
+  font-weight: 400;
+}
+
 .box-wrap .box:nth-of-type(even) .line:before {
   left: 0;
   transform: translate(-50%, -50%);
@@ -977,6 +990,8 @@
 }
 .center-section .main-tit-wrap .txt-wrap .txt {
   margin-top: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
 }
 
 /* 각각에게 크기를 줘서 CSS을 형성하여 만들었지만, 본페이지는 다른 CSS를 적용했음. 차이점은 반응형에 대비한 것 같음. 내 생각엔 한 번 물어보겠음. */
@@ -1811,7 +1826,7 @@
 
 .count-section .section-inner .main-tit-wrap .txt-box {
   margin-top: 1.8rem;
-  line-height: 1;
+  line-height: 1.38;
 }
 
 .count-section .section-inner .main-tit-wrap .txt-box .txt {
@@ -2671,5 +2686,311 @@
   background: #004a74;
 }
 /*   11. 공지(Notice) notice section : end */
+
+/* footer - start */
+#footer {
+  padding-bottom: 5.4rem;
+  background-color: #f7f7f8;
+  color: #636366;
+}
+
+#footer .footer-container {
+}
+
+/* grid 설정 */
+#footer .footer-container .footer-cont {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: space-between;
+
+  /* 오른쪽 퀵메뉴 크기를 뺴야한다.  */
+  margin-right: calc(9rem - 1px);
+}
+
+#footer .footer-container .footer-cont .branch-box {
+  width: 100%;
+  padding: 6.3rem;
+
+  color: #fff;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(1) {
+  /* 사진 정렬을 오른쪽으로 */
+  background: url(../img/foot-bg1.png) no-repeat right / cover;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(2) {
+  background: url(../img/foot-bg2.png) no-repeat right / cover;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(3) {
+  background: url(../img/foot-bg3.png) no-repeat right / cover;
+}
+
+#footer .branch-box .branch-address {
+  display: flex;
+  flex-direction: column;
+}
+
+#footer .branch-box .branch-address .txt {
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+
+  margin-top: 1rem;
+}
+
+#footer .branch-box .branch-address .tit {
+  font-size: 2.7rem;
+  font-weight: 700;
+
+  color: #fff;
+}
+
+#footer .branch-box .branch-address .operating-hours {
+  margin-top: 3.6rem;
+}
+
+#footer .branch-box .branch-address .operating-hours .info .medium {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* grid로 설정해서 텍스트 간격 맞추기 */
+
+#footer .branch-box .branch-address .operating-hours .info {
+  font-size: 1.4rem;
+  display: grid;
+  /* 한 열은 7.2rem으로 고정하고, 다른 한쪽은 남은 공간을 차지하게 1fr을 설정. */
+  /* minmax(0,1fr) -> 남은 공간을 모두 쓰는 유연 칼럼인데, 최소를 0으로 잡아 긴 내용이 와도 줄어들 수 있게 한 안전한 설정. */
+
+  grid-template-columns: 7.2rem minmax(0, 1fr);
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 1rem;
+}
+
+#footer .branch-box .branch-address .operating-hours .info span {
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+#footer .branch-box .call {
+  margin-top: 4.6rem;
+  display: flex;
+  align-items: center;
+}
+
+#footer .branch-box .call .ico {
+  width: 2rem;
+  height: 2rem;
+
+  background: url(../img/foot-branch-ico.svg) no-repeat 0 0 / contain;
+}
+
+#footer .branch-box .call .num {
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  margin-left: 1.3rem;
+}
+
+#footer .footer-in {
+  width: calc(100% - 9rem);
+
+  /* 최대 크기를 정해줘야 오른쪽 퀵메뉴에 넘치지 않는다.  */
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+#footer .footer-in .foot-top {
+  margin-top: 4.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 2rem;
+}
+
+#footer .footer-in .foot-top .num-box {
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+}
+
+#footer .footer-in .foot-top .num-box .num {
+  margin-left: 0.8rem;
+  font-weight: 500;
+
+  font-size: 1.5rem;
+}
+
+#footer .footer-in .foot-top .foot-logo {
+  width: 18rem;
+  height: auto;
+}
+
+#footer .footer-in .foot-top .foot-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  max-width: 100%;
+}
+
+#footer .footer-in .foot-bot {
+  position: relative;
+  margin-top: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#footer .footer-in .foot-bot:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: calc(100% + 9rem);
+  height: 1px;
+  background-color: rgba(99, 99, 99, 0.2);
+}
+
+#footer .footer-in .foot-bot .legal-list {
+  padding: 4.2rem 0 3.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+#footer .footer-in .foot-bot .legal-list li {
+  position: relative;
+}
+
+#footer .footer-in .foot-bot .legal-list li:before {
+  content: "";
+  display: block;
+
+  position: absolute;
+  left: 0%;
+  bottom: 0;
+
+  width: 0%;
+  height: 1px;
+
+  background-color: rgba(99, 99, 99, 0.8);
+  transition: width 0.5s;
+}
+
+#footer .footer-in .foot-bot .legal-list li:hover:before {
+  width: 100%;
+}
+
+#footer .footer-in .foot-bot .legal-list .privacy {
+  font-weight: 700;
+}
+
+#footer .footer-in .foot-bot .legal-list li a {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+#footer .footer-in .foot-bot .util-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 2rem;
+}
+
+#footer .footer-in .foot-bot .util-menu a {
+  display: flex;
+  align-items: center;
+
+  width: 5.4rem;
+  height: 5.4rem;
+
+  border-radius: 2.7rem;
+
+  background-color: #ebebeb;
+  padding: 1.2rem 1.6rem;
+
+  transition: background-color 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a:hover {
+  background-color: #757575;
+}
+
+#footer .footer-in .foot-bot .util-menu a.youtube-btn .ico {
+  height: 1.6rem;
+  background: url(../img/foot-sns1.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a:hover.youtube-btn .ico {
+  background: url(../img/foot-sns1-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.blog-btn .ico {
+  background: url(../img/foot-sns2.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.blog-btn:hover .ico {
+  background: url(../img/foot-sns2-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.kakao-btn .ico {
+  background: url(../img/foot-sns3.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.kakao-btn:hover .ico {
+  background: url(../img/foot-sns3-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.sns-clip .ico {
+  background: url(../img/foot-sns4.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.sns-clip:hover .ico {
+  background: url(../img/foot-sns4-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a .ico {
+  width: 2.2rem;
+  height: 2rem;
+}
+
+#footer .footer-in .foot-bot .util-menu a .ico img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#footer .copyright {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: rgba(99, 99, 99, 0.5);
+}
+
+/* footer - end */
 
 /* main : end */

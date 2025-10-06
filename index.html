@@ -8,15 +8,30 @@
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/main.css" />
 
+    <!-- Swiper.css -->
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+
     <!-- 라이브러리들 -->
     <!-- GSAP -->
+         <script src="https://unpkg.com/gsap/dist/gsap.min.js"></script>
+         
     <!-- GSAP - ScrollTrigger -->
+        <script src="https://unpkg.com/gsap/dist/ScrollTrigger.min.js"></script>
+
     <!-- lenis -->
+         <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
+
     <!-- Swiper -> CSS도  -->
+     <script src="./js/swiper-bundle.min.js"></script>
+
     <!-- Jquery -->
+         <script src="./js/jquery-3.7.0.min.js"></script>
+
+    <script src="./js/common.js"></script>
+     <script src="./js/main.js"></script>
   </head>
   <body>
-    <!-- header : start -->
+    <!-- header : start --?
     <header id="header">
       <!-- header의 최대 넓이를 부모 -->
       <div class="in-header">
@@ -1923,32 +1938,32 @@
       <div class="footer-container">
         <!-- footer 영역이 2개로 나뉨 -->
         <div class="footer-cont">
-          <div class="branch-box">
+          <div class="branch-box branch1">
             <div class="branch-address">
               <p class="tit">강남점</p>
-              <p>서울특별시 강남구 강남대로 318, 타워837 3·4·5층
+              <p class="txt">서울특별시 강남구 강남대로 318, 타워837 3·4·5층
                 <br>
                 (신분당선 강남역 4번 출구, 도보 5분 거리)
               </p>
 
               <div class="operating-hours">
                 <p class="info">
-                  <span>평일</span>
+                  <span class="medium">평일</span>
                   <span>09:00 ~ 18:00</span>
                 </p>
 
                 <p class="info">
-                  <span>야간</span>
+                  <span class="medium">야간</span>
                   <span>~ 20:00 (월,수,금)</span>
                 </p>
 
                 <p class="info">
-                  <span>토요일</span>
+                  <span class="medium">토요일</span>
                   <span>09:00 ~ 15:00</span>
                 </p>
 
                 <p class="info">
-                  <span>사업자번호</span>
+                  <span class="medium">사업자번호</span>
                   <span>229-29-01687</span>
                 </p>
               </div>
@@ -1960,32 +1975,33 @@
             </div>
           </div>
 
-          <div class="branch-box">
+          <div class="branch-box branch2">
             <div class="branch-address">
               <p class="tit">세종점</p>
-              <p>세종특별자치시 한누리대로 265 명동프라자 5층
+              <p class="txt">세종특별자치시 한누리대로 265 명동프라자 5층
                 <br>
                 (나성동 743, 백화점 부지 맞은편 BRT 정류장 앞)
               </p>
 
+              <!-- 이런 라벨-값 구조는 시멘틱하게 <dl><dt><dd>//dl>로 마크업하는 것도 좋다. (접근성,의미론 측)-->
               <div class="operating-hours">
                 <p class="info">
-                  <span>평일</span>
+                  <span class="medium">평일</span>
                   <span>09:00 ~ 18:00</span>
                 </p>
 
                 <p class="info">
-                  <span>야간</span>
+                  <span class="medium">야간</span>
                   <span>~ 19:30 (평일 매일)</span>
                 </p>
 
                 <p class="info">
-                  <span>토요일</span>
+                  <span class="medium">토요일</span>
                   <span>09:00 ~ 15:00</span>
                 </p>
 
                 <p class="info">
-                  <span>사업자번호</span>
+                  <span class="medium">사업자번호</span>
                   <span>726-45-00705</span>
                 </p>
               </div>
@@ -1997,32 +2013,32 @@
             </div>
           </div>
 
-          <div class="branch-box">
+          <div class="branch-box branch3">
             <div class="branch-address">
               <p class="tit">대전점</p>
-              <p>대전시 서구 대덕대로 234번길 18 유웰빌딩 4·5·6층
+              <p class="txt">대전시 서구 대덕대로 234번길 18 유웰빌딩 4·5·6층
                 <br>
                 (서구 둔산동 1355, 스타벅스 건물)
               </p>
 
               <div class="operating-hours">
                 <p class="info">
-                  <span>평일</span>
+                  <span class="medium">평일</span>
                   <span>08:30 ~ 17:30</span>
                 </p>
 
                 <p class="info">
-                  <span>야간</span>
+                  <span class="medium">야간</span>
                   <span>~ 19:00 (평일 매일)</span>
                 </p>
 
                 <p class="info">
-                  <span>토요일</span>
+                  <span class="medium">토요일</span>
                   <span>08:30 ~ 14:30</span>
                 </p>
 
                 <p class="info">
-                  <span>사업자번호</span>
+                  <span class="medium">사업자번호</span>
                   <span>384-73-00654</span>
                 </p>
               </div>
@@ -2048,7 +2064,7 @@
           </div>
 
           <div class="foot-bot">
-            <ul class="lagal-list">
+            <ul class="legal-list">
               <li><a href="#" class="privacy">개인정보처리방침</a></li>
               <li><a href="#" class="terms">이용약관</a></li>
               <li><a href="#" >비급여안내</a></li>
@@ -2058,25 +2074,25 @@
             <div class="util-menu">
               <a href="#" class="youtube-btn">
                 <div class="ico">
-                  <img src="./img/foot-sns1.svg" alt="">
+                  <i class="hidden">유튜브 아이콘</i>
                 </div>
               </a>
 
               <a href="#" class="blog-btn">
                 <div class="ico">
-                  <img src="./img/foot-sns2.svg" alt="">
+                <i class="hidden">블로그 아이콘</i>
                 </div>
               </a>
 
               <a href="#" class="kakao-btn">
                 <div class="ico">
-                  <img src="./img/foot-sns3.svg" alt="">
+                <i class="hidden">카카오 아이콘</i>
                 </div>
               </a>
 
               <a href="#" class="sns-clip">
                 <div class="ico">
-                  <img src="./img/foot-sns4.svg" alt="">
+                  <i class="hidden">sns 아이콘</i>
                 </div>
               </a>
             </div>
