@@ -185,7 +185,7 @@ body {
   height: 100%;
 }
 
-#nav .depth1 > li {
+#nav > .depth1 > li {
   /* 절대요소의 부모가 되어 서브메뉴의 부모가 된다. */
   position: relative;
   border: 1px solid #000;
@@ -198,7 +198,7 @@ body {
   transition: padding 0.3s;
 }
 
-#nav .depth1 li > a {
+#nav > .depth1 > li > a {
   display: flex;
   align-items: center;
 
@@ -209,7 +209,7 @@ body {
   font-weight: 400;
 }
 
-#nav .depth1 li > a > span {
+#nav > .depth1 > li > a > span {
   /* 텍스트 요소에 부모 요소가 되게 하고, hover시 나오는 효과를 주기 위해서 부모 요소로 적용. */
   position: relative;
 
@@ -217,7 +217,7 @@ body {
   line-height: 1.7;
 }
 
-#nav .depth1 li > a > span:before {
+#nav > .depth1 > li > a > span:before {
   content: "";
   display: block;
 
@@ -236,7 +236,7 @@ body {
   transition: width 0.3s;
 }
 
-#nav .depth1 li > a:hover > span:before {
+#nav > .depth1 > li > a:hover > span:before {
   width: 100%;
 }
 
@@ -505,3 +505,75 @@ body {
 #headerSearch {
   display: none;
 }
+
+/* 서브메뉴 CSS. */
+#nav > .depth1 > li > .depth2 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+
+  min-width: 100%;
+  text-align: center;
+
+  background-color: #0c3659;
+
+  padding: 3.6rem 2.6rem;
+
+  transition: opacity 0.3s;
+  z-index: 10;
+
+  /* 가려진 상태에서 */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#nav > .depth1 > li > .depth2.on {
+  opacity: 1;
+  visibility: visible;
+}
+
+#nav > .depth1 > li > .depth2 > li {
+  line-height: 2.2;
+}
+
+#nav > .depth1 > li > .depth2 > li > a {
+  position: relative;
+  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.7);
+
+  transition: color 0.3s;
+}
+
+#nav > .depth1 > li > .depth2 > li > a:hover {
+  color: #fff;
+}
+
+#nav > .depth1 > li > .depth2 > li > a > span:before {
+  content: "";
+  display: block;
+
+  position: absolute;
+  left: -1.3rem;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+
+  background-color: #fff;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s ease-in-out;
+}
+
+#nav > .depth1 > li > .depth2 > li > a:hover > span:before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 서브메뉴 클래스가 구현됐을 때.  */
