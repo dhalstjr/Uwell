@@ -46,7 +46,6 @@ body {
 
 body {
   /* 폰트 적용  */
-
   font-family: "Pretendard", sans-serif;
 }
 
@@ -509,10 +508,16 @@ body {
 /* 서브메뉴 CSS. */
 #nav > .depth1 > li > .depth2 {
   position: absolute;
+
+  /* 기준 요소가 depth1 > li가 relative이므로, 그 자식 depth2의 절대 위치 기준이 되기에,  */
+  /* bottom + translateY(100%) -> bottom 0은 서브메뉴의 아래쪽을 부모 li의 아래쪽에 맞춥니다.  */
+  /* 여기에 translateY(100%)(자기 자신의 높이의 100%만큼 아래로 이동)를 더하면, 서브메뉴의 윗변이 부모의 아랫변과 정확히 맞닿아 바로 아래에 위치하게 됩니다. */
+  /* 결과적으로 top : 100%와 같은 효과를 만들어낸다. */
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 100%);
 
+  /* 서브메뉴의 최소폭을 부모 li 폭과 같게 보장. */
   min-width: 100%;
   text-align: center;
 
@@ -532,6 +537,7 @@ body {
 #nav > .depth1 > li > .depth2.on {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 #nav > .depth1 > li > .depth2 > li {
@@ -576,4 +582,8 @@ body {
   visibility: visible;
 }
 
-/* 서브메뉴 클래스가 구현됐을 때.  */
+/* 헤더에 header_down 클래스가 부여됐을 떄  */
+#header.header_down {
+  /* 헤더의 영역이라는 걸 알기 위해서 그림자 효과 구현 */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
