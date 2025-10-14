@@ -128,8 +128,6 @@ body {
   font-size: 1.8rem;
 
   z-index: 1000;
-
-  background: #55f;
 }
 
 /* 헤더의 넓이를 선정. */
@@ -144,12 +142,10 @@ body {
 
   padding: 0 0 0 5rem;
 
-  background: #5f5;
+  background-color: #fff;
 }
 
 .logo-box {
-  background: #ff5;
-
   margin-right: 20rem;
 }
 
@@ -163,7 +159,6 @@ body {
 }
 
 #header #nav {
-  background: #f5f;
   height: 100%;
 
   /* 절대 요소로 만들고 가운데 맞춤. */
@@ -187,7 +182,7 @@ body {
 #nav > .depth1 > li {
   /* 절대요소의 부모가 되어 서브메뉴의 부모가 된다. */
   position: relative;
-  border: 1px solid #000;
+
   white-space: nowrap;
 
   /* li에 크기를 주고 a태그도 100%를 줄 수 있도록 100%를 준다. a태그의 크기를 키워 마우스가 들어갈 수 있는 영역을 키움. */
@@ -240,8 +235,6 @@ body {
 }
 
 .utils {
-  background: #f55;
-
   /* 유틸메뉴의 정렬은 오른쪽에 붙여서 헤더의 레이아웃을 구성 */
   display: flex;
   /*  유틸메뉴의 구성인 자식들이 가운데 정렬 */
@@ -376,11 +369,21 @@ body {
   /* 여기서 height와 border-top을 함께 사용한 이유는 기능적으로는 한개만 사용해도 되지만, 디자인적으로는 border로 선을 그리고, height로 높이를 제어하는 방식이 라인을 얇지만 선명하게 만들 수 있어 같이 쓰는 경우가 많다 */
   /* 1. 라인 두께 조절, 2. 레이아윳의 안정성, 3.시각적 대비 강회 */
   background: #fff;
+
+  transition: width 0.5s;
+}
+
+.utils .ham-box:hover .ham-btn .line {
+  width: 80%;
 }
 
 /* line의 2번째 요소에게 넓이의 차이를 줘 디자인 적 요소 추가 */
 .utils .ham-box .ham-btn .line:nth-of-type(2) {
   width: 80%;
+}
+
+.utils .ham-box:hover .ham-btn .line:nth-of-type(2) {
+  width: 100%;
 }
 
 /* 퀵메뉴 맵 : fixed로 만들기 -> 왼쪽 끝에 븉게 헤더와 같이 연결되어 있는 듯한 */
@@ -586,4 +589,126 @@ body {
 #header.header_down {
   /* 헤더의 영역이라는 걸 알기 위해서 그림자 효과 구현 */
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 사이트 맵 CSS */
+.site-map {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1000;
+
+  font-size: 1.8rem;
+
+  background-color: rgba(5, 51, 100, 0.9);
+  /* 요소 뒤에 있는 영역에 블러(흐림), 색상 변경 등 시각적 필터 효과를 적용하는 CSS */
+  backdrop-filter: blur(20px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-map .util-wrap {
+  display: flex;
+  display: none;
+}
+
+.site-map .cls-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 100%;
+
+  border: 1px solid #fff;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 50px;
+  right: 200px;
+}
+
+.site-map .cls-btn .line-box {
+  width: 2.4em;
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-map .site-cont {
+  color: #fff;
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  /* 크기를 줘 간격을 서로 동일하게 가지게. */
+  width: 80%;
+  /* 가운데 정렬 */
+  margin: 0 auto;
+}
+
+.site-map .site-cont .box {
+}
+
+.site-map .site-cont .box > .depth1 {
+  position: relative;
+  margin-bottom: 4.3rem;
+  font-size: 2.7rem;
+  font-weight: 700;
+}
+.site-map .site-cont .box > .depth1:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.site-map .site-cont .box > .depth1:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background-color: #65a9df;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.site-map .site-cont .box .depth2 {
+}
+
+.site-map .site-cont .box .depth2 > li {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.6s;
+}
+
+.site-map .site-cont .box .depth2 > li:hover {
+  color: #fff;
+}
+
+.site-map .site-cont .box .depth2 > li > a {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.site-map .site-cont .box .depth2 > li > a > span {
+  position: relative;
 }

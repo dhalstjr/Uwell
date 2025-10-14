@@ -527,6 +527,9 @@
   border-radius: 3.4rem;
 
   transition: background-color 0.3s;
+
+  font-size: 1.7rem;
+  font-weight: 700;
 }
 
 .counsel-section .form-wrap .btn-wrap .submit-btn:hover {
