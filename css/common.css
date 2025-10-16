@@ -611,6 +611,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+
+  /* 클래스를 부여할 때 부드러운 효과 */
+  transition: opacity 0.6s;
+}
+
+.site-map.on {
+  opacity: 1;
+  pointer-events: visible;
 }
 
 .site-map .util-wrap {
@@ -632,8 +643,14 @@ body {
   cursor: pointer;
 
   position: absolute;
-  top: 50px;
-  right: 200px;
+  top: 3vw;
+  right: 4vw;
+
+  transition: background-color 0.5s;
+}
+
+.site-map .cls-btn:hover {
+  background-color: #fff;
 }
 
 .site-map .cls-btn .line-box {
@@ -668,13 +685,14 @@ body {
 }
 .site-map .site-cont .box > .depth1:hover:before {
   opacity: 1;
-  visibility: visible;
+  /* 그리고 hover에 translateY의 위치를 바꿔주면 효과를 제대로 보여줄 수 있다.  */
+  transform: translateY(0);
 }
 
 .site-map .site-cont .box > .depth1:before {
   content: "";
   position: absolute;
-  top: -10px;
+  top: -15px;
   left: 0;
 
   width: 10px;
@@ -685,7 +703,9 @@ body {
   background-color: #65a9df;
 
   opacity: 0;
-  visibility: hidden;
+
+  /* 여기서 transform에 translate를 넣어 효과를 준다.(위에서 떨어지는 효과) */
+  transform: translateY(-100%);
 
   transition: opacity 0.5s, transform 0.5s;
 }
@@ -711,4 +731,9 @@ body {
 
 .site-map .site-cont .box .depth2 > li > a > span {
   position: relative;
+}
+
+/* 사이트 맵 같은 경우에는 내부 스크롤이 사용되면 안되기 때문에 클래스를 부여해서 스크롤을 차단해준다. */
+html.scroll_none {
+  overflow: hidden;
 }
