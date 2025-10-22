@@ -518,12 +518,21 @@ body {
   background-color: #0c3659;
 
   /* on 클레스 붙기 전 상태 */
-  /*   opacity: 0;
+  opacity: 0;
   visibility: visible;
-  pointer-events: visible; */
+  pointer-events: visible;
 
   /* 그리드로 레이아웃 배치 */
   display: grid;
+  /* grid-template-columns 명령에 대해서 */
+  /* 그리드 열을 2개 만든다. 1열은 minmax(0,1fr) : 유동 폭(남는 공간을 먹는 열) / 2열은 max-content: 컨텐츠가 필요로 하는 만큼만 넓어지는 열 */
+  /* 그래서 2열 레이아웃이 형성되고, 아이템들이 자동으로 행을 늘려가며 채워짐 그리고 행은 내가 지정해주지 않으면 아이템 수에 맞춰 자동 생성. */
+  /* 1열 :  1fr은 남는 공간을 분배받는 단위 , minmax(0...)를 쓰면  콘텐츠가 넘칠 때도 0까지 줄어들 수 있어서 긴 단어/긴 인풋 대문에 레이아웃이 밀리는 현상을 막아준다. (보통 1fr만 사용하면 콘텐츠의 min-content 크기 때문에 넘침이 생길 수 있다. */
+  /* 2열 : max-content는 그 열의 폭을 자식 콘텐츠의 최대 자연 너비로 맞춤. 닫기 버튼처럼 폭이 작은 요소면 딱 그만큼만 차지. (콘텐츠가 길어지면 그 길이만큼 넓어지므로, 너무 길어질 수 있다는 점을 주의.) */
+  grid-template-columns: minmax(0, 1fr) max-content;
+
+  /* grid를 설정했더니 좌우가 붙어서 padding으로 간격을 줌. */
+  padding: 0 2rem;
 
   align-items: center;
   justify-content: center;
@@ -532,34 +541,51 @@ body {
   justify-items: center;
 }
 
-#headerSearch .all-sch .search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+#headerSearch .all-sch.on {
+  opacity: 1;
+  visibility: auto;
+  pointer-events: auto;
 }
 
-#headerSearch .all-sch .search-box input {
-  width: 45rem;
-  padding: 1rem 1.6rem;
+#headerSearch .all-sch .search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 54rem;
+  height: 5.4rem;
+  padding: 0 2.1rem;
+
+  /* height와 같은 크기를 주어 height가 사라져도 높이는 line-height와 같은 값을 나타냄. */
+  /*   line-height: 5.4rem; */
 
   background-color: #fff;
   border-radius: 3rem;
 }
 
-#headerSearch .all-sch .search-box .search-icon {
-  position: absolute;
-  top: 50%;
-  right: 1.6rem;
-  transform: translateY(-50%);
+#headerSearch .all-sch .search-box input {
+  width: 100%;
+  font-size: 1.8rem;
+}
 
-  width: 1.6rem;
-  height: 1.6rem;
+#headerSearch .all-sch .search-box .search-icon button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  background-color: #000;
+  width: 2rem;
+  height: 2rem;
+
+  background: url(../img/search-icon-bold.svg) no-repeat 0 0 / contain;
 }
 
 #headerSearch .all-sch .close-btn {
+  width: 3.2rem;
+  height: 3.2rem;
+  opacity: 0.6;
+
+  background: url(../img/close-icon_white.svg) no-repeat 0 0 / contain;
 }
 
 #headerSearch .all-sch .tag-wrap {
@@ -587,6 +613,12 @@ body {
   font-size: 1.3rem;
   font-weight: 600;
   color: #fff;
+
+  transition: background-color 0.3s;
+}
+
+#headerSearch .all-sch .tag-wrap .tag-box .tag:hover {
+  background-color: #65a9df;
 }
 
 /* 서브메뉴 CSS. */
