@@ -82,6 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       siteMap.classList.add("on");
+
+      // CSS에서 is-open으로도 열려있는 상태가 아니라서 실제 scrollHeight를 가져올 수 없다고 한다. 이유는 site-map이 숨겨져있을 때는 실제 높이는 0이지만, on클래스를 붙여 보이게 만들면 브라우저가 레이아웃을 다시 계산해서 진짜 높이를 알수 있게 된다.
+
+      // 사이트 맵이 on클래스를 가졌을 때 이제 .box .depth2가  높이 계산이 가능하기에 -> 열린 박스들 높이 주입.
+      document.querySelectorAll(".site-cont .box.is-open").forEach((box) => {
+        const panel = getPanel(box);
+        if (panel) setPanelHeight(panel);
+      });
+
       // typeof lenis !== 'undefined' -> 전역 스코프에 lenis라는 변수가 정의되어 있다면 안쪽 코드를 실행하라는 안전 장치용 코드인데, '
       // 이걸 사용한 이유는 어떤 페이지/상태에서는 lenis가 없을 수도 있기에 그때는 lenis.stop()/start() 를 그냥 호출하면 "lenis is not defined" 에러가 나니까, 존재 확인 후에 살행하는 패턴이다.
       // !== 불일치 연산자로, 왼쪽 피연산자와 오른쪽 피연산자의 값이 같지 않거나 타입이 다를 경우 참(true)을 반환한다.
@@ -122,11 +131,123 @@ document.addEventListener("DOMContentLoaded", function () {
     const siteDepth1 = document.querySelector(".site-map .site-cont .depth1");
     const siteDepth2 = document.querySelector(".site-map .site-cont .depth2");
 
-    console.log(siteDepth1, siteDepth2);
+    // 모든 depth1 요소 가져오기
+    const siteDepth1s = document.querySelectorAll(
+      ".site-map .site-cont .depth1"
+    );
 
-    siteDepth1.addEventListener("click", (e) => {
-      // a 링크가 아니라서 막지 않아도 된다. 하지만 일단 적용
-      e.preventDefault();
+    //사이트 맵에 요소들이 있는 content부분
+    const siteCont = document.querySelector(".site-cont");
+
+    console.log(siteDepth1, siteDepth2, siteCont, siteDepth1s);
+
+    // 직계 depth2 찾기 (:scope와 children의 차이)
+    // :scope와 children의 차이는 서로 현재 요소를 기준으로 직계 자식을 선택하는 것은 같다.
+    // :scope는 (CSS 선택자) 현재 요소에 .depth2를 찾지 ( :scope > .depth2) -> 한 줄로 명확하고 간결하다. CSS 선택자 문법 그대로라 가독성에 좋다. (CSS에 따로 해줄 게 없음)
+    // children (DOM 트리 탐색) 실제 DOM 컬렉션을 순회해서 직계 자식만 필터링 -> 선택자 호환성을 신경 안써도 되고, IE같은 레거시(더 이상 지원이 종료된 인터넷 익스플로러의 기술과 호환성이 필요한 오래된 웹사이트나 애플리케이션을 말함.)까지 커버 가능(요즘엔 사용 x)
+    // 웹접근성 미치는 영향은 차이가 없고, 실무에서는 현대 프론트에서는 :scope가 간결하고 읽기 쉬워서 선호. 레거시 브라우저(특히 IE) 지원 요구가 없다면 :scope 추천
+    // children은 모든 브라우저에서 오래전부터 사용 / Chrome, Edge(Chromium), Firefox, Safari — 현대 브라우저에서는 :scope 2025년 기준 웹 표준 타겟이라면 :scope 써도 안전. IE 포함 초레거시만 신경 쓰면 children
+
+    // children 사용
+    // 찾은 결과를 담을 변수 초기화
+    // let panel = null;
+
+    // box의 직계 자식들만 순회.
+    // 프로퍼티 : box.children - 직계 자식 요소만 포함. 요소(ELement)만 제공.
+    // box안에 들어있는 자식 요소들을 하나씩 꺼내서 child라는 이름으로 사용하겠다는 말이다.
+    // 그리고 반복문(for문)이다. for(let i = 0; i < ~; i++) 같은 "숫자로 도는 for문"이 아니라 요소 값 자체를 하나씩 꺼내는 반복문이다.
+    // 즉 이 코드를 해석하자면 box.children 안에 있는 각 child에 대해 반복해서 ~을 하라.
+    // 여기서 child는 따로 변수로 선언할 필요가 없다. 이 for문 안에서 box.children안의 요소들을 하나씩 꺼내 child라는 이름의 변수로 만들어라 라는 내용이기에
+    // for..of 문법이 자동으로 child 라는 이름의 변수를 만든것이다. 그리고 이 child라는 변수는 for문안에서 사용가능이다.
+    // for (const child of box.children) {
+    //   //지금 for문에서 child가 depth2 클래스를 가지고 있다면, 그 요소를 panel에 담고 반복을 멈춰라.
+    //   // ?는 옵셔널 체이닝 -> 혹시 classList가 없으면 여기서 에러 내지 말고 그냥 넘어가라(안전장치용)
+    //   if (child.classList?.contains("depth2")) {
+    //     // panel은 찾은 것을 변수로 저장 child라는 이름으로.
+    //     panel = child;
+    //     break; // 찾았으니 for문(반복문)을 중단
+    //   }
+    //   // 끝까지 못찾았으면(panel이 비어있으면) 더이상 진행하지말고 함수에서 나와라.
+    //   // !panel은 가드 문장
+    // }
+    // if (!panel) return;
+
+    // 이 위 코드를 함수로 변경해서 코드 변경
+    // 이렇게 하면 좋은 점은 불필요한 외부 변수를 제거하고 재사용/유지보수가 쉬움.
+    function getPanel(box) {
+      for (const child of box.children) {
+        if (child.classList?.contains("depth2")) return child;
+      }
+      return null;
+    }
+
+    // depth1을 클릭 시 메뉴가 슬라이드 업다운되는 코드 구현하려고 한다. 이거를 함수로 정의해서 구현한다.
+    // 여기는 함수 정의
+    function setPanelHeight(panel) {
+      // 3.그 DOM요소의 scrollHeight를 읽어 "***px"로 만들어,
+      // panel.style.setProperty('--h', ..)로 CSS 변수 --h를 요소의 인라인 스타일에 세팅 -> 이후 CSS에서 max-height : var (--h)로 부드럽게 펼침.
+      panel.style.setProperty("--h", panel.scrollHeight + "px");
+    }
+
+    function openBox(box) {
+      const panel = getPanel(box); // 1. box안에 ul class = "depth2" DOM 요소를 찾아 panel 변수에 담음.
+      if (!panel) return;
+      // 여기는 함수 실행.
+      setPanelHeight(panel); // 2. 저 위에 있는 함수 호출하고 실행, 그리고 const panel = getPanel(box) <-> panel 이것을 인자로 넘겨 DOM 요소가 매개변수 panel에 들어간다. (저 위에 있는 panel)
+      box.classList.add("is-open"); // 클래스를 추가하여 열린 상태를 만든다.
+    }
+
+    function closeBox(box) {
+      const panel = getPanel(box);
+      if (!panel) return; // panel이 없으면 실행 중단(안전장치)
+
+      box.classList.remove("is-open");
+      // removeProperty 메서드는 일반적인 객체에 속성을 제거하는 것이 아니라 DOM요소의 인라인 CSS스타일 속성을 제거할 때 사용.
+      // 인라인 스타일은 HTML태그 안에 style ="" 이 들어가 있으면 인라인 스타일.
+      panel.style.removeProperty("--h"); // 역할 : 인라인 스타일에 설정돼 있던 CSS속성(여기서는 CSS 변수 --h)를 삭제
+    }
+
+    function closeAll() {
+      // 각 .box 요소를 closeBox 함수에 넘겨서 실행한다.
+      document.querySelectorAll(".site cont .box").forEach(closeBox); // 여기서 closeBox는 위에 있는 closeBox 함수를 실행한것이다.
+    }
+
+    // querySelector()로 잡으면 첫번째 .depth1 요소 하나만 잡기 때문에 querySelectorAll로 잡고 forEach문을 사용하던지, 아니면 이벤트 위임을 하든지 둘 중 하나이다.
+    // 1. forEach방식으로 구현 -> 기본적인 동작 구조(직관적이라 JS 기초를 다지기 굿.)
+    siteDepth1s.forEach((depth1) => {
+      depth1.addEventListener("click", (e) => {
+        // a링크의 기본 동작 막기 -> 그리고 이 버튼이 토글 전용이니 항상 막아도 무방하다.
+        e.preventDefault();
+
+        // 그래도 실무 안정성을 위한다면 조건부로 막거나 토글 버튼과 링크를 분리하는 것이 좋다.
+        // a링크를 변수로 잡고 조건부를 설정하여 a링크의 기본 동작을 제어한다.
+        const depth1Link = depth1.querySelector("a");
+        if (depth1Link) e.preventDefault();
+
+        // 현재 .depth1에 부모인 box 찾기
+        // 이 변수가 왜 필요한가? .site-cont안에 여러 개의 .box가 있는데 각 box는 .depth1과 .depth2와 같이 한쌍으로 이룬다.
+        // 지금 구현하고자 하는 것은 .depth1는 클릭했을 때 슬라이드 업다운 효과를 주려면 .depth2도 함께 잡아야하기 때문에
+        // 클릭된 .depth1이 속한 box를 기준점으로 삼아야, 정확히 그 박스 안의 depth2 하나만을 잡을 수 있다.
+
+        // closest 메서드 기능은 특정 요소에서 시작하여 자기 자신을 포함해 위쪽(부모방향)으로 올라가면서 주어진 CSS 선택자와 일치하는 가장 가까운 조상 요소를 찾는다.
+        // 내가 생각한 index값을 맞추는 방법은 DOM변화에 취약하고 유지보수가 커지기 때문에 부모 구조가 DOM관계 그대로 사용하고, 안전하다
+        const box = depth1.closest(".box");
+        // 박스 요소가 없다면 실행 중단
+        if (!box) return;
+
+        // b 는 .site-cont 안에 있는 모든 .box를 하나씩 순회하면서 가리키는 각 박스 요소
+        // box는 지금 클릭한 .depth1에 속한 그 박스(const box = depth1.closest('.box))
+        document.querySelectorAll(".site-cont .box").forEach((b) => {
+          //if (b !== box)는 DOM요소 참조 비교(엄격 비교 - 불일치 연산자)인데, 즉 같은 요소 객체면 false , 다른 요소면 true
+          // 그래서 결과적으로 현재 클릭한 박스(box)만 제외하고 그 외의 모든 박스(b)에는 closeBox(b)를 실행 -> 전부 닫음(클릭한 박스 제외)
+          if (b !== box) closeBox(b);
+        });
+
+        // 현재 박스 토글 -> 이걸 넣어야 --h가 부여된다.
+        const willOpen = !box.classList.contains("is-open");
+        if (willOpen) openBox(box);
+        else closeBox(box);
+      });
     });
   }
 

@@ -67,4 +67,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // 즉, 매 이벤트 끝에서 previousScroll을 현재값으로 업데이트를 해야 "이번 이벤트의 현재값"이 다음 이벤트의 직전값이 되어 정확한 값과 방향 비교가 가능하다.
     previousScroll = currentPosition;
   });
+
+  // 서브 헤더 메뉴 슬라이드 업다운 효과 구현
+  const Depth2 = document.querySelector(".depth2");
+  const Depth2List = document.querySelectorAll(".depth1 > li");
+  console.log(Depth2, Depth2List);
+
+  Depth2List.forEach((li) => {
+    li.addEventListener("mouseover", () => {
+      Depth2.forEach((li2) => {
+        li2.classList.add("on");
+      });
+    });
+  });
 });

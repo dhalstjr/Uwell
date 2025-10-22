@@ -476,28 +476,45 @@
 
         <!-- 서치 아이콘을 눌렀을 때 나오는 검색창 (모달)-->
         <!-- 모달이란 일반적으로 기존 화면 위에 플로팅 되는 화면을 말한다. - 새 페이지 이동없이 기존화면에서 정보를 표시하는 것.  -->
-        <form action="#" id="headerSearch" name="headerSearch">
+        <form id="headerSearch" name="headerSearch">
           <div class="all-sch">
             <!-- 검색창 -->
-            <div class="search-box"></div>
+            <div class="search-box">
+              <!-- 검색하는 부분 -->
+              <input
+                type="text"
+                name="searchText"
+                id="searchText"
+                title="검색어를 입력하세요."
+                placeholder="검색어를 입력하세요."
+                autocomplete="off"
+              />
+
+              <div class="search-icon">
+                <i class="hidden">검색 아이콘</i>
+              </div>
+            </div>
             <!-- 닫기 버튼 -->
             <button type="button" class="close-btn">
               <i class="hidden">닫기 버튼</i>
             </button>
-
-            <!-- 텍스트 그룹 (2줄로 디자인 형성)-->
-            <div class="text-wrap">
-              <div class="box">
-                <p class="tag">전립선비대증</p>
-                <p class="tag">요로결석</p>
-                <p class="tag">정계정맥류</p>
-                <p class="tag">정관복원수술</p>
+            <!-- 태그 버튼 영역 -->
+            <div class="tag-wrap">
+              <div class="tag-box">
+                <!-- form태그안에서 button / a / p나 span 같은 태그를 사용할 때 사용목적 -->
+                <!-- 무언가 작동한다면 button태그 (검색어 채우기, 즉시 검색 실행 등) -->
+                <!-- 다른 페이지/결과로 이동한다면 a태그 (해당 태그 클릭 시 검색 결과 페이지로 이동) -->
+                <!-- 그냥 표시용(작동 없음)이라면 -> 비인터랙티브 요소 span이나 p태그 사용. -->
+                <a href="#" class="tag"><span>전립선 비대증</span></a>
+                <a href="#" class="tag"><span>요로결석</span></a>
+                <a href="#" class="tag"><span>정계정맥류</span></a>
+                <a href="#" class="tag"><span>정관복원수술</span></a>
               </div>
 
-              <div class="box">
-                <p class="tag">진료안내</p>
-                <p class="tag">검사결과문의</p>
-                <p class="tag">제증명 발급 안내</p>
+              <div class="tag-box">
+                <a href="#" class="tag"><span>진료안내</span></a>
+                <a href="#" class="tag"><span>검사결과문의</span></a>
+                <a href="#" class="tag"><span>제증명 발급 안내</span></a>
               </div>
             </div>
           </div>
@@ -581,7 +598,7 @@
       </div>
 
       <div class="site-cont">
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">병원소개</a>
           </p>
@@ -633,7 +650,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">전립선</a>
           </p>
@@ -714,7 +731,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">요로결석</a>
           </p>
@@ -752,7 +769,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">여성비뇨의학과</a>
           </p>
@@ -797,7 +814,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">난임·남성비뇨의학</a>
           </p>
@@ -853,7 +870,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">비뇨의학검진</a>
           </p>
@@ -897,7 +914,7 @@
           </ul>
         </div>
 
-        <div class="box">
+        <div class="box is-open">
           <p class="depth1">
             <a href="#">커뮤니티</a>
           </p>

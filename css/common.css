@@ -505,7 +505,88 @@ body {
 
 /* 검색창 모달 -> 일단 보이지 않게 설정. */
 #headerSearch {
-  display: none;
+}
+
+#headerSearch .all-sch {
+  position: fixed;
+  top: 90px; /*  헤더 크기 뺴주기 */
+  left: 0;
+
+  z-index: 50;
+  width: 100%;
+  height: 25.2rem;
+  background-color: #0c3659;
+
+  /* on 클레스 붙기 전 상태 */
+  /*   opacity: 0;
+  visibility: visible;
+  pointer-events: visible; */
+
+  /* 그리드로 레이아웃 배치 */
+  display: grid;
+
+  align-items: center;
+  justify-content: center;
+
+  align-content: center;
+  justify-items: center;
+}
+
+#headerSearch .all-sch .search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#headerSearch .all-sch .search-box input {
+  width: 45rem;
+  padding: 1rem 1.6rem;
+
+  background-color: #fff;
+  border-radius: 3rem;
+}
+
+#headerSearch .all-sch .search-box .search-icon {
+  position: absolute;
+  top: 50%;
+  right: 1.6rem;
+  transform: translateY(-50%);
+
+  width: 1.6rem;
+  height: 1.6rem;
+
+  background-color: #000;
+}
+
+#headerSearch .all-sch .close-btn {
+}
+
+#headerSearch .all-sch .tag-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  margin-top: 2.8rem;
+}
+
+#headerSearch .all-sch .tag-wrap .tag-box {
+  display: flex;
+  gap: 0.8rem;
+}
+
+#headerSearch .all-sch .tag-wrap .tag-box .tag {
+  white-space: nowrap;
+  padding: 0.45rem 1.4rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2.6rem;
+
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 /* 서브메뉴 CSS. */
@@ -621,7 +702,7 @@ body {
 
 .site-map.on {
   opacity: 1;
-  pointer-events: visible;
+  pointer-events: auto;
 }
 
 .site-map .util-wrap {
@@ -711,6 +792,12 @@ body {
 }
 
 .site-map .site-cont .box .depth2 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.site-map .site-cont .box.is-open > .depth2 {
+  max-height: var(--h, 0px);
 }
 
 .site-map .site-cont .box .depth2 > li {
