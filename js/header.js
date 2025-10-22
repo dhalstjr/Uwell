@@ -41,6 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
       header.classList.remove("header_down");
     }
 
+    // 모달 창이 떴을 때에 대비해서 스크롤 방향 판단하여 아래로 스크롤 시 모달 창 안보이게.
+    if (scrollPosition > currentPosition) {
+      header.classList.add("down");
+    } else {
+      header.classList.remove("down");
+      searchModal.classList.remove("on");
+    }
+
     // nav 변수 저장
     const Nav = document.getElementById("nav");
 
@@ -69,15 +77,35 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 서브 헤더 메뉴 슬라이드 업다운 효과 구현
-  const Depth2 = document.querySelector(".depth2");
-  const Depth2List = document.querySelectorAll(".depth1 > li");
-  console.log(Depth2, Depth2List);
+  // const Depth2 = document.querySelector(".depth2");
+  // const Depth2List = document.querySelectorAll(".depth1 > li");
+  // console.log(Depth2, Depth2List);
 
-  Depth2List.forEach((li) => {
-    li.addEventListener("mouseover", () => {
-      Depth2.forEach((li2) => {
-        li2.classList.add("on");
-      });
+  // Depth2List.forEach((li) => {
+  //   li.addEventListener("mouseover", () => {
+  //     Depth2.forEach((li2) => {
+  //       li2.classList.add("on");
+  //     });
+  //   });
+  // });
+
+  // 검색 창 모달 구현
+  const searchBtn = document.querySelector(".search-box");
+  const searchModal = document.querySelector(".all-sch");
+  const searchCloseBtn = document.querySelector(".close-btn");
+  console.log(searchBtn, searchModal, searchCloseBtn);
+
+  function searchAni() {
+    searchBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      searchModal.classList.add("on");
     });
-  });
+
+    searchCloseBtn.addEventListener("click", (e) => {
+      searchModal.classList.remove("on");
+    });
+  }
+
+  searchAni();
 });

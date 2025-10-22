@@ -539,11 +539,13 @@ body {
 
   align-content: center;
   justify-items: center;
+
+  transition: opacity 0.3s;
 }
 
 #headerSearch .all-sch.on {
   opacity: 1;
-  visibility: auto;
+  visibility: inherit;
   pointer-events: auto;
 }
 
