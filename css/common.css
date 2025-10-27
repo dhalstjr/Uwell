@@ -540,6 +540,7 @@ body {
   align-content: center;
   justify-items: center;
 
+  /* 클릭 시 부드러운 구현을 위해서 */
   transition: opacity 0.3s;
 }
 
@@ -753,7 +754,7 @@ body {
   height: 6.4rem;
   border-radius: 100%;
 
-  border: 1px solid #fff;
+  border: 2px solid #fff;
 
   cursor: pointer;
 
@@ -762,6 +763,20 @@ body {
   right: 4vw;
 
   transition: background-color 0.5s;
+}
+.site-map .cls-btn .cls-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+
+  opacity: 0.8;
+
+  background: url(../img/close-icon_white.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.3s;
+}
+
+.site-map .cls-btn:hover .cls-icon {
+  background: url(../img/close-icon_color.svg) no-repeat 0 0 / contain;
 }
 
 .site-map .cls-btn:hover {
@@ -857,4 +872,241 @@ body {
 /* 사이트 맵 같은 경우에는 내부 스크롤이 사용되면 안되기 때문에 클래스를 부여해서 스크롤을 차단해준다. */
 html.scroll_none {
   overflow: hidden;
+}
+
+/* 모달 로그인 창 */
+.modal {
+  /* 로그인 창이 떴을 때 로그인 창 빼고 어둡게 하기 위한 태그 */
+  display: block;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 9999;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  padding: 7.2rem 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+
+  /* 클래스 부여하기 전 상태 */
+  /*  opacity: 0; */
+  /*   pointer-events: none; */
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+/* display : table / table-cell을 이용한 세로 가운데 정렬 패턴 */
+/* 근데 왜 table/table-cell을 사용했을까? - Flexbox가 나오기 전에는 세로 가운데 정렬이 까다로웠다. */
+/* 그 때 표준적으로 많이 사용한 css는 부모 -  display : table , height : 100% , 자식 - display :  table-cell , vertical-align : middle 이 조합이다.  */
+/* 오늘 날엔 Flex나 Grid가 더 간단하지만, 레거시 호환/익숙한 패턴 때문에 여전히 보이곤 한다.  */
+
+/* 언제 사용하면 좋은지? */
+/* 1. 아주 구형 브라우저 지원이 꼭 필요할 때. */
+/* 2. 간단한 세로 갸운데 정렬을 래핑/트랜스 폼 없이 해야할 때 */
+/* 언제 피하는 게 좋은가? */
+/* 1.복잡한 반응형/재배치/정렬(가로 세로 동시 중앙, 줄바꿈, 재정렬 등) */
+.modal .modal-wrap {
+  display: table;
+  table-layout: fixed;
+  vertical-align: middle;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  padding: 0 2rem;
+}
+
+.modal .modal-wrap .scroll-box {
+  /* 세로 가운데 정렬 담당 */
+  display: table-cell;
+  vertical-align: middle; /* 세로 가운데 정렬의 핵심 */
+}
+
+/* 내부 스크롤을 막기 위한 html태그에 overflow :  hidden  */
+html.scroll-none {
+  overflow: hidden;
+}
+
+/* 가로 가운데 정렬 */
+.modal .modal-wrap .scroll-box .modal-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto; /* 가로 가운데 정렬 */
+}
+
+.modal .modal-wrap .scroll-box .modal-container.login {
+  width: 54rem;
+  background: none;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .modal-close-btn {
+  position: absolute;
+  top: 2.8rem;
+  right: 2.8rem;
+
+  width: 2.8rem;
+  height: 2.8rem;
+
+  background: url(../img/close-icon_black.svg) no-repeat center;
+  background-size: 2.2rem;
+
+  z-index: 2;
+
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .modal-close-btn:hover {
+  /* 아이콘이 회전하는 느낌 */
+  transform: rotate(180deg);
+}
+
+.modal .modal-wrap .scroll-box .modal-container .login-wrap {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 7.2rem 5.4rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .login-wrap .tit {
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .login-wrap .input-wrap {
+  margin-top: 5.1rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .login-wrap .input-wrap input {
+  width: 100%;
+  height: 5.2rem;
+
+  /* 아이콘이 있을 공간까지 여유있게. */
+  padding-left: 4.2rem;
+
+  /* 수직으로 세로 정렬하기 위해서 line-height를 height 크기 만큼 준다. */
+  line-height: 5.2rem;
+
+  font-size: 1.7rem;
+  border: 1px solid #bcbfc7;
+  border-radius: 0.7rem;
+
+  margin-bottom: 1.2rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .login-wrap .input-wrap .inp {
+  /* 아이콘이 제대로 배치될 수 있도록 */
+  position: relative;
+}
+.modal .modal-wrap .scroll-box .modal-container .input-wrap .inp .icon {
+  position: absolute;
+  /* 중간으로 맞춰주기 */
+  top: calc(50% - 1.6rem);
+  /*   transform: translateY(-50%); */
+  /* 완쪽 공간 여유 두기 */
+  left: 1.4rem;
+
+  display: block;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .input-wrap .inp .icon img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .input-wrap button {
+  width: 100%;
+
+  background-color: #232323;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 2.6rem;
+
+  /* font-size와 line-height를 같게 한 이유는 단일 행 텍스트를 세로로 딱 맞게 한다.  */
+  /* 글자 위 아래 기본 여백(padding)이 거의 없어져 텍스트 박스가 "글자 높이만큼" 된다. 그리고 텍스트 1줄일 때만 깔끔하다.  */
+  font-size: 1.7rem;
+  line-height: 1.7rem;
+
+  padding: 2.1rem 0;
+  border-radius: 0.7rem;
+  text-align: center;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .util-wrap {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .util-wrap a {
+  position: relative;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  font-weight: 500;
+
+  color: #9a9ea7;
+
+  transition: color 0.3s;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .util-wrap a + a {
+  padding-left: 1.6rem;
+  margin-left: 1.6rem;
+  border-left: 1px solid rgba(188, 191, 199, 0.5);
+}
+
+.modal .modal-wrap .scroll-box .modal-container .util-wrap a:hover {
+  color: #232323;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .sns-login {
+  display: flex;
+  margin-top: 7.2rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .sns-login a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.4rem 2.8rem;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+
+  width: 100%;
+  border: 1px solid #bcbfc7;
+  border-radius: 2.8rem;
+
+  transition: border-color 0.3s;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .sns-login a:hover {
+  border: 1px solid #232323;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .sns-login a + a {
+  margin-left: 1.6rem;
+}
+
+.modal .modal-wrap .scroll-box .modal-container .sns-login a .icon {
+  margin-right: 1.4rem;
+}
+.modal .modal-wrap .scroll-box .modal-container .sns-login a .icon img {
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+
+  max-width: 100%;
 }
