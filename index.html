@@ -27,6 +27,14 @@
     <!-- Swiper -> CSS도  -->
     <script src="./js/swiper-bundle.min.js"></script>
 
+    <!-- ProgressBar.js CDN -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/0.6.1/progressbar.min.js"
+      integrity="sha512-7IoDEsIJGxz/gNyJY/0LRtS45wDSvPFXGPuC7Fo4YueWMNOmWKMAllEqo2Im3pgOjeEwsOoieyliRgdkZnY0ow=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <!-- Jquery -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -47,7 +55,7 @@
       <div class="in-header">
         <!-- 1. 로고 -->
         <h1 class="logo-box">
-          <a href="#" class="logo"> </a>
+          <a href="./index.html" class="logo"></a>
         </h1>
 
         <!-- 2. nav -->
@@ -451,12 +459,20 @@
 
         <!-- 유틸리티 메뉴 -->
         <div class="utils right-wrap">
-          <a href="" class="info-btn utils_btn_common">
+          <a href="./stotenotice.html" class="info-btn utils_btn_common">
             <!-- a태그안에 div는 유효하지 않은 HTML이다.  -->
             <span class="info">지점안내</span>
           </a>
 
-          <a href="#" class="login-box utils_btn_common">
+          <!-- onclick은 인라인 핸들러 요소인데, 인라인 핸들러란 HTML  요소 속성에 직접 JS 코드를 쓰는 방식 -> HTML태그 내에 <script></script>로 함수를 전역(window)에 정의하면 수정없이 바로 동작 가능 -->
+          <!-- 인라인에서 호출하는 함수는 window스코프에서 찾는다.  -->
+          <!-- 인라인 onclick을 사용하는 것은 레거시/제약/속도 같은 현실적 이유일 가능성이 크다. -->
+          <!-- 바꾸지 못하는 상황이라면 window.xxx = function(){}로 전역 노출 -> return false;로 안전장치를 사용하는 것이 좋다. -->
+          <a
+            href="#"
+            class="login-box utils_btn_common"
+            onclick="openLoginModal()"
+          >
             <span class="login"><i class="hidden">로그인 창</i></span>
             <div class="login-toll">로그인</div>
           </a>
@@ -586,7 +602,7 @@
       <div class="top">
         <!-- 모바일에서 나오는 요소 -->
         <div class="util-wrap">
-          <a href="#" class="info-btn">
+          <a href="" class="info-btn">
             <div class="info">
               <span>지점안내</span>
             </div>
@@ -1105,7 +1121,11 @@
             <!-- swiper-wrapper 클래스 지정 -->
             <div class="swiper-wrapper">
               <!-- slide할 요소에 swiper-slide 클래스 지정 -->
-              <div class="swiper-slide item">
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#ffffff"
+              >
                 <!-- 슬라이드 이미지 -->
                 <div class="bg">
                   <img src="./img/slide-bg1.png" alt="비주얼 섹션 배경 사진1" />
@@ -1130,14 +1150,19 @@
                 <!-- 슬라이드 텍스트 박스 -->
               </div>
 
-              <div class="swiper-slide item">
-                <div class="bg"></div>
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#ffffff"
+              >
+                <div class="bg"><img src="./img/slide-bg8.png" alt="" /></div>
                 <div class="txt-box">
-                  <p class="tit"></p>
-                  <p class="tit"></p>
-                  <p class="txt"></p>
+                  <p class="tit">2025 대한민국 굿닥터 100인</p>
+                  <p class="tit">비뇨의학과 부문 선정</p>
+                  <p class="txt">Korea Good Doctor Certification 2025</p>
+
                   <div class="btn-wrap">
-                    <a href="">
+                    <a href="#">
                       <span class="btn-txt">View More</span>
                       <div class="icon">
                         <i class="hidden">화살표 아이콘</i>
@@ -1146,42 +1171,119 @@
                   </div>
                 </div>
               </div>
-              <!-- 
-              <div class="swiper-slide item">
-                <div class="bg"></div>
+
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#000000"
+              >
+                <div class="bg"><img src="./img/slide-bg2.png" alt="" /></div>
                 <div class="txt-box">
-                  <p class="tit"></p>
-                  <p class="tit"></p>
-                  <p class="txt"></p>
+                  <p class="tit">'강남권 최초'</p>
+                  <p class="tit">AI 3T MRI + 저선량 CT 보유!</p>
+                  <p class="txt">
+                    1 Day 전립선 검진 가능 (혈액검사 > MRI > 표적 조직검사)
+                  </p>
+
+                  <div class="btn-wrap">
+                    <a href="#">
+                      <span class="btn-txt">View More</span>
+                      <div class="icon">
+                        <i class="hidden">화살표 아이콘</i>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              <div class="swiper-slide item">
-                <div class="bg"></div>
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#000000"
+              >
+                <div class="bg"><img src="./img/slide-bg3.png" alt="" /></div>
                 <div class="txt-box">
-                  <p class="tit"></p>
-                  <p class="tit"></p>
-                  <p class="txt"></p>
+                  <p class="tit">단일 진료과, 최대 규모</p>
+                  <p class="tit">비뇨기계 전문의료진 17인</p>
+                  <p class="txt">
+                    It drives the development and innovation of urology
+                  </p>
+
+                  <div class="btn-wrap">
+                    <a href="#">
+                      <span class="btn-txt">View More</span>
+                      <div class="icon">
+                        <i class="hidden">화살표 아이콘</i>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              <div class="swiper-slide item">
-                <div class="bg"></div>
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#ffffff"
+              >
+                <div class="bg"><img src="./img/slide-bg4.png" alt="" /></div>
                 <div class="txt-box">
-                  <p class="tit"></p>
-                  <p class="tit"></p>
-                  <p class="txt"></p>
+                  <p class="tit">총 41대, 최신 하이엔드</p>
+                  <p class="tit">첨단 장비 압도적 보유!</p>
+                  <p class="txt">Leading-edge of medical equipment</p>
                 </div>
               </div>
 
-              <div class="swiper-slide item">
-                <div class="bg"></div>
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#ffffff"
+              >
+                <div class="bg"><img src="./img/slide-bg5.png" alt="" /></div>
                 <div class="txt-box">
-                  <p class="tit"></p>
-                  <p class="tit"></p>
-                  <p class="txt"></p>
+                  <p class="tit">독보적 시술 · 수술 건수</p>
+                  <p class="tit">2024년 당해연도 '8,606례' 돌파!</p>
+                  <p class="txt">
+                    전립선, 남성난임, 요로결석, 남성배뇨장애, 여성비뇨의학분야
+                    기준
+                  </p>
                 </div>
-              </div> -->
+              </div>
+
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#000000"
+              >
+                <div class="bg"><img src="./img/slide-bg6.png" alt="" /></div>
+                <div class="txt-box">
+                  <p class="tit">다각적 초개인화 맞춤 진료</p>
+                  <p class="tit">비수술·수술 특화 센터</p>
+                  <p class="txt">
+                    Advanced medical systems proride the best service
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="swiper-slide item"
+                data-swiper-autoplay="7000"
+                data-color="#000000"
+              >
+                <div class="bg"><img src="./img/slide-bg7.png" alt="" /></div>
+                <div class="txt-box">
+                  <p class="tit">'삼성서울병원 교수 출신'</p>
+                  <p class="tit">영상의학과 전문의 부임</p>
+                  <p class="txt">Prostate MRI specialist</p>
+                  <div class="btn-wrap">
+                    <a href="#">
+                      <span class="btn-txt">View More</span>
+                      <div class="icon">
+                        <i class="hidden">화살표 아이콘</i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1189,13 +1291,14 @@
           <div class="slide-move">
             <!-- swiper-pagination 을 사용 -->
             <div class="paging">
-              <span class="swiper-pagination-current">01</span>
+              <!-- js에서 renderFraction으로 DOM요소로 넣기 때문에 html 구조 안에 직접 넣지 않아도 들어간다. -->
+              <!--<span class="swiper-pagination-current">01</span>
               <div class="timer">
                 <div class="progress">
                   <div class="bar"><i class="hidden">프로그래스 바</i></div>
                 </div>
               </div>
-              <span class="swiper-pagination-total">06</span>
+              <span class="swiper-pagination-total">06</span> -->
             </div>
           </div>
           <!-- 3) scroll down(아이콘)  -->
@@ -1420,26 +1523,44 @@
                 비뇨의학 선진을 리드하는 유웰비뇨의학과 전문의료진 16인
               </p>
               <div class="tit">
-                <h2>
-                  극강의 노하우로,
-                  <em class="tit-gradient">메디컬 하이퀄리티가 되다.</em>
-                </h2>
+                <p>극강의 노하우로,</p>
+                <em class="gradient">메디컬 하이퀄리티가 되다.</em>
               </div>
+
               <div class="txt">
+                <!-- main-tit-wrap에서 span안에 em 들어간 부분은 scroll에 의해서 텍스트 효과. -->
                 <p>
-                  <span>유웰비뇨의학과는 표준화, 과학화, 근치적 치료로</span>
                   <span
-                    >비뇨의학의 발전을 선도한다는 목표실현과 최상의 의료환경을
-                    갖추고</span
-                  >
-                  <span
-                    >전립선, 요로결석, 정계정맥류, 정관복원, 요실금 등 특수
-                    비뇨기 질환까지</span
-                  >
-                  <span
-                    >의료영역을 확대하며, 비수술 · 수술 초개인화 맞춤 치료를
-                    다각적 접근으로 시행하고 있습니다.</span
-                  >
+                    >유웰비뇨의학과는 표준화, 과학화, 근치적 치료로
+                    <em>유웰비뇨의학과는 표준화, 과학화, 근치적 치료로</em>
+                  </span>
+
+                  <span>
+                    비뇨의학의 발전을 선도한다는 목표실현과 최상의 의료환경을
+                    갖추고
+                    <em>
+                      비뇨의학의 발전을 선도한다는 목표실현과 최상의 의료환경을
+                      갖추고
+                    </em>
+                  </span>
+
+                  <span>
+                    전립선, 요로결석, 정계정맥류, 정관복원, 요실금 등 특수
+                    비뇨기 질환까지
+                    <em>
+                      전립선, 요로결석, 정계정맥류, 정관복원, 요실금 등 특수
+                      비뇨기 질환까지
+                    </em>
+                  </span>
+
+                  <span>
+                    의료영역을 확대하며, 비수술 · 수술 초개인화 맞춤 치료를
+                    다각적 접근으로 시행하고 있습니다.
+                    <em>
+                      의료영역을 확대하며, 비수술 · 수술 초개인화 맞춤 치료를
+                      다각적 접근으로 시행하고 있습니다.
+                    </em>
+                  </span>
                 </p>
               </div>
             </div>
@@ -1466,8 +1587,8 @@
                 <div class="main-tit-wrap">
                   <p class="desc">비뇨의학 리더가 되기까지</p>
                   <div class="tit">
-                    <p class="tit-gradient">Innovative</p>
-                    <p class="tit-gradient">Leaders</p>
+                    <p class="gradient">Innovative</p>
+                    <p class="gradient">Leaders</p>
 
                     <div class="txt-box">
                       <div class="box">
@@ -1722,7 +1843,8 @@
             <div class="slide-wrap">
               <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  <div class="slide-item item">
+                  <!-- swiper-slide라는 이름을 붙여줘야만 swiper.css에 있는 것이 정의가 된다. -->
+                  <div class="swiper-slide item">
                     <div class="img">
                       <img
                         src="./img/center-slide-img1.png"
@@ -1740,9 +1862,14 @@
                       </div>
                     </div>
                   </div>
-                  <!-- 
-                  <div class="slide-item item">
-                    <div class="img"><img src="./img/center-slide-img2.png" alt="센터 이미지"></div>
+
+                  <div class="swiper-slide item">
+                    <div class="img">
+                      <img
+                        src="./img/center-slide-img2.png"
+                        alt="센터 이미지"
+                      />
+                    </div>
                     <div class="txt-wrap">
                       <h3 class="tit">24시간 요로결석센터</h3>
                       <p class="txt">결석의 형성기전, 크기에 따른</p>
@@ -1754,11 +1881,19 @@
                     </div>
                   </div>
 
-                  <div class="slide-item item">
-                    <div class="img"><img src="./img/center-slide-img3.png" alt="센터 이미지"></div>
+                  <div class="swiper-slide item">
+                    <div class="img">
+                      <img
+                        src="./img/center-slide-img3.png"
+                        alt="센터 이미지"
+                      />
+                    </div>
                     <div class="txt-wrap">
                       <h3 class="tit">요실금·배뇨장애센터</h3>
-                      <p class="txt">요로계의 퇴생성 질환, 배뇨장애 삶의 질을 높이는 근원적 치료</p>
+                      <p class="txt">
+                        요로계의 퇴생성 질환, 배뇨장애 삶의 질을 높이는 근원적
+                        치료
+                      </p>
 
                       <div class="btn-wrap">
                         <a href="#" class="btn-more">View More</a>
@@ -1766,18 +1901,27 @@
                     </div>
                   </div>
 
-                  <div class="slide-item item">
-                    <div class="img"><img src="./img/center-slide-img4.png" alt="센터 이미지"></div>
+                  <div class="swiper-slide item">
+                    <div class="img">
+                      <img
+                        src="./img/center-slide-img4.png"
+                        alt="센터 이미지"
+                      />
+                    </div>
                     <div class="txt-wrap">
                       <h3 class="tit">난임·남성센터</h3>
-                      <p class="txt">전) 서울강남미즈메디병원 난임클리닉 출신</p>
-                      <p class="txt">임상 경험이 풍부한 의료진이 제공하는 체계적인 난임 치료</p>
+                      <p class="txt">
+                        전) 서울강남미즈메디병원 난임클리닉 출신
+                      </p>
+                      <p class="txt">
+                        임상 경험이 풍부한 의료진이 제공하는 체계적인 난임 치료
+                      </p>
 
                       <div class="btn-wrap">
                         <a href="#" class="btn-more">View More</a>
                       </div>
                     </div>
-                  </div> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -1807,7 +1951,7 @@
 
           <!-- 여기 부분에서도 swiper를 사용하는 부분 존재. -->
           <div class="box-wrap">
-            <div class="txt-wrap">
+            <div class="main-tit-wrap">
               <div class="tit">
                 <!-- 텍스트에 마스크 효과를 주는 곳. -->
                 <p class="gradient">비뇨의학의 정점에,</p>
@@ -1907,6 +2051,8 @@
                         <img src="./img/leader-slider4.png" alt="" />
                       </div>
                     </div>
+
+                    <!-- swiper-slide에 개수 늘려야함.  -->
                   </div>
                 </div>
               </div>
@@ -1940,8 +2086,9 @@
                 </div>
 
                 <div class="paging">
-                  <div class="current"><!-- 숫자 -->1</div>
-                  <div class="total">17</div>
+                  <!-- 이 아래 코드는 알아서 js에 custom을 통해 HTML구조로 들어간다.  -->
+                  <!-- <div class="current">1</div>
+                  <div class="total">17</div> -->
                 </div>
 
                 <div class="slide-btn-wrap">

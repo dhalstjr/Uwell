@@ -520,7 +520,7 @@ body {
   /* on 클레스 붙기 전 상태 */
   opacity: 0;
   visibility: visible;
-  pointer-events: visible;
+  pointer-events: none;
 
   /* 그리드로 레이아웃 배치 */
   display: grid;
@@ -895,8 +895,8 @@ html.scroll_none {
   transition: opacity 0.3s;
 
   /* 클래스 부여하기 전 상태 */
-  /*  opacity: 0; */
-  /*   pointer-events: none; */
+  opacity: 0;
+  pointer-events: none;
 }
 
 .modal.open {
@@ -1109,4 +1109,324 @@ html.scroll-none {
   object-fit: contain;
 
   max-width: 100%;
+}
+
+/* footer - start */
+#footer {
+  padding-bottom: 5.4rem;
+  background-color: #f7f7f8;
+  color: #636366;
+}
+
+#footer .footer-container {
+}
+
+/* grid 설정 */
+#footer .footer-container .footer-cont {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: space-between;
+
+  /* 오른쪽 퀵메뉴 크기를 뺴야한다.  */
+  margin-right: calc(9rem - 1px);
+}
+
+#footer .footer-container .footer-cont .branch-box {
+  width: 100%;
+  padding: 6.3rem;
+
+  color: #fff;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(1) {
+  /* 사진 정렬을 오른쪽으로 */
+  background: url(../img/foot-bg1.png) no-repeat right / cover;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(2) {
+  background: url(../img/foot-bg2.png) no-repeat right / cover;
+}
+
+#footer .footer-container .footer-cont .branch-box:nth-of-type(3) {
+  background: url(../img/foot-bg3.png) no-repeat right / cover;
+}
+
+#footer .branch-box .branch-address {
+  display: flex;
+  flex-direction: column;
+}
+
+#footer .branch-box .branch-address .txt {
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+
+  margin-top: 1rem;
+}
+
+#footer .branch-box .branch-address .tit {
+  font-size: 2.7rem;
+  font-weight: 700;
+
+  color: #fff;
+}
+
+#footer .branch-box .branch-address .operating-hours {
+  margin-top: 3.6rem;
+}
+
+#footer .branch-box .branch-address .operating-hours .info .medium {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* grid로 설정해서 텍스트 간격 맞추기 */
+
+#footer .branch-box .branch-address .operating-hours .info {
+  font-size: 1.4rem;
+  display: grid;
+  /* 한 열은 7.2rem으로 고정하고, 다른 한쪽은 남은 공간을 차지하게 1fr을 설정. */
+  /* minmax(0,1fr) -> 남은 공간을 모두 쓰는 유연 칼럼인데, 최소를 0으로 잡아 긴 내용이 와도 줄어들 수 있게 한 안전한 설정. */
+
+  grid-template-columns: 7.2rem minmax(0, 1fr);
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 1rem;
+}
+
+#footer .branch-box .branch-address .operating-hours .info span {
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+#footer .branch-box .call {
+  margin-top: 4.6rem;
+  display: flex;
+  align-items: center;
+}
+
+#footer .branch-box .call .ico {
+  width: 2rem;
+  height: 2rem;
+
+  background: url(../img/foot-branch-ico.svg) no-repeat 0 0 / contain;
+}
+
+#footer .branch-box .call .num {
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  margin-left: 1.3rem;
+}
+
+#footer .footer-in {
+  width: calc(100% - 9rem);
+
+  /* 최대 크기를 정해줘야 오른쪽 퀵메뉴에 넘치지 않는다.  */
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+#footer .footer-in .foot-top {
+  margin-top: 4.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 2rem;
+}
+
+#footer .footer-in .foot-top .num-box {
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+}
+
+#footer .footer-in .foot-top .num-box .num {
+  margin-left: 0.8rem;
+  font-weight: 500;
+
+  font-size: 1.5rem;
+}
+
+#footer .footer-in .foot-top .foot-logo {
+  width: 18rem;
+  height: auto;
+}
+
+#footer .footer-in .foot-top .foot-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  max-width: 100%;
+}
+
+#footer .footer-in .foot-bot {
+  position: relative;
+  margin-top: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#footer .footer-in .foot-bot:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: calc(100% + 9rem);
+  height: 1px;
+  background-color: rgba(99, 99, 99, 0.2);
+}
+
+#footer .footer-in .foot-bot .legal-list {
+  padding: 4.2rem 0 3.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+#footer .footer-in .foot-bot .legal-list li {
+  position: relative;
+}
+
+#footer .footer-in .foot-bot .legal-list li:before {
+  content: "";
+  display: block;
+
+  position: absolute;
+  left: 0%;
+  bottom: 0;
+
+  width: 0%;
+  height: 1px;
+
+  background-color: rgba(99, 99, 99, 0.8);
+  transition: width 0.5s;
+}
+
+#footer .footer-in .foot-bot .legal-list li:hover:before {
+  width: 100%;
+}
+
+#footer .footer-in .foot-bot .legal-list .privacy {
+  font-weight: 700;
+}
+
+#footer .footer-in .foot-bot .legal-list li a {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+#footer .footer-in .foot-bot .util-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 2rem;
+}
+
+#footer .footer-in .foot-bot .util-menu a {
+  display: flex;
+  align-items: center;
+
+  width: 5.4rem;
+  height: 5.4rem;
+
+  border-radius: 2.7rem;
+
+  background-color: #ebebeb;
+  padding: 1.2rem 1.6rem;
+
+  transition: background-color 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a:hover {
+  background-color: #757575;
+}
+
+#footer .footer-in .foot-bot .util-menu a.youtube-btn .ico {
+  height: 1.6rem;
+  background: url(../img/foot-sns1.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a:hover.youtube-btn .ico {
+  background: url(../img/foot-sns1-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.blog-btn .ico {
+  background: url(../img/foot-sns2.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.blog-btn:hover .ico {
+  background: url(../img/foot-sns2-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.kakao-btn .ico {
+  background: url(../img/foot-sns3.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.kakao-btn:hover .ico {
+  background: url(../img/foot-sns3-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a.sns-clip .ico {
+  background: url(../img/foot-sns4.svg) no-repeat 0 0 / contain;
+
+  transition: background 0.4s;
+}
+
+#footer .footer-in .foot-bot .util-menu a.sns-clip:hover .ico {
+  background: url(../img/foot-sns4-hover.svg) no-repeat 0 0 / contain;
+}
+
+#footer .footer-in .foot-bot .util-menu a .ico {
+  width: 2.2rem;
+  height: 2rem;
+}
+
+#footer .footer-in .foot-bot .util-menu a .ico img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#footer .copyright {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: rgba(99, 99, 99, 0.5);
+}
+
+/* footer - end */
+
+/* 넓이 제한해주는 영역 */
+.section-inner {
+  position: relative;
+  /* max-width에 165.3rem을 주지 않고, width에 주고, max-width에 100%를 준 이유는 width는 기본적으로 폭 넓이를 165.3rem 최대로 갖는다는 의미인데, 넓은 화면에서 레이아웃이 무한히 늘어나는 게 아니라, 최대 디자인 폭이 165.3rem을 유지하도록 만든 것이다. */
+  /* max-width는 반응형에 대응하기 위해서 명령을 준 것인데, 만약 width만 165.3rem만 준다면, 화면이 좁아졌을 때도 width는 165.3rem을 고집한다. -> 그러면 스크롤이 생기고, 화면 밖으로 벗어나게 된다. */
+  /* max-width:100%를 추가하면 화면이 width의 크기보다 넓을 때는 그대로의 넓이를 유지하고, 화면이 width보다 작아졌을때는 화면 폭에 맞춰 100%로 줄어든다. -> 유동적으로 넓이를 변화하는 구조를 갖게 되는 것이다. */
+  width: 165.3rem;
+  max-width: 100%;
+  margin: 0 auto;
+
+  /* padding을 주는 이유는 잘 모르겠지만. 양끝까지 딱 붙게 하지 않게 하기 위해서라고 한다. 모바일에서는 글자나 이미지가 화면 끝에 딱 붙으면 답답해 보이는 느낌을 주기 때문에 기본적인 가이드로 패딩을 주는 경우가 있다고 한다. */
+  padding: 0 2rem;
 }

@@ -1,0 +1,44 @@
+@charset 'utf-8';
+
+/* sub container는 header를 뺀 나머지 */
+.container {
+  margin-top: 9rem;
+  font-size: 1.7rem;
+  word-break: keep-all;
+}
+
+.container .sub-visual {
+  width: 100%;
+  margin-bottom: 24rem;
+  border-bottom: 1px solid #d5d9e3;
+}
+
+.container .sub-visual .main-tit-wrap {
+  width: 100%;
+  text-align: center;
+  padding: 4.5rem 0 9rem;
+}
+
+/*  */
+.in {
+  position: relative;
+  width: 165.6rem;
+  max-width: 100%;
+
+  /*  */
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
+.container .sub-visual .main-tit-wrap .in .desc {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #9ca1ae;
+  margin-bottom: 1rem;
+}
+
+.container .sub-visual .main-tit-wrap .in .tit {
+  font-size: 5.8rem;
+  font-weight: 700;
+  color: #232323;
+}

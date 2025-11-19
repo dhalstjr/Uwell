@@ -76,19 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
     previousScroll = currentPosition;
   });
 
-  // 서브 헤더 메뉴 슬라이드 업다운 효과 구현
-  // const Depth2 = document.querySelector(".depth2");
-  // const Depth2List = document.querySelectorAll(".depth1 > li");
-  // console.log(Depth2, Depth2List);
-
-  // Depth2List.forEach((li) => {
-  //   li.addEventListener("mouseover", () => {
-  //     Depth2.forEach((li2) => {
-  //       li2.classList.add("on");
-  //     });
-  //   });
-  // });
-
   // 검색 창 모달 구현
   const searchBtn = document.querySelector(".search-box");
   const searchModal = document.querySelector(".all-sch");
@@ -108,4 +95,84 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   searchAni();
+
+  // 로그인 모달 창 구현
+  // HTML 태그 내에 있는 onclick은 openLoginModal을 전역에 선언해야 하는데, 처음 js에선 함수가 전역(window)에 없었음.
+  // 그리고 html태그 내에 있는 onclick은 인라인 핸들러라고 하는데, 인라인 핸들러란 html 요소 속성에 직접 JS 코드를 쓰는 방식.
+  // 즉 html내에 script를 이용해 그 안에서 이 밑에 js코드를 사용하면 아까 전 수정없이 사용 가능하다.
+  // 지금은 window.함수 = function() {}으로 전역에 선언하여 수정했으므로 사용이 가능한 것이다.
+  // onclick은 html에  js를 짜서 넣어주는 방식으로 간단하고 편리하게 사용 가능하다. 한번에
+  window.openLoginModal = function (page, idx = "") {
+    const modal = document.querySelector("#loginBox");
+    console.log(modal);
+    if (modal) {
+      modal.classList.add("open");
+    }
+
+    if (window.innerWidth > 1240) {
+      lenis.stop();
+    }
+
+    document.documentElement.classList.add("scroll-none");
+  };
+
+  // 모달 클릭 이벤트(로그인)
+  window.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".modal").forEach((modal) => {
+      // 닫기 버튼
+      modal.querySelectorAll(".modal-close-btn").forEach((button) => {
+        // 클릭 처리
+        button.addEventListener("click", function () {
+          document.documentElement.classList.remove("scroll-none");
+          modal.classList.remove("open");
+
+          if (modal.id === "loginBox") {
+            if (window.innerWidth > 1240 && typeof lenis !== "undefined") {
+              lenis.start();
+            }
+            document.documentElement.classList.remove("scroll-none");
+          }
+        });
+      });
+    });
+  });
+
+  // openLoginModal();
+
+  // 헤더에 있는 메뉴에 hover했을 시 각 서브메뉴가 구현
+  // 이 바로 밑은 Jquery방식으로 한 서브메뉴 구현
+  // $('.header .nav .depth1 > li').hover(
+  //     function () {
+  //         if ($('.all_sch').hasClass('on')) return;
+  //         $(this).find('.depth2').stop().slideDown(400);
+  //         $(this).find('.depth2').addClass('on');
+  //     },
+  //     function () {
+  //         if ($('.all_sch').hasClass('on')) return;
+  //         $(this).find('.depth2').stop().slideUp(400);
+  //         $(this).find('.depth2').removeClass('on');
+  //     }
+  // );
+
+  // javascript로 구현.
+  // 헤더에 있는 각 메뉴요소 잡기
+  document.querySelectorAll("#header #nav .depth1 > li").forEach((li) => {
+    // 각 li 하위요소에 depth2 찾기.
+    const Depth2 = li.querySelector(".depth2");
+
+    if (!Depth2) return;
+
+    li.addEventListener("mouseover", () => {
+      if (searchModal.classList.contains("on")) return;
+      Depth2.classList.add("on");
+    });
+
+    li.addEventListener("mouseout", () => {
+      if (searchModal.classList.contains("on")) return;
+      Depth2.classList.remove("on");
+    });
+  });
+
+  // 지금 이렇게 하니 li에서 벗어나는 순간 on클래스가 삭제가 돼 depth2(서브메뉴)에 닿기도 전에 사라지고, depth2에 마우스가 가는 순간 on클래스 삭제
+  // 이유는 depth2가 li의 absolute가 되어있어서 li의 mouseleave가 즉시 실행되어 on클래스가 지워짐
 });

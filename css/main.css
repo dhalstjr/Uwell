@@ -127,6 +127,10 @@
   padding: 1.3rem 2rem;
 
   border: 1px solid #fff;
+
+  /* span에 있던 color를 부모로 옮겨 텍스트도 color 변경에 문제없게. */
+  color: #fff;
+
   border-radius: 2.6rem;
 
   display: flex;
@@ -138,8 +142,6 @@
 
 .visual-section .item .btn-wrap a .btn-txt {
   font-size: 1.3rem;
-
-  color: #fff;
 
   margin-right: 1.6rem;
 }
@@ -299,22 +301,7 @@
   margin-top: 10rem;
   padding: 5rem 0;
 
-  background-color: #ff5;
   color: #232323;
-}
-
-/* 넓이 제한해주는 영역 */
-.section-inner {
-  position: relative;
-  /* max-width에 165.3rem을 주지 않고, width에 주고, max-width에 100%를 준 이유는 width는 기본적으로 폭 넓이를 165.3rem 최대로 갖는다는 의미인데, 넓은 화면에서 레이아웃이 무한히 늘어나는 게 아니라, 최대 디자인 폭이 165.3rem을 유지하도록 만든 것이다. */
-  /* max-width는 반응형에 대응하기 위해서 명령을 준 것인데, 만약 width만 165.3rem만 준다면, 화면이 좁아졌을 때도 width는 165.3rem을 고집한다. -> 그러면 스크롤이 생기고, 화면 밖으로 벗어나게 된다. */
-  /* max-width:100%를 추가하면 화면이 width의 크기보다 넓을 때는 그대로의 넓이를 유지하고, 화면이 width보다 작아졌을때는 화면 폭에 맞춰 100%로 줄어든다. -> 유동적으로 넓이를 변화하는 구조를 갖게 되는 것이다. */
-  width: 165.3rem;
-  max-width: 100%;
-  margin: 0 auto;
-
-  /* padding을 주는 이유는 잘 모르겠지만. 양끝까지 딱 붙게 하지 않게 하기 위해서라고 한다. 모바일에서는 글자나 이미지가 화면 끝에 딱 붙으면 답답해 보이는 느낌을 주기 때문에 기본적인 가이드로 패딩을 주는 경우가 있다고 한다. */
-  padding: 0 2rem;
 }
 
 .counsel-section .counsel-container {
@@ -627,6 +614,7 @@
 .staff-section .main-tit-wrap .desc {
   font-size: 2.2rem;
   font-weight: 600;
+  color: #232323;
 }
 
 .staff-section .main-tit-wrap .tit {
@@ -639,7 +627,17 @@
   letter-spacing: -0.02em;
 }
 
-.staff-section .main-tit-wrap .tit .tit-gradient {
+.staff-section .main-tit-wrap .tit > p {
+  display: block;
+  font-size: 5.4rem;
+  font-weight: 700;
+}
+
+.staff-section .main-tit-wrap .tit em {
+  display: block;
+}
+
+.staff-section .main-tit-wrap .tit .gradient {
   background: linear-gradient(90deg, #0f2538, #0f2538, #65a9df, #65a9df);
   background-size: 300% 300%;
 
@@ -665,7 +663,26 @@
 .staff-section .main-tit-wrap .txt p span {
   /* 강제로 한줄 맞춤 */
   white-space: nowrap;
+  position: relative;
+  color: #9ca1ae;
 }
+.staff-section .main-tit-wrap .txt span em {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  color: #000;
+  width: 50%;
+  height: 100%;
+
+  white-space: nowrap;
+  /* overflow : hidden을 사용해야 width의 효과가 제대로 활용된다.  */
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+/* 스크롤에 의해서 바뀌는 em CSS*/
 
 /* 이미지 영역 */
 .staff-section .section-inner .cont {
@@ -754,7 +771,7 @@
 
 /* 텍스트에 gradient 효과 -> background를 이용해서 text에만 컬러가 들어갈 수 있게 사용된 것 같음. */
 /* 문자 자체를 mask처럼 사용해서 그라디언트를 보여주고, js로 background-position만 계속 바꿔서 흘러가는 듯한 느낌을 줌. */
-.innovation-section .main-tit-wrap .tit .tit-gradient {
+.innovation-section .main-tit-wrap .tit .gradient {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.4),
@@ -1061,9 +1078,10 @@
   /* -1px를 주어 위치 조정 -> 없으면 tab에 있는 border 위에 얹어있음. */
   bottom: -1px;
   left: 50%;
-  width: 10%;
+  width: 0%;
 
-  border-bottom: 2px solid #000;
+  /* color를 같은 색을 줘야만 정상적인 효과가 나올 수 있다. */
+  border-bottom: 2px solid #65a9df;
   border-radius: 44px;
 
   /* left : 50%만 주면 가운데에서 퍼지지 않고, 정확한 가운데를 맞추기 위해서는 translateX에 -50%를 줘, 가운데로 퍼지게 하는 애니메이션을 형성한다. */
@@ -1097,7 +1115,11 @@
 /* 즉, .img(이미지 블록)가 1열의 자식이면, .img에 계산된 width는 그리드 컨테이너 너비의 60%가 된다. (여기에 gap이 있다면 gap만큼 줄어든다.) */
 /* 왜 minmax(0, 1fr)을 사용했는가? -> 1fr만 사용하면, 컨텐츠가 클 경우 min-content 규칙 때문에 의도치 않게 칼럼이 줄어들 지 않을 수 있다.  */
 /* 그리하여 minmax(0, 1fr)는 최소 0, 최대는 남은 공간 으로 강제하므로 반응형에서 안정적으로 동작한다.  */
-.center-section .slide-wrap .swiper-container .swiper-wrapper .slide-item {
+.center-section
+  .slide-wrap
+  .swiper-container
+  .swiper-wrapper
+  .swiper-slide.item {
   display: grid;
   grid-template-columns: 60% minmax(0, 1fr);
   align-items: center;
@@ -1118,7 +1140,7 @@
 /* grid-template-columns에 퍼센트 또는 fr를 쓰면 그리드 컨테이너의 너비에 따라 칼럼 너비가 동적으로 변한다.  */
 /* 그 결과 .img의 폭이 줄어들면 padding-top도 줄어들어 비율은 같지만 크기(절대값)는 반응형으로 줄어든다.  */
 /* 그래서 이 조합은 반응형에서 동일한 비율의 이미지를 유지하려는 전형적인 기법이다.  */
-.center-section .slide-item .img {
+.center-section .swiper-slide.item .img {
   position: relative;
   width: 100%;
 
@@ -1132,7 +1154,7 @@
   overflow: hidden;
 }
 
-.center-section .slide-item .img img {
+.center-section .swiper-slide.item .img img {
   position: absolute;
   top: 0;
   left: 0;
@@ -1141,35 +1163,35 @@
   object-fit: cover;
 }
 
-.center-section .slide-item .txt-wrap {
+.center-section .swiper-slide.item .txt-wrap {
   color: #232323;
 }
 
-.center-section .slide-item .txt-wrap .tit {
+.center-section .swiper-slide.item .txt-wrap .tit {
   font-size: 4rem;
   font-weight: 700;
 
   line-height: 1.7;
 }
 
-.center-section .slide-item .txt-wrap .txt {
+.center-section .swiper-slide.item .txt-wrap .txt {
   margin-top: 3.6rem;
   font-size: 1.8rem;
   font-weight: 400;
 }
 
 /* 형제 선택자. */
-.center-section .slide-item .txt-wrap .txt + .txt {
+.center-section .swiper-slide.item .txt-wrap .txt + .txt {
   margin-top: 0;
 }
 
-.center-section .slide-item .txt-wrap .btn-wrap {
+.center-section .swiper-slide.item .txt-wrap .btn-wrap {
   display: flex;
 
   margin-top: 8.6rem;
 }
 
-.center-section .slide-item .txt-wrap .btn-wrap a {
+.center-section .swiper-slide.item .txt-wrap .btn-wrap a {
   font-size: 1.4rem;
   font-weight: 400;
   padding: 1.4rem 2rem;
@@ -1182,7 +1204,7 @@
   transition: all 0.4s;
 }
 
-.center-section .slide-item .txt-wrap .btn-wrap a::after {
+.center-section .swiper-slide.item .txt-wrap .btn-wrap a::after {
   content: "";
   display: block;
 
@@ -1197,13 +1219,13 @@
 }
 
 /* hover시 스타일 변경 */
-.center-section .slide-item .txt-wrap .btn-wrap a:hover {
+.center-section .swiper-slide.item .txt-wrap .btn-wrap a:hover {
   color: #fff;
   border: 1px solid #fff;
   background-color: #0a2e4d;
 }
 
-.center-section .slide-item .txt-wrap .btn-wrap a:hover::after {
+.center-section .swiper-slide.item .txt-wrap .btn-wrap a:hover::after {
   background: url(../img/arrow-right-hover.svg) no-repeat 0 0 / contain;
 }
 
@@ -1319,6 +1341,18 @@
   width: 32.8rem;
 }
 
+.leader-section .swiper-slide.item {
+  opacity: 0.3;
+  filter: grayscale(1);
+  transition: opacity 0.5s, filter 0.5s;
+}
+
+/* tab에 슬라이드가 연동되고 , swiper-slide-active가 들어갔을 때 이미지 구현. */
+.leader-section .swiper-slide-active.item {
+  opacity: 1;
+  filter: unset;
+}
+
 .leader-section .swiper-slide .img {
   width: 100%;
   height: 100%;
@@ -1350,6 +1384,8 @@
 
   transform: font-size 0.3s, opacity 0.3s;
   white-space: nowrap;
+
+  cursor: pointer;
 }
 
 .leader-section .tab-wrap .tab + .tab {
@@ -1377,11 +1413,11 @@
   border-radius: 8px;
 }
 
-.leader-section .box-wrap .txt-wrap {
+.leader-section .box-wrap .main-tit-wrap {
   width: 50%;
 }
 
-.leader-section .box-wrap .txt-wrap .tit {
+.leader-section .box-wrap .main-tit-wrap .tit {
   font-size: 5.4rem;
   font-weight: 700;
   line-height: 1.4;
@@ -1389,7 +1425,7 @@
   margin-bottom: 5.4rem;
 }
 
-.leader-section .box-wrap .txt-wrap .tit .gradient {
+.leader-section .box-wrap .main-tit-wrap .tit .gradient {
   background: linear-gradient(90deg, #65a9df, #65a9df, #45647d, #44637c);
 
   background-size: 300% 300%;
@@ -1403,24 +1439,24 @@
   overflow: hidden;
 }
 
-.leader-section .box-wrap .txt-wrap .txt {
+.leader-section .box-wrap .main-tit-wrap .txt {
   font-size: 1.8rem;
   font-weight: 400;
 }
 
-.leader-section .box-wrap .txt-wrap .txt p {
+.leader-section .box-wrap .main-tit-wrap .txt p {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
 
-.leader-section .box-wrap .txt-wrap .txt span {
+.leader-section .box-wrap .main-tit-wrap .txt span {
   position: relative;
   color: #9ca1ae;
 }
 
 /* 2. em태그 안에 들어간 텍스트 CSS로 스타일 변경 */
-.leader-section .box-wrap .txt-wrap .txt span em {
+.leader-section .box-wrap .main-tit-wrap .txt span em {
   position: absolute;
   left: 0;
   top: 0;
@@ -1432,7 +1468,7 @@
   overflow: hidden;
 }
 
-.leader-section .box-wrap .txt-wrap .txt p + p {
+.leader-section .box-wrap .main-tit-wrap .txt p + p {
   margin-top: 3.6rem;
 }
 /* section - leader section(submit 섹션) : enb */
@@ -1487,9 +1523,6 @@
   width: calc(100% - 5.4rem);
   height: 1px;
   background-color: #d4d9e4;
-
-  transition: width 0.5s;
-
   /* 왼쪽에 마진을 줘서 중앙에 맞게 정렬.  */
   margin-left: 2.4rem;
 }
@@ -1501,10 +1534,13 @@
   top: 0;
 
   /* width는 js로 효과 */
-  width: 10%;
+  width: 0;
   height: 200%;
 
   background-color: #65a9df;
+
+  /* Swiper를 적용해주고 pagination으로 지정해서 bar의 width가 점점 차오르게 하는데, 부드럽게 차오르게 하기 위해서는 CSS로 transition을 주면 부드럽게 효과가 나타난다. */
+  transition: width 0.5s;
 }
 
 .staff-slide-section .paging-con .paging {
@@ -1559,6 +1595,8 @@
   height: 2.7rem;
 
   background: url(../img/slide-prev-ico.svg) no-repeat 0 0 / contain;
+
+  cursor: pointer;
 }
 
 .staff-slide-section .paging-con .slide-btn-wrap .btn-next {
@@ -1568,6 +1606,8 @@
   background: url(../img/slide-next-ico.svg) no-repeat 0 0 / contain;
 
   margin-left: 2.4rem;
+
+  cursor: pointer;
 }
 
 /* slide 부분 */
@@ -1618,6 +1658,8 @@
   padding-top: 130%;
 
   /*   height: 35.2rem; -> 퍼센트로는 안됌. 크기를 지정해줘야 보임. */
+
+  transition: transform 0.4s;
 }
 
 .staff-slide-section .swiper-slide .item-box .img {
@@ -1656,6 +1698,16 @@
 
   /* 이미지 hover 했을 시 opacity : 1로 적용 */
   opacity: 0;
+  transition: opacity 0.4s;
+}
+
+/* item-box에 hover시에 효과 */
+.staff-slide-section .swiper-slide .item-box:hover .hover-box {
+  opacity: 1;
+}
+
+.staff-slide-section .swiper-slide .item-box:hover {
+  transform: translateY(-4.2rem);
 }
 
 .staff-slide-section .swiper-slide .hover-box .top-wrap .badge {
@@ -2689,311 +2741,5 @@
   background: #004a74;
 }
 /*   11. 공지(Notice) notice section : end */
-
-/* footer - start */
-#footer {
-  padding-bottom: 5.4rem;
-  background-color: #f7f7f8;
-  color: #636366;
-}
-
-#footer .footer-container {
-}
-
-/* grid 설정 */
-#footer .footer-container .footer-cont {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  justify-content: space-between;
-
-  /* 오른쪽 퀵메뉴 크기를 뺴야한다.  */
-  margin-right: calc(9rem - 1px);
-}
-
-#footer .footer-container .footer-cont .branch-box {
-  width: 100%;
-  padding: 6.3rem;
-
-  color: #fff;
-}
-
-#footer .footer-container .footer-cont .branch-box:nth-of-type(1) {
-  /* 사진 정렬을 오른쪽으로 */
-  background: url(../img/foot-bg1.png) no-repeat right / cover;
-}
-
-#footer .footer-container .footer-cont .branch-box:nth-of-type(2) {
-  background: url(../img/foot-bg2.png) no-repeat right / cover;
-}
-
-#footer .footer-container .footer-cont .branch-box:nth-of-type(3) {
-  background: url(../img/foot-bg3.png) no-repeat right / cover;
-}
-
-#footer .branch-box .branch-address {
-  display: flex;
-  flex-direction: column;
-}
-
-#footer .branch-box .branch-address .txt {
-  font-size: 1.7rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-
-  margin-top: 1rem;
-}
-
-#footer .branch-box .branch-address .tit {
-  font-size: 2.7rem;
-  font-weight: 700;
-
-  color: #fff;
-}
-
-#footer .branch-box .branch-address .operating-hours {
-  margin-top: 3.6rem;
-}
-
-#footer .branch-box .branch-address .operating-hours .info .medium {
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* grid로 설정해서 텍스트 간격 맞추기 */
-
-#footer .branch-box .branch-address .operating-hours .info {
-  font-size: 1.4rem;
-  display: grid;
-  /* 한 열은 7.2rem으로 고정하고, 다른 한쪽은 남은 공간을 차지하게 1fr을 설정. */
-  /* minmax(0,1fr) -> 남은 공간을 모두 쓰는 유연 칼럼인데, 최소를 0으로 잡아 긴 내용이 와도 줄어들 수 있게 한 안전한 설정. */
-
-  grid-template-columns: 7.2rem minmax(0, 1fr);
-  align-items: center;
-
-  gap: 1rem;
-
-  margin-top: 1rem;
-}
-
-#footer .branch-box .branch-address .operating-hours .info span {
-  font-weight: 600;
-
-  color: rgba(255, 255, 255, 1);
-}
-
-#footer .branch-box .call {
-  margin-top: 4.6rem;
-  display: flex;
-  align-items: center;
-}
-
-#footer .branch-box .call .ico {
-  width: 2rem;
-  height: 2rem;
-
-  background: url(../img/foot-branch-ico.svg) no-repeat 0 0 / contain;
-}
-
-#footer .branch-box .call .num {
-  font-size: 2.5rem;
-  font-weight: 700;
-
-  margin-left: 1.3rem;
-}
-
-#footer .footer-in {
-  width: calc(100% - 9rem);
-
-  /* 최대 크기를 정해줘야 오른쪽 퀵메뉴에 넘치지 않는다.  */
-  max-width: 85%;
-  margin: 0 auto;
-}
-
-#footer .footer-in .foot-top {
-  margin-top: 4.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 2rem;
-}
-
-#footer .footer-in .foot-top .num-box {
-  font-size: 1.4rem;
-  font-weight: 700;
-
-  display: flex;
-  align-items: center;
-}
-
-#footer .footer-in .foot-top .num-box .num {
-  margin-left: 0.8rem;
-  font-weight: 500;
-
-  font-size: 1.5rem;
-}
-
-#footer .footer-in .foot-top .foot-logo {
-  width: 18rem;
-  height: auto;
-}
-
-#footer .footer-in .foot-top .foot-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-
-  max-width: 100%;
-}
-
-#footer .footer-in .foot-bot {
-  position: relative;
-  margin-top: 4rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#footer .footer-in .foot-bot:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: calc(100% + 9rem);
-  height: 1px;
-  background-color: rgba(99, 99, 99, 0.2);
-}
-
-#footer .footer-in .foot-bot .legal-list {
-  padding: 4.2rem 0 3.2rem 0;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  justify-content: flex-start;
-}
-
-#footer .footer-in .foot-bot .legal-list li {
-  position: relative;
-}
-
-#footer .footer-in .foot-bot .legal-list li:before {
-  content: "";
-  display: block;
-
-  position: absolute;
-  left: 0%;
-  bottom: 0;
-
-  width: 0%;
-  height: 1px;
-
-  background-color: rgba(99, 99, 99, 0.8);
-  transition: width 0.5s;
-}
-
-#footer .footer-in .foot-bot .legal-list li:hover:before {
-  width: 100%;
-}
-
-#footer .footer-in .foot-bot .legal-list .privacy {
-  font-weight: 700;
-}
-
-#footer .footer-in .foot-bot .legal-list li a {
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-#footer .footer-in .foot-bot .util-menu {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  gap: 2rem;
-}
-
-#footer .footer-in .foot-bot .util-menu a {
-  display: flex;
-  align-items: center;
-
-  width: 5.4rem;
-  height: 5.4rem;
-
-  border-radius: 2.7rem;
-
-  background-color: #ebebeb;
-  padding: 1.2rem 1.6rem;
-
-  transition: background-color 0.4s;
-}
-
-#footer .footer-in .foot-bot .util-menu a:hover {
-  background-color: #757575;
-}
-
-#footer .footer-in .foot-bot .util-menu a.youtube-btn .ico {
-  height: 1.6rem;
-  background: url(../img/foot-sns1.svg) no-repeat 0 0 / contain;
-
-  transition: background 0.4s;
-}
-
-#footer .footer-in .foot-bot .util-menu a:hover.youtube-btn .ico {
-  background: url(../img/foot-sns1-hover.svg) no-repeat 0 0 / contain;
-}
-
-#footer .footer-in .foot-bot .util-menu a.blog-btn .ico {
-  background: url(../img/foot-sns2.svg) no-repeat 0 0 / contain;
-
-  transition: background 0.4s;
-}
-
-#footer .footer-in .foot-bot .util-menu a.blog-btn:hover .ico {
-  background: url(../img/foot-sns2-hover.svg) no-repeat 0 0 / contain;
-}
-
-#footer .footer-in .foot-bot .util-menu a.kakao-btn .ico {
-  background: url(../img/foot-sns3.svg) no-repeat 0 0 / contain;
-
-  transition: background 0.4s;
-}
-
-#footer .footer-in .foot-bot .util-menu a.kakao-btn:hover .ico {
-  background: url(../img/foot-sns3-hover.svg) no-repeat 0 0 / contain;
-}
-
-#footer .footer-in .foot-bot .util-menu a.sns-clip .ico {
-  background: url(../img/foot-sns4.svg) no-repeat 0 0 / contain;
-
-  transition: background 0.4s;
-}
-
-#footer .footer-in .foot-bot .util-menu a.sns-clip:hover .ico {
-  background: url(../img/foot-sns4-hover.svg) no-repeat 0 0 / contain;
-}
-
-#footer .footer-in .foot-bot .util-menu a .ico {
-  width: 2.2rem;
-  height: 2rem;
-}
-
-#footer .footer-in .foot-bot .util-menu a .ico img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-#footer .copyright {
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: rgba(99, 99, 99, 0.5);
-}
-
-/* footer - end */
 
 /* main : end */
