@@ -821,13 +821,14 @@ document.addEventListener("DOMContentLoaded", function () {
       //이렇게 custom과 renderCustom을 사용하는 이유는 Swiper 기본 pagination으로 구현할 수 없을 때 사용한다.
       renderCustom: function (swiper, current, total) {
         //  이 부분이 핵심인데, 진행 바(progress bar)계산 로직
+
         const progressBar = document.querySelector(
           ".staff-slide-section .paging-con .progress .bar"
         );
         if (progressBar) {
           // renderCustom의 기능 2 - 현재 current/ total을 기준으로 "진행 바"까지 원하는대로 만들 수가 있다.
-          const progress = (current / total) * 100;
-          progressBar.style.width = progress + "%";
+          const progress = (current / total) * 100; // 몇번 째 슬라이드인지에 따라 진행률 계산 - 예시) 총 슬라이드 개수가 5(total = 5개)개라면 1번 슬라이드는 1/5 *100 = 20% 2번 슬라이드는 40% 이런식으로 계산을 한다.
+          progressBar.style.width = progress + "%"; // 그리고 계산한 것을 CSS에 접근하여 width에 적용. 그러면 가로로 채워지는  progress bar가 만들어진다.
         }
         // renderCustom의 기능 1 - 반환(return)한 HTML 문자열을 Swiper가 pagination element에 넣는다.
         // 아래에 코드가 paging 안에 HTMl 구조가 들어간다.
@@ -892,5 +893,8 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   const staffSlideSectItems = document.querySelectorAll(".staff-slide-section");
-  staffSlideSectItems.forEach((item) => {});
+  staffSlideSectItems.forEach((item) => {
+    // IntersectionObserver을 사용하기 위해서는 observe() 가 꼭 필요하다.
+    staffSlidSectWrap.observe(item);
+  });
 });
