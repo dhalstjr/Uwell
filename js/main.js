@@ -897,4 +897,258 @@ document.addEventListener("DOMContentLoaded", function () {
     // IntersectionObserver을 사용하기 위해서는 observe() 가 꼭 필요하다.
     staffSlidSectWrap.observe(item);
   });
+
+  // .count-section(카운트 섹션) - 스크롤 효과
+  // 화면 크기가 768px 보다 클 때(즉 PC나 태블릿 이상에 화면)
+  if (window.innerWidth > 768) {
+    // gsap의 타임라인 생성 - pin할 섹션에 스크롤을 고정시켜 스크롤을 내리는만큼 countTl 타임라인 안의 에니메이션이 진행되도록 하는 코드.
+    let countTl = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".count-section",
+          // start 설정 지점에 대해서 start는 보통 "요소의 위치 뷰포트 위치" 형식 -> 예를 들어 "top top" , "top center" "top 50%"
+          // 하지만 여기서는 헤더 높이(px) (패딩 + 보더 포함한 jQuery의 높이 계산 - 예를 들어 헤더 높이가 80px이면 -> start : "top 80px") -> .count-section의 top이 화면 위에서 헤더 높이만큼(예 : 80px) 내려왔을 때 시작해라.
+          // 이렇게 헤더 높이만큼 설정한 이유는 고정 헤더 때문에 컨텐츠가 뒤에 가려지지 않게 보정해주는 것. -> 그래서 "top top"으로 설정해봤더니, 확실히 보여지는 부분이 어색해진다.
+          // 사용자 개선을 위해서는 꼭 필요한 코드이다.
+
+          // 저 구조는 jQUery이기 때문에 javascript로 변형한다면
+          // 1. 헤더 높이 구하기 - jQuery에선 outerHeight()로 JS에서는 offsetHeight()로 충분히 가능하다.
+          // 코드 )  const header = document.querySelector(".header");
+          //         const headerHeight = header ? header.offsetHeight : 0;
+          // 2. start에 텍스로 넣기
+          // start :  "top" + heightHeight + "px"  또는 `top ${headerHeight}px`
+          start: `top ${$("header").outerHeight()}px`,
+
+          // end 설정도 처음 보는 구조 -> bottom += 1000px 같은 경우에는 봤지만, 이런 구조는 처음 보기 때문에 설명이 필요하다.
+          // 이건 ScrollTrigger의 상대 거리 문법이다. 해석하자면 트리거(.count-section)의 bottom이 자기 높이의 150%만큼 더 아래로 진행된 위치에서 뷰포트의 bottom 기준으로 끝낸다.
+          // 즉, .count-section 섹션이 화면에 고정된 상태에서 섹션 높이의 1.5베 만큼 더 스크롤할 수 있게 타임라인 길이를 늘려놓은 것이다. -> +=5000px 늘리는 것처럼 말이다.
+          // 섹션이 고정된 상태에서 더 길게 애니메이션을 진행할 수 있다. 길이가 길수록 더 길어진다.
+
+          // 1.  궁금해서 px단위로 늘려도 되는 퍼센트로 설정한 이유는 "반응형 + 섹션 높이 기반으로 자연스럽게 조정이 되기 때문이다."
+          // px로 구현을 한다면 화면 크기에 관계없이 항상 px만큼 스크롤 구간이 생긴다.
+          // 반응형에선 화면 별로 섹션의 높이 다를 수 있기 때문에 px로 구현을 한다면 큰 화면에서는 짧고, 작은 화면에서 길어져 부자연스러운 효과가 나타날 수 있다. -> 경직된 구조엔 반응형은 적합하지 않다.\
+
+          // 2. 그리도 또 특히 더 필요한 이유가 있는데, .to() 애니메이션이 많을수록 스크롤 구간이 필요한데, 단순히 정해진 px로 한다면 애니메이션 전개 속도가 기기마다 다르게 보일 수 있다.
+          //    반면에 퍼센트로 설정한다면 애니메이션 길이가 자동으로 조정되어 항상 '적당한 타이밍' 으로 보인다.
+          // 여기서 궁금한 점이 생겼는데, .to() 애니메이션에 duration을 사용했는데, px로 하면 애니메이션이 틀어질까? 했는데
+          // duration은 상대적인 시간, scrollTrigger의 end는 "전체 구간 길이" -> 즉 duration은 타임라인 안에서 "애니메이션 비율"을 나누는 용도 / end는 이 타임라인 전체를 스크롤로 얼마나 길게 늘일지를 결정.
+          // end를 어디까지 잡느냐 -> 스크롤을 얼마나 해야 전체 애니메이션이 다 끝나는지를 의미하고, duration은 그 안에서 “어떤 파트가 더 빨리/천천히 보이느냐”를 나누는 역할이다.
+          // ScrollTrigger에 scrub : 1 이 붙는 순간 실제 시간으로 돌지 않고 스크롤 거리에 비례해서 애니메이션 속도가 지정된다.
+
+          // "%"를 사용하는 이유 - 1. 반응형 - 모든 해상도에서 애니메이션 비율이 일정함
+          // "%"를 사용하는 이유 - 2. 섹션 높이 기반 - 콘텐츠 양이 변해도 자연스럽게 스크롤 구간 확보
+          // "%"를 사용하는 이유 - 3. 유연성 - px는 고정 , %는 유동 -> UX 훨씬 부드러움.
+          // "%"를 사용하는 이유 - 4. GSAP 권장 패턴 - 스크롤 기반 애니메이션은 % 사용이 일반적
+          end: "bottom+=150% bottom", // 퍼센트로 설정한 이유는 반응형을 고려하여 설정한 것이다.
+          pin: true,
+          scrub: 1,
+
+          // pin을 true했을 때 사용하는 옵션인데, 섹샨을 pin할 때, 갑자기 딱 멈추면서 튀는 느낌이 생길 수 있는데, 그걸 줄이려고 스크롤 중 살짝 미리 계산해서 부드럽게 고정시켜주는 옵션
+          // 숫자가 클수록 미리 당겨서 준비하는 느낌 -> 그렇지만 보통 0.5 ~ 1 정도로 많이 서용된다.
+          anticipatePin: 1,
+          markers: true,
+        },
+      })
+      .to(
+        ".count-section .bg-wrap",
+        {
+          width: "100%",
+          height: "100%",
+          duration: 1,
+        },
+        0 // 타임라인 0초 지점에서 바로 시작
+      )
+      .to(
+        ".count-section .bg-wrap .bg-img",
+        {
+          width: "100%",
+          // 이 코드가 이해가 안되서 자세하게 알아볼 필요가 있음.
+          // 이 코드의 내용 : 데스트탑( > 768) - paddingTop : 100vh / 모바일(< 768) - height : 100% -> 어떻게 해서 데스크탑일 때는 paddingTop을 가지고, 모바일일 때는 height를 갖게 되는지 궁금함.
+          // 이 코드식은 삼향 연산자 + 객체의 동적 속성명(Computed Property Name)을 함께 사용한 것.(조건식)
+          // 이 구조는 객체의 속성명도 조건에 따라 바꾸고, 그 속성명의 값도 조건에 따라 바꿀 떄 사용하는 방법. 즉, 속성 이름을 "동적"으로 생성하는 문법.
+          // 보통 JS 객체는 {height : "100%"} 이렇게 만드는데, 속성명을 변수나 조건식으로 만들고 싶을 때는 []을 사용한다. -> 예){[동적 값] : "100%"} 이걸 동적 속성명(Computed Property Name)이라고 한다.
+          // []안에는 문자열이 되고, 그 문자열은 객체의 key가 된다.
+          [window.innerWidth > 768 ? "paddingTop" : "height"]:
+            window.innerWidth > 768 ? "100vh" : "100%",
+          duration: 1,
+        },
+        0 // 위에 bg-wrap과 동시에 애니메이션이 진행
+      )
+      // 즉, 이 위에 코드의 애니메이션은 섹션이 고정된 상태에서 배경 덩어리와 이미지가 동시에 펼쳐지는 연출
+
+      // position이 안들어갔으니 순차적으로 실행된다.
+      .to(".count-section .bg-wrap .bg", { opacity: 1, duration: 0.5 })
+      // css에서 opacity :0으로 설정해놓고 시작해야함.
+      .to(".count-section .wrap", { opacity: 1, duration: 0.5 })
+
+      // 여기서 call()은 GSAP이 제공하는 전용 메서드이며, JS의 기본 기능이 아니다.
+      // call()은 GSAP의 메서드인데 타임라인에서 특정 지점에 JS 함수를 실행시키는 메서드이다. 즉, 타임라인 안에 애니메이션이 아닌 JS 코드를 끼워넣는 메서드
+      // call() 메서드를 사용하는 이유는 애니메이션 아닌 "함수"를 타임라인 중간에 넣어 애니메이션을 진행하고 싶을 떄 사용하는데, 이 타임라인의 특정 위치에서 실행되게 하려는 것이 핵심이다.
+      // 그리고 중요한 사실은 call()은 한번만 실행된다. - 다시 위로 스크롤해서 되돌려도 기본적으로 재실행되지 않는다. (scrollTrigger +  scrub일 떄 , 이게 아니더라도 한번만 실행되는 것은 맞다.)
+
+      // 그리고 타임라인 내에서 사용하는 것으로 보아 동작의 시점을 맞추는 것으로 보인다.
+      .call(/* startCountAnimation - 함수임 : 동작 만들어야함 */)
+
+      // 섹션 전체를 한 번 더 안정적으로 보여주거나 다음 상태로 정리하는 용도  - 사실 opacity 1이라면 시각적으로는 변화 없을 수도 있고, 연출용 버퍼 느낌
+      // opacity 0으로 설정하면 섹션 전체가 보이지 않고 다음으로 넘어간다.
+      .to(".count-section", { opacity: 1, duration: 1 });
+  }
+  // 화면 크기가 768px 보다 작을 때
+  else {
+    // 타임라인 생성
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".count-section",
+        // 모바일에서는 데스크탑과는 다르게 scrollTrigger을 설정한 것 같은데, 왜 이렇게 사용했는지에 대해서 알아보자.
+        // 모바일에서는 스크롤과 연동하기보다는 섹션이 화면에 들어오는 순간 딱 한 번 애니메이션을 재생하는 구조로 바뀐 것.(그래서 옵션 구조가 다른것.) -> 데스크탑은 스크롤과 연동 (scrub)
+        start: "top 20%",
+
+        // 모바일에서는 섹션이 들어올 떄마다 계속 카운트 애니메이션이 재실행되면 UX가 별로라서 한번만 실행하고 끝내려고,
+        once: true, // 애니메이션이 단 한 번만 실행되도록 설정. -> onEnter가 여러번 호출되지 않게 하고, 스크롤이 위아래로 왔다갔다 해도 다시 재실행되지 않게 만드는 옵션.
+
+        // trigger 요소가 start 조건에 만족하면서 화면 안으로 들어올 때 실행된다. - 코드 애니메이션 시작.
+        // 그리고 왜 onEnter안에 timeline을 다시 만들까? -> 모바일에서는 scroll연동형 애니메이션이 아니라, 그냥 시간 기반 애니메이션을 한번만 설정하면 되기때문에
+        // 데스크톱에선 타임라인 전체가 scrollTrigger에 묶여있고, 스크롤 위치 -> 타임라인 진행률과 1:1 대응 (scrub연동)
+        // 모바일에선 바깥의 타임라인은 사실상 scrollTrigger를 만들기 위한 껍데기 역할만 한다. (이 타임라인 자체에 to()가 없어서, 자체 애니메이션이 없다.)
+        // 진짜 애니메이션은 onEnter 안에서 새로운 타임라인으로 생성하여 설정한다.
+        onEnter: () => {
+          // 그래서 이 안에 있는 타임라인이 애니메이션으로 설정되고, 시간 기반 재생(기본 애니메이션)이다.
+          gsap
+            .timeline()
+            .to(
+              ".count-section .bg-wrap",
+              {
+                width: "100%",
+                height: "100%",
+                duration: 1,
+              },
+              0
+            )
+            // 왜 모바일에서는 paddingTop을 110vh로 설정하였을까? -> 개발자의 의도? 아니면 모바일의 필요한 설정?
+            // 단순한 의도가 아닌 모바일 레이아웃 특성때문에 거의 필수적으로 사용하는 테크닉이라고 한다.
+            // 그렇다면 이유가 뭘까? -> 모바일에서 영상/이미지 비율을 강제로 세로로 길게 늘려서 꽉 차 보이도록 만들기 위한 것이다.
+            // 모바일 화면은 세로가 더 길다. 그래서 모바일 화면에서는 세로 공간이 더 많이 필요하다.
+            // 핵심은 모바일에서 애니메이션이 지연스럽고 원활하게 보여주기 위해 화면보다 더 큰 세로 공간이 필요하기 때문에 paddingTop을 110vh로 사용한 것이다. (paddingTop : 110vh는 화면 높이보다 10% 더 긴 세로 배경을 만들라는 이야기다.)
+            .to(
+              ".count-section .bg-wrap .bg-img",
+              { width: "100%", paddingTop: "110vh", duration: 1 },
+              0
+            )
+            .to(".count-section .bg-wrap .bg", {
+              opacity: 1,
+              duration: 0.5,
+            })
+            .to(".count-section .wrap", {
+              opacity: 1,
+              duration: 0.5,
+            })
+            .call(/* startCountAnimation */)
+            .to(".count-section", {
+              opacity: 1,
+              duration: 1,
+            });
+        },
+      },
+    });
+  }
+
+  // .count-section에 있는 숫자를 카운팅 하는 효과
+  // startCountAnimation이 하는 일은
+  function startCountAnimation() {
+    // 모든 숫자 카운팅 시작
+    // 1. targetNumbers 배열 - 이 아래 숫자들은 최종적으로 각 카운트 박스에 찍히길 원하는 숫자들이고, 순서대로 첫번째~네번째의 배열의 인덱스를 가지게 된다.
+    //                         이 배열의 인덱스(index)값이 나중에 .each()의 index와 매칭된다.
+    // 이 코드는 배열(Array)이다. [] <- 배열 리터럴.
+    const targetNumbers = [151174, 8606, 800, 17];
+
+    // jQuery
+    // each()는 javascript문법에서 forEach()와 비슷한 문법을 가지고 있다. - each메서드는 선택한 요소들이 여러 개일 때, 각 요소에 대헤 지정된 함수를 반복적으로 실행하는 기능.
+    // each()의 첫번째 매개변수는 index(인덱스(숫자)) , 두번째 매개변수는 value(값 또는 요소 자체) 그렇다면 foeEach()랑은 반대의 매개변수를 가지고 있다.
+    // jQuery의 $는 javascript의 document.querySelector와 같은 기능을 가지고 있다.
+
+    // 2. jQuery로 각 .count-box를 순회
+    // each()을 사용해 jQuery의 반복문 메서드를 형셩 -> 함수를 실행하여 index값을 몇번째인지 알려준다.
+    $(".count-section .count-container .count-box").each(function (index) {
+      // $(this) -> 현재 .count-box 요소를 말하고,  저 숫자의 인덱스값을 가져오고, 1500 -> 애니메이션 총 시간(ms) ,즉 1.5초 동안 0에서 목표 숫자까지 올라가게 설정한 것이다.
+      // animateNumber가 숫자가 올라가게 하는 기능의 함수일 것이다.
+      // 첫번째 인자 $(this) , 두번째 인자 targetNumbers[index] 값, 세번쨰 인자는 1500 ,
+      animateNumber($(this), targetNumbers[index], 1500);
+    });
+
+    //javaScript로도 변경.
+    //$(".count-section .count-container .count-box").each(function (index) -> 이 부분을 document.querySelector나 querySelectorAll로 변경하면 되는데, 지금 여기서는 querySelectorAll을 사용하는 것이 맞다.
+    // 그러면 document.querySelectorAll(".count-section .count-container .count-box")가 된다.
+    // 그리고 each(function (index){}) -> 에서 forEach문을 사용해주면 되는데, 저 document.querySelectorAll("...")에 변수를 저장해준 다음 forEach문을 사용한다.
+    // const countBoxes = document.querySelectorAll(".count-section .count-container .count-box") 로 저장하고
+    // countBoxes.forEach((box,index) =>{animateNumber(box, targetNumbers[index] , 1500)}) -> 으로 사용해주면 된다.
+
+    /*     const countBoxes = document.querySelectorAll(
+      ".count-section .count-container .count-box"
+    );
+    countBoxes.forEach((box, index) => {
+      animateNumber(box, targetNumbers[index], 1500);
+    }); */ // 이렇게 Js로 변경이 가능하다.
+  }
+
+  //  count-box 숫자 카운팅 효과
+  // 첫번째 인자 $(this) , 두번째 인자 targetNumbers[index] 값, 세번쨰 인자는 1500 - 그래서 여기서 element = $(this) , end = targetNumbers , duration = 1500이 되는 것이다.
+  // 이건 매개변수(피라미터)개념과 호출 시 전달되는 인자(argument)구조 때문에
+  function animateNumber($element, end, duration) {
+    // 0부터 숫자 카운팅 시작
+    // jQuery
+    let start = 0; // <- 이건 카운트 시작 숫자.
+    const step = end / (duration / 16); // (duration / 16)은 프레임 수 - end / (프레임수) -> 매 프레임마다 얼마씩 숫자를 올릴 지 결정 -> 예를 들어 end = 1000 , duration = 1000 이라면 duration / 16 =62.5프레임 -> step은 1000(end) / 62.5 = 16 -> 매 프레임 숫자를 16씩 올려서, 1초 동안 0-> 1000까지 도달
+
+    // jQuery에서 find()의 기능은 요소의 하위(후손) 요소 중에서 특정 요소를 찾아 반환한다.
+    // 여기서 궁금한 게 $element가 어떻게 .count-box가 되는건지에 대해서
+    // startCountAnimation()안에서 each를 돌릴 때 this는 각각의 .count-box의 DOM 요소이다. 그걸 $(this)로 감싸서 jQuery객체로 만든 뒤 animateNumber($(this),..) 에 넘겨
+    // 즉, animateNumber의 첫번째 인자 -> $(this) -> 하나의 .count-box - 이 인자가 함수 안에서 $element라는 이름으로 받는 것이다.
+    // 결국 포인트는 이 함수 안에서는 .count-box를 직접 선택하는 게 아니러, startCountAnimation안에서 이미 골라서 인자로 넘겼기 때문에 그 결과를 $element로 받은 것이다.
+    const $num = $element.find(".num"); // .count-box 안에 숫자 출력용 요소를 찾는것
+
+    // detach()의 기능은 선택한 요소를 DOM에서 제거하지만, 해당 요소에 연결된 jQuery 데이터와 이벤트 핸들러는 유지하여 나중에 다시 삽입할 수 있게 한다.
+    // remove()와 달리 제거된 요소에 대한 정보를 보존한다는 점에서 차이가 있습니다.
+    // 그래서 find("span").detach()는 숫자 옆에 붙은 단위(span)을 DOM에서 잠깐 빼놓고 변수에 저장
+    // detach() -> DOM에서 완전히 빠지는데, 하지만 $span 변수 안에는 이벤트/데이터/속성 유지
+    // 왜 span이라는 DOM요소를 제거했냐면 숫자 자체는 계속 바뀌는데, 옆에 붙어 있는 단위 (명 또는 %)는 바뀌지 않아야 하기 때문에, span을 DOM요소를 잠깐 뺴놓는다는 말이다
+    const $span = $num.find("span").detach();
+
+    // 이 함수는 updateNumber()는 숫자를 0 -> 목표값(end)까지 부드럽게 증가시키는 애니메이션 함수. -> requestAnimationFrame을 이용해 매 프레임마다 숫자를 조금씩 증가시키고 화면에 업데이트하는 함수.
+    function updateNumber() {
+      // start = 현재 숫자 / end = 목표 숫자 / step = 1프레임 당 증가량(숫자 증가량)
+      // start값을 step만큼 증가시키는 연산. -> start = start = step 을 줄여 쓴 문법이 start += step 이다.
+      start += step;
+
+      // 목표(end)보다 커지면 end에 강제로 맞춤 -> start가 목표(end)를 넘기지 못하게 "제동"을 거는 코드이다.
+      // 애니메이션 도중 rounding 때문에 start가 end보다 살짝 커질 수 있음. -> 그럴 때 강제로 끝값(end)으로 맞춰준다.
+      // 이렇게 해서 최종 숫자(end)를 정확히 맞추도록 오버 하는 것을 막는 역할을 한다.
+      if (start > end) start = end;
+
+      // jQuery 문법.
+      // 화면에 숫자를 업데이트.
+      // 1) 이 한 줄은 세가지 작업을 순서대로 하는데, Math.floor()는 주어진 숫자보다 작거나 같은 가장 큰 정수를 반환하는 함수. - 소수점 이하를 버림.
+      // 그러니 Math.floor(start)는 start숫자를 소수점 버리고 정수로 만든다.
+
+      // 2) toLocaleString()은 JS의 표준 내장 함수(메서드)문법 - 숫자, 날짜 , 배열등의 객체를 사용자의 로컬(지역)설정에 맞는 형식의 문자열로 변환하는 기능.
+      // 숫자를 사람이 읽기 쉬운 문자열로 변환 + 천단위 콤마 추가 -> en-Us 옵션은 미국식 숫자 표기(쉼표 사용)기준이라는 의미
+
+      // 3) $num.text(...) .num 요소의 textContent를 실제로 변경 -> 쉽게 말하면 .num 내부의 텍스트를 위에서 만든 숫자 문자열로 바꾸라는 말.
+
+      // 즉, 현재 카운트 숫자(start)를 정수로 내리고, 천 단위 콤마를 붙여 문자열로 만든 후, .num에 출력.
+      $num.text(Math.floor(start).toLocaleString("en-US"));
+
+      // detach()로 떼어 둔 span을 다시 append로 다시 .num에 붙여 넣는 코드이다.
+      // 왜 append로 다시 붙여서 사용하냐면 .num안의 숫자를 덮어쓰기(text)할 때 span이 사라자기 때문이다.
+      // text()는 해당 요소의 모든 자식 노드를 지워버리고, 문자만 넣는다. -> text()가 실행되면 안에 요소가 사라지기에 미리 span을 뺴놓고 다시 붙여주는 것이다.
+      // text()는 jQuery 문법이다. -> 즉, 이 코드는 숫자 옆에 다시 단위를 넣어주는 작업이다.
+      $num.append($span);
+
+      // 이 코드는 지금 숫자가 목표값에 도달하지 않았다면 -> 애니메이션을 반복.(숫자 증가)
+      if (start < end) {
+        // 숫자 애니메이션은 requestAnimationFrame이 최적의 방법이다.
+        requestAnimationFrame(updateNumber);
+      }
+    }
+    updateNumber();
+  }
 });

@@ -1817,8 +1817,8 @@
 
   margin: 0 auto;
 
-  width: 100%;
-  height: 100%;
+  /* pin 애니메이션을 적용하기 전 CSS 점검 -> 크기 줄여주기 */
+  width: 40%;
 
   background: #55f;
 }
@@ -1831,12 +1831,13 @@
 
   width: 100%;
 
+  /* pin 애니메이션을 적용하기 전 CSS 점검 -> 크기 줄여주기 */
   /* pim효과는 pin이 걸리기 전에 크기가 작았다가 스크롤 할수록 전체회면이 꽉 차게 35vh -> 100vh */
   /* pin 적용되기 후 크기 */
   padding-top: 35vh;
 
   /* pin 적용되기 전 크기 */
-  padding-top: 100vh;
+  /*  padding-top: 100vh; */
 }
 
 .count-section .bg-wrap .bg-img img {
@@ -1858,6 +1859,8 @@
   background-color: rgba(0, 64, 133, 0.9);
 
   z-index: 10;
+
+  opacity: 0;
 }
 
 .count-section .section-inner .wrap {
@@ -1867,6 +1870,9 @@
   justify-content: center;
 
   height: calc(100vh - 90px);
+
+  z-index: 15;
+  opacity: 0;
 }
 
 .count-section .section-inner .main-tit-wrap {

@@ -61,3 +61,221 @@
 .hide {
   display: none;
 }
+
+.sub-tab-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: 9rem;
+  overflow: hidden;
+}
+
+.sub-tab-wrap .sub-tab {
+  /* 가상요소를 사용하기 위해서 부모를 지정 */
+  position: relative;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+
+  border-bottom: 1px solid #9ca1ae;
+
+  padding: 1.8rem 3.4rem;
+
+  /* 최소 크기를 정해줘서 크기를 줌 */
+  min-width: 23.4rem;
+
+  cursor: pointer;
+  text-align: center;
+  color: #9ca1ae;
+  transition: color 0.5s;
+
+  white-space: nowrap;
+}
+
+/* 가상요소를 사용하여 채워지는 선을 디자인 할건데, 채워지는 선을 만들어 가운데에서 퍼져서 패워지도록 설정  */
+.sub-tab-wrap .sub-tab:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  /* active가 들어가기 전 */
+  width: 0%;
+  height: 1px;
+
+  background-color: #004ea2;
+
+  transition: width 0.5s;
+}
+
+.sub-tab-wrap .sub-tab:hover {
+  color: #004ea2;
+}
+
+.sub-tab-wrap .sub-tab:hover:before {
+  width: 100%;
+}
+
+.sub-tab-wrap .sub-tab.active:before {
+  width: 100%;
+}
+
+.sub-tab-wrap .sub-tab.active {
+  color: #004ea2;
+}
+
+#listView .sub-cont-visual {
+  margin-top: 6.4rem;
+}
+
+#listView .sub-cont-visual .cont {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+#listView .sub-cont-visual {
+  margin-top: 14.4rem;
+}
+
+.sub-cont-visual .sub-tit-wrap {
+}
+
+.sub-cont-visual .sub-tit-wrap .txt-box {
+  margin-top: 5rem;
+}
+
+.sub-cont-visual .sub-tit-wrap .txt-box .txt {
+  color: #232323;
+}
+
+.sub-cont-visual .img-box {
+  /* 이미지 크기 설정 */
+  width: 65.2rem;
+  height: 43.4rem;
+}
+.sub-cont-visual .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.medi-info {
+  margin-top: 18rem;
+}
+
+.medi-info .medi-card-cont {
+  margin-top: 5.4rem;
+}
+
+.medi-info .medi-tit-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.medi-info .medi-tit-wrap .medi-rese-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.medi-info .medi-tit-wrap .medi-rese-wrap .txt {
+  display: flex;
+  align-items: center;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #004ea2;
+}
+
+.medi-info .medi-tit-wrap .medi-rese-wrap .txt:before {
+  content: "";
+  display: block;
+  width: 1.8rem;
+  height: 1.8rem;
+
+  background: url(../img/sub-call-icon.svg) no-repeat 0 0 / contain;
+
+  margin-right: 1rem;
+}
+
+.medi-info .medi-tit-wrap .medi-rese-wrap .num {
+  font-size: 3.4rem;
+  font-weight: 700;
+  margin-left: 2.1rem;
+
+  color: #232323;
+}
+
+.medi-info .medi-card-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.medi-info .medi-card-cont .medi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 31rem;
+  height: 35.6rem;
+  background-color: #f2f6fa;
+  text-align: center;
+
+  padding: 5.4rem 5rem;
+}
+
+.medi-info .medi-card-cont .medi-card .ico {
+  width: 5.4rem;
+  height: 6.3rem;
+}
+
+.medi-info .medi-card-cont .medi-card .ico img {
+  width: 100%;
+  height: 100%;
+}
+
+.medi-info .medi-card-cont .medi-card .badge {
+  margin-top: 4.5rem;
+
+  font-weight: 700;
+
+  line-height: 1.9;
+  padding: 0 2.1rem;
+
+  border-radius: 5rem;
+  color: #fff;
+  background-color: #004ea2;
+}
+
+.medi-info .medi-card-cont .medi-card .time {
+  font-size: 2.7rem;
+  font-weight: 700;
+
+  margin-top: 2.7rem;
+}
+
+.medi-info .medi-card-cont:nth-child(2) .medi-card .time > p {
+  font-size: 1.8rem;
+  display: inline-block;
+}
+
+.medi-info .medi-card-cont .medi-card > p {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.road-map {
+  margin-top: 18rem;
+}
+
+/* 서브 섹션 inner */
+.sub .section-inner {
+  /* 반응형 CSS */
+  width: clamp(1240px, 70vw, 147.6rem);
+}
