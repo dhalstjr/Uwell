@@ -39,7 +39,7 @@
     <!-- 그리고 내가 계속 잘못하고 있었던 라이브러리 사용법은 라이브러리 (SDK)를 두번 부르고 있었고, SDK는 한 번에 불러야하기 때문에 -->
     <!-- Javascript 키와 libraries=services 이 두개를 같이 연동해서 하나로 사용해야 한다.-->
     <!-- 그래서 지금껏 중복 로드가 되어서 kakao.maps 객체가 재정의되어 충돌 발생. -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02a30294ac66235c4cfb5c94aa6fef25Y&libraries=services"></script> 
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02a30294ac66235c4cfb5c94aa6fef25&libraries=services"></script> 
 
     <script src="./js/common.js"></script>
     <script src="./js/library.js"></script>
@@ -1193,7 +1193,7 @@
             <div class="road-map">
               <p class="sect-tit">오시는 길</p>
 
-              <div class="map">
+             
                 <div class="uwell-map">
                   <!-- 근데 본 페이지와는 다르게 카카오맵에서 제공하는 HTML코드를 복사해서 가져왔지만 다른 곳이 있는데, 그 곳은 지도의 종류를 고를 수 있는(지도/스카이뷰) 버튼이 없다. -->
                   <!-- 즉, 내가 사용한 카카오 지도 퍼가기(roughmap) 방식에서는 지도/스카이 뷰 버튼을 포함한 모든 기본 UI를 제공하지 않는다고 한다. -->
@@ -1204,11 +1204,50 @@
 
                   <!-- 1) 지도 담을 영역을 만들어야 한다. -> 이 아래에 코드처럼 정해진 코드가 있는데. div id = map처럼 사용해야한다. -->
                   <!-- 그리고 맵에 스타일을 정해주면 된다.  -->
-                  <div id="map">
-                   <!-- 이제 카카오지도 API를 설정했다면 커스텀한 HTML요소를 작성하고 속성을 넣는다.-->
+                  <div class ="map-wrap">
+                  <style></style>
+                  <div class="map-cont">
+                    <!-- 카카오 지도가 들어갈 영역 -->
+                    <div id="map"></div>
 
+                    <!-- 커스텀한 버튼들 -->
+                    <!-- 지도 타입 버튼 (일반/스카이뷰) -->
+                    <div class="custom_typecontrol">
+                      <span id="btnRoadmap" onclick="">지도</span>
+                      <span id="btnSkyview" onclick="">스카이뷰</span>
+                    </div>
+
+                    <!-- 지도 확대/축소 컨트롤 버튼 -->
+                    <div class="custom_zoomcontrol">
+                      <span onclick="">
+                        <!-- 아이콘(SVG로 들어가는데, 이미지로 설정하기) -->
+
+                      </span>
+
+                      <span onclick="">
+                        <!-- 아이콘(SVG로 들어가는데, 이미지로 설정하기) -->
+
+                      </span>
+
+                    </div>
+                    
+                    <!-- 다시 정상으로 돌아가는 버튼 -->
+                    <div class="custom_refreshcontrol">
+                      <span onclick="">
+                         <!-- 아이콘(SVG로 들어가는데, 이미지로 설정하기) -->
+                          
+                      </span>
+                    </div>
+
+                    <!-- 주소로 지정된 곳을 카카오지도 링크로 열리(새 창) -->
+                    <div class="custom_linkcontrol">
+                      <span onclick="">
+                         <!-- 아이콘(SVG로 들어가는데, 이미지로 설정하기) -->
+
+                      </span>
+                    </div>
                   </div>
-
+                  <!-- 이제 카카오지도 API를 설정했다면 커스텀한 HTML요소를 작성하고 속성을 넣는다.-->
                   <!-- HTML내에 사용해도 되고, 따로 js파일을 만들어 사용해도 무방하다. 그럼에도 인라인 스크립트로 작성한 것은 필요해서가 아니라 편해서 아니면 제공하는 기본 코드가 그렇게 되어 있어서 그럴 경우가 있다. -->
                   <!-- 2) 이제 맵을 활용하려면 Javascript API를 이용해 코드를 짜서 커스텀마이징을 해줘야한다. -->
                   <!-- 이 아래 코드는 본적으로 제공하는 코드 - 지도를 띄우는 코드이다. -->
@@ -1493,6 +1532,9 @@
                   // 실행된 후에는 내부 변수들은 모두 외부에서 접근할 수 없음
                   // 딱 한번만 실행되는 "초기화" 코드에 매우 적합.  
                   </script>
+                  </div>
+
+                
                   
                   <!-- 이 아래 코드가 기본적인 퍼가기 기능인 방식인 코드 -->
                   <!-- 카카오맵 지도를 퍼가는 법은 카카오맵에 들어가 그 주소에 HTML을 퍼가면 되는데 크기 조절이 가능하다.  -->
@@ -1515,7 +1557,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            
+
               <div class="map-addr">
                 <p>
                  서울특별시 강남구 강남대로 318, 타워837 3·4·5층<br />
