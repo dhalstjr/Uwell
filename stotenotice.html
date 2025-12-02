@@ -35,11 +35,11 @@
       referrerpolicy="no-referrer"
     ></script>
     
-        <!-- 1. 카카오 지도 -> Javascript API를 이용하기 위한 코드 -> 이 코드를 쓰기 직전에 왼쪽 메뉴에 있는 카카오맵에 들어가 사용 여부에 on을 설정해야한다. -->
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02a30294ac66235c4cfb5c94aa6fef25"></script>
-    
-    <!-- 2. 지도 기능을 사용하기 위한 javascript API(카카오) 라이브러리. - service 라이브러리는 꼭 들어가야한다. -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script> 
+    <!-- 1. 지도 기능을 사용하기 위한 javascript API(카카오) 라이브러리. - service 라이브러리는 꼭 들어가야한다. -->
+    <!-- 그리고 내가 계속 잘못하고 있었던 라이브러리 사용법은 라이브러리 (SDK)를 두번 부르고 있었고, SDK는 한 번에 불러야하기 때문에 -->
+    <!-- Javascript 키와 libraries=services 이 두개를 같이 연동해서 하나로 사용해야 한다.-->
+    <!-- 그래서 지금껏 중복 로드가 되어서 kakao.maps 객체가 재정의되어 충돌 발생. -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02a30294ac66235c4cfb5c94aa6fef25Y&libraries=services"></script> 
 
     <script src="./js/common.js"></script>
     <script src="./js/library.js"></script>
@@ -1243,6 +1243,9 @@
 
                     // (function(){}) -> 이 문법은 즉시 실행 함수인데, 함수로 정의하고 바로 실행하는 자바스크립트 패턴이다. - 주요 기능은 전역 스코프를 오염시키지 않고 변수 범위를 격리하는 것, 이를 통해 전역 변수 충돌을 방지.
                     // 전체를 감싸는 즉시 실행 함수(IIFE)
+                    kakao.maps.load(function(){
+                    // gih으로 설정한 페이지를 도메인 주소로 정하고 했더니 카카오 지도의 SDK는 불러왔지만 다른 문제가 발생했다.
+                    // kakao.maps.services.Geocoder가 undefined가 된 문제가 생김.
                     (function(){
                       // 이 안에서 쓰이는 변수/함수들은 지역화해서 전역 오염을 막는다.
                       // 마지막에 필요한 함수들만 window.함수명 = 함수; 로 밖으로 내보내줌.
@@ -1485,7 +1488,9 @@
                   }) ();
                   // 마지막에 (); 은 즉시 실행 함수(IIFE)를 바로 실행시키기 위한 문법이다. 바로 뒤에 ();가 붙으면 함수를 즉시 실행하라는 이야기다.
                   // 실행된 후에는 내부 변수들은 모두 외부에서 접근할 수 없음
-                  // 딱 한번만 실행되는 "초기화" 코드에 매우 적합. 
+                  // 딱 한번만 실행되는 "초기화" 코드에 매우 적합.  
+                  // 도메인 설정을
+                  });
                   </script>
                   
                   <!-- 이 아래 코드가 기본적인 퍼가기 기능인 방식인 코드 -->
