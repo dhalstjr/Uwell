@@ -946,7 +946,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // pin을 true했을 때 사용하는 옵션인데, 섹샨을 pin할 때, 갑자기 딱 멈추면서 튀는 느낌이 생길 수 있는데, 그걸 줄이려고 스크롤 중 살짝 미리 계산해서 부드럽게 고정시켜주는 옵션
           // 숫자가 클수록 미리 당겨서 준비하는 느낌 -> 그렇지만 보통 0.5 ~ 1 정도로 많이 서용된다.
           anticipatePin: 1,
-          markers: true,
+          markers: false,
         },
       })
       .to(
@@ -1150,5 +1150,92 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     updateNumber();
+  }
+
+  // innovation-section JS
+
+  // 이 섹션은 768px보다 더 넓을 때만 실행
+  if (innerWidth > 768) {
+    // gsap를 활용 - 타임라인 생성
+    gsap
+      .timeline({
+        // 스크롤 트리거를 활용
+        scrollTrigger: {
+          // 효과를 줄 섹션
+          trigger: ".innovation-section .innov-box .box-wrap",
+          start: "top 70%",
+          end: "bottom 70%",
+          // 스크롤과 연동되도록
+          scrub: 2,
+          // 콜백함수 기능 onEnter / onLeave / onEnterBack / onLeaveBack
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      })
+      // innovation에 line효과 - 라인이 스크롤에 의해서 내려오는 효과(height 값)
+      .to(".innovation-section .innov-box .box-wrap .bg-line", {
+        height: "140%",
+        duration: 1,
+        ease: "none",
+      });
+
+    // 박스안에 이미지들 애니메이션
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".innovation-section .innov-box .box-wrap",
+          start: "top 70%",
+          end: "bottom 80%",
+          scrub: 2,
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+      })
+      .to(".innovation-section .innov-box .box-wrap .box", {
+        opacity: 1,
+        duration: 0.2,
+        // stagger를 사용하지 않으면 전체 박스가 opacity : 1로 서서히 올라가는데,
+        // stagger를 사용하니 차례대로 박스가 보이기 시작한다. -> CSS에서 초기 세팅을 opacity: 0으로 설정
+        // stagger를 0.2로 설정하여 차례대로 0.2초 마다 나오게 하려는 애니메이션을 구현한 것이다.
+        // 여기서 중요한 포인트는 stagger는 "순서 애니메이션"이 아니라는 이야기이다. 모두 같은 애니메이션의 효과를 주는 것이지만 시작 지점이 달라 순서 애니메이션처럼 보일 수 있다.
+        // .box들이 형제 관게이기 때문에 이 구조에서는 stagger기능을 잘 활용할 수 있다.
+        stagger: 0.2, // 차례대로 나오게 하는 기능
+        ease: "none",
+      });
+  } else {
+    // 모바일일 때 실행
+    // intersectionObserver는 특정 요소가 뷰포트나 다른 상위 요소와 교차(겹치거나 벗어나는)하는 시점을 감지해주는 API
+    const innovObserver = new IntersectionObserver((entries) => {
+      entries.forEach(
+        (entry) => {
+          if (entry.isIntersecting) {
+            // 모바일에서는  scrub기능 빼고 사용 (스크롤과 연동되지 않게 애니메이션이)
+            gsap
+              .timeline()
+              .to(".innovation-section .innov-box .box-wrap .bg-line", {
+                height: "140%",
+                duration: 3.4,
+                ease: "none",
+              });
+
+            // 모바일에서는 세로 길이가 길어져 duration을 더 길게 사용
+            gsap
+              .timeline()
+              .to(".innovation-section .innov-box .box-wrap .box", {
+                opacity: 1,
+                duration: 0.4,
+                stagger: 0.4,
+                ease: "none",
+              });
+          }
+        },
+        { threshold: 0.3 } // 뷰포트에 30%이상 영역에 들어왔을 때
+      );
+    });
+    // 이 부분이 중요한 이유는 이 DOM요소를 관찰 대상으로 등록하여, 등록 대상이 있고, 없고를 나누어
+    // 없다면 콜백 실행 X / 있다면 해당 요소가 뷰포트에 들어올 때마다 entries 배열에 정보를 전달.
+    innovObserver.observe(
+      document.querySelector(".innovation-section .innov-box .box-wrap")
+    );
   }
 });

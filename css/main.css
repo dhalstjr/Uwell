@@ -871,6 +871,8 @@
 .innov-box .box-wrap .box {
   /* 이미지가 있는 박스 요소들을 크기를 주고, margin-left/right : auto로 좌 우로 해서 정렬힘. */
   width: 40%;
+
+  opacity: 0;
 }
 
 /* margin-left와 right은 홀수와 짝수를 나누는 even과 odd으로 나누어서 css 적용 */
@@ -892,7 +894,7 @@
   /* border로 사용 시 1px보다 뚜꺼워보인다. */
   border-right: 1px solid #fff;
   /* 스크롤 돠면서 height값이 늘어남. */
-  height: 100%;
+  height: 0%;
 }
 
 .innov-box .box-wrap .box-content {

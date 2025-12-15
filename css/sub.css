@@ -578,8 +578,18 @@
 }
 
 .counsel-section #quickFrm .form-wrap .form-box .sel-box .nice-select {
+  cursor: pointer;
 }
 
+.counsel-section #quickFrm .form-wrap .form-box .sel-box .nice-select .current {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #fff;
+
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
 .counsel-section #quickFrm .form-wrap .form-box .sel-box .nice-select .list {
   opacity: 0;
   visibility: hidden;
