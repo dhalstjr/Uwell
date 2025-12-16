@@ -2088,6 +2088,8 @@
   height: 2.7rem;
 
   background: url(../img/slide-prev-ico.svg) no-repeat 0 0 / contain;
+
+  cursor: pointer;
 }
 
 .career-section .top .paging-con .slide-btn-wrap .btn-next {
@@ -2097,6 +2099,8 @@
   background: url(../img/slide-next-ico.svg) no-repeat 0 0 / contain;
 
   margin-left: 2.7rem;
+
+  cursor: pointer;
 }
 
 /* slide 부분 */

@@ -987,7 +987,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 그리고 중요한 사실은 call()은 한번만 실행된다. - 다시 위로 스크롤해서 되돌려도 기본적으로 재실행되지 않는다. (scrollTrigger +  scrub일 떄 , 이게 아니더라도 한번만 실행되는 것은 맞다.)
 
       // 그리고 타임라인 내에서 사용하는 것으로 보아 동작의 시점을 맞추는 것으로 보인다.
-      .call(/* startCountAnimation - 함수임 : 동작 만들어야함 */)
+      .call(startCountAnimation /*  - 함수임 : 동작 만들어야함 */)
 
       // 섹션 전체를 한 번 더 안정적으로 보여주거나 다음 상태로 정리하는 용도  - 사실 opacity 1이라면 시각적으로는 변화 없을 수도 있고, 연출용 버퍼 느낌
       // opacity 0으로 설정하면 섹션 전체가 보이지 않고 다음으로 넘어간다.
@@ -1042,7 +1042,7 @@ document.addEventListener("DOMContentLoaded", function () {
               opacity: 1,
               duration: 0.5,
             })
-            .call(/* startCountAnimation */)
+            .call(startCountAnimation)
             .to(".count-section", {
               opacity: 1,
               duration: 1,
@@ -1238,4 +1238,91 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".innovation-section .innov-box .box-wrap")
     );
   }
+
+  // 커리어 슬라이드
+  // career-section Swiper 슬라이드 설정
+  // 새로운 커리어 슬라이드 구현
+  var careerSlide = new Swiper(".career-section .swiper", {
+    // 모바일을 우선으로 디자인해야하기 때문에 웹에서 보이는 슬라이드 개수가 아니라 모바일에서 보이는 개수를 지정
+    // 웹에서는 4개 반이 보이고 모바일에선 1.5개가 보이게 사용
+
+    // 768px 이하일 때 -> Swiper 설정하는 코드는 모바일 퍼스트를 우선으로 한다.
+    slidesPerView: 1.5,
+    spaceBetween: 20,
+    loop: true,
+
+    // centeredSlides의 기본값은 false.
+    centeredSlides: false, //centeredSlides 옵션은 활성화(active) 슬라이드를 항상 컨테이너 중앙에 배치하기 위해 사용
+
+    autoplay: {
+      delay: 5000,
+
+      // 기본값 true는 터치하거나 넘기면 autoplay가 중지.
+      // false를 사용하는 이유는  1.배너 슬라이드처럼 계속 움직여야 눈에 띄는 컨텐츠일 때
+      // 2. 사용자 경험보다 노출 빈도가 중요한 마케팅성 슬라이드일 때
+      // 3. 슬라이드가 잠깐 조작되더라도 다시 자동으로 진행되길 원할 때
+      disableOnInteraction: false, // 사용자가 터치하거나 넘겨도 autoplay가 지속되도록.
+    },
+
+    // progress bar 코드
+    pagination: {
+      el: ".career-section .top .paging-con .paging",
+      type: "custom", // custom을 사용하면 디자인이 swiper의 기본 디자인처럼 변경지 않는다.
+
+      // 타입을 custom으로 설정한다면 renderCustom을 사용하여 직접 설정하여야한다.
+      // renderCustom에서 매개변수는 3개의 변수를 받는다.
+      // 1. Swiper : 현재 Swiper 인스턴스 자체를 가리킴. 이를 통해 Swiper의 다른 속성이나 메소드에 접근 가능하다.
+      // 2. current : 현재 횔성화된(보이는) 슬라이드 번호(인덱스가 아닌 1부터 시작하는 숫자)
+      // 3. total : 전체 슬라이드 총 개수
+      renderCustom: function (swiper, current, total) {
+        // progress bar 업데이트
+        const progressBar = document.querySelector(
+          ".career-section .top .paging-con .progress .bar"
+        );
+
+        if (progressBar) {
+          const progress = (current / total) * 100;
+          progressBar.style.width = progress + "%";
+        }
+        // 현 상태까지는 progress에 bar만 채워지는 것만 구현
+
+        // 숫자 페이지네이션 업데이트
+        // HTML 구조를 짜서 넣어줌.
+        return (
+          '<span class = "current">' +
+          current +
+          "</span>" +
+          '<span class = "total">' +
+          total +
+          "</span>"
+        );
+      },
+    },
+
+    // 네비게이션 버튼
+    navigation: {
+      nextEl: ".career-section .top .paging-con .slide-btn-wrap .btn-next",
+      prevEl: ".career-section .top .paging-con .slide-btn-wrap .btn-prev",
+    },
+
+    // 반응형 코드 설정
+    breakpoints: {
+      // 1640px 이상
+      1640: {
+        slidesPerView: 4.5,
+        spaceBetween: 35,
+      },
+      // 1240px 이상
+      1240: {
+        slidesPerView: 3.5,
+        spaceBetween: 25,
+      },
+
+      // 768px 이상일 때
+      768: {
+        slidesPerView: 2.5,
+        spaceBetween: 15,
+      },
+    },
+  });
 });
