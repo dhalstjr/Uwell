@@ -2159,8 +2159,6 @@
 
   width: 85%;
   margin: 0 auto 27rem;
-
-  background: #55f;
 }
 
 .banner-section .bg {
@@ -2169,7 +2167,8 @@
   left: 50%;
   transform: translateX(-50%);
 
-  width: 100%;
+  /* 초기 상태는 100% X -> gsap로 width를 넓힐거임.  */
+  width: 20%;
   height: 100%;
   overflow: hidden;
 }
@@ -2208,6 +2207,11 @@
   font-weight: 400;
 
   line-height: 1.38;
+
+  /* 초기 세팅 - js 활용 */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.4s;
 }
 
 .banner-section .tit-box .bold {
@@ -2216,6 +2220,10 @@
 
 .banner-section .btn-wrap {
   margin-top: 9rem;
+
+  /* 초기 세팅 - js 적용 후 */
+  opacity: 0;
+  transform: translateY(40px);
 }
 
 .banner-section .btn-wrap .view-btn {

@@ -1188,7 +1188,7 @@ document.addEventListener("DOMContentLoaded", function () {
           end: "bottom 80%",
           scrub: 2,
           toggleActions: "play none none reverse",
-          markers: true,
+          markers: false,
         },
       })
       .to(".innovation-section .innov-box .box-wrap .box", {
@@ -1325,4 +1325,56 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
   });
+
+  // banner-section
+  // 배너 섹션에 gsap 타임라인 설정
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".banner-section",
+        start: "top 70%",
+        end: "center 70%",
+        scrub: 2,
+        // 되돌아갔을 때 다시 효과를 주기 위해서 onLeaveBack에 reverse를 사용하여 다시 되돌린다. 효과 실행 전 모습으로.
+        toggleActions: "play none none reverse",
+        markers: true,
+      },
+    })
+    .to(".banner-section .bg", {
+      width: "100%",
+      duration: 1,
+      ease: "none",
+    })
+    // 텍스트
+    .to(
+      ".banner-section .cont .tit-box",
+      {
+        opacity: 1,
+        duration: 1,
+        ease: "none",
+        transform: "translateY(0)",
+      },
+      "+=0.1"
+    )
+    .to(
+      ".banner-section .cont .txt",
+      {
+        opacity: 1,
+        duration: 1,
+        transform: "translateY(0)",
+        ease: "none",
+      },
+      "<" // 바로 이전의 시작 지점과 동일한 시점에서 시작.
+    )
+    // 버튼도 같은 효과 적용
+    .to(
+      ".banner-section .btn-wrap",
+      {
+        opacity: 1,
+        duration: 1,
+        ease: "none",
+        transform: "translateY(0)",
+      },
+      "<" // 바로 이전의 시작 지점과 동일한 시점에서 시작.
+    );
 });
