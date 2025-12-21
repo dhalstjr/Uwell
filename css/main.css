@@ -2388,10 +2388,13 @@
   top: 0;
   left: 0;
 
-  width: 40%;
+  width: 0;
   height: 200%;
 
   background-color: #65a9df;
+
+  /* 부드러운 효과  */
+  transition: width 0.4s;
 }
 
 .youtube-section .paging-con .paging {
@@ -2438,12 +2441,14 @@
   width: 2.7rem;
   height: 2.7rem;
   background: url(../img/slide-prev-ico.svg) no-repeat 0 0 / contain;
+  cursor: pointer;
 }
 
 .youtube-section .paging-con .slide-btn-wrap .btn-next {
   width: 2.7rem;
   height: 2.7rem;
   background: url(../img/slide-next-ico.svg) no-repeat 0 0 / contain;
+  cursor: pointer;
 
   margin-left: 2.7rem;
 }

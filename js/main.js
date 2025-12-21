@@ -1337,7 +1337,7 @@ document.addEventListener("DOMContentLoaded", function () {
         scrub: 2,
         // 되돌아갔을 때 다시 효과를 주기 위해서 onLeaveBack에 reverse를 사용하여 다시 되돌린다. 효과 실행 전 모습으로.
         toggleActions: "play none none reverse",
-        markers: true,
+        markers: false,
       },
     })
     .to(".banner-section .bg", {
@@ -1356,16 +1356,6 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       "+=0.1"
     )
-    .to(
-      ".banner-section .cont .txt",
-      {
-        opacity: 1,
-        duration: 1,
-        transform: "translateY(0)",
-        ease: "none",
-      },
-      "<" // 바로 이전의 시작 지점과 동일한 시점에서 시작.
-    )
     // 버튼도 같은 효과 적용
     .to(
       ".banner-section .btn-wrap",
@@ -1377,4 +1367,92 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       "<" // 바로 이전의 시작 지점과 동일한 시점에서 시작.
     );
+
+  // .youtube-section에 대한 JS
+  // Swiper 연결
+
+  // youtubeSlide를 전역 변수로 선언.
+  // youtubeSlide를 전역 변수로 선언한 이유는 PC/모바일 분기에서 생선된 Swiper인스턴스를 "공통으로 제어"하기 위해서
+  // 즉, 쉽게 이야기하자면 "화면 크기에 따라 Swiper 설정을 다르게 만들지만 나중에 제어할 때는 항상 youtubeSlide 하나만 사용하겠다."
+  // if에서 실행한 youtubeSlide와 else에서 실행한 youtubeSlide는 전역 변수로 선언하지 않으면 if와 else안에서만 사용할 수 있는 youtubeSlide가 된다.
+  // 분기별로 하나만 실행하기 위해서 youtubeSlide를 전역 변수로 선언하고 if와 else의 조건에 따라서 서로 다른 설정을 사용하려고 하는 것이다.
+
+  let youtubeSlide;
+
+  if (window.innerWidth > 768) {
+    youtubeSlide = new Swiper(".youtube-section .slide-wrap .swiper", {
+      // 모바일 퍼스트 Swiper 옵션
+      slidesPerView: 1.5,
+      spaceBetween: 0,
+      loop: true,
+      speed: 1000,
+      autoplay: {
+        delay: 2000,
+        // 사용자가 터치 및 드래그해도 autoplay 자동재생 진행
+        disableOnInteraction: false,
+      },
+
+      // 프로그레스 바
+      pagination: {
+        el: ".youtube-section .paging-con .paging", // 진행되는 바를 선택
+        type: "custom",
+
+        // type을 custom으로 사용 시 renderCustom을 사용해서 직접 커스텀 코드를
+        renderCustom: function (swiper, current, total) {
+          // 3개의 매개 변수를 받음
+          // progress Bar 업데이트
+          const progressBar = document.querySelector(
+            ".youtube-section .paging-con .progress .bar"
+          );
+
+          if (progressBar) {
+            const progress = (current / total) * 100;
+            progressBar.style.width = progress + "%";
+          }
+
+          // 숫자 페이지네이션 업데이트 (HTML 구조)  - HTML안에 current와 total 구조는 없어도 된다.
+          return (
+            '<span class = "current">' +
+            current +
+            "</span>" +
+            '<span class = "total">' +
+            total +
+            "</span>"
+          );
+        },
+      },
+
+      // 네비게이션 버튼 (슬라이드 버튼)
+      // 위치판단 잘하기
+      navigation: {
+        nextEl: ".youtube-section .btn-next",
+        prevEl: ".youtube-section .btn-prev",
+      },
+
+      // 반응형 코드
+      breakpoints: {
+        1000: {
+          slidesPerView: 1,
+          spaceBetween: 0,
+        },
+      },
+    });
+
+    // 넓이가 768px이하일 때
+  } else {
+    youtubeSlide = new Swiper(".youtube-section .slide-wrap .swiper", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+
+      pagination: {
+        el: ".youtube-section .paging-con .paging",
+        type: "progressbar",
+      },
+    });
+  }
 });
